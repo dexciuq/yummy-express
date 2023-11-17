@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.presentation.utils
+package com.dexciuq.yummy_express.utils
 
 import android.view.View
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -31,3 +31,5 @@ fun View.invisible() {
 fun View.show() {
     visibility = View.VISIBLE
 }
+
+fun String?.orPlaceholder(): String = this ?: ""

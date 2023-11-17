@@ -7,8 +7,10 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.databinding.ActivityMainBinding
-import com.dexciuq.yummy_express.presentation.utils.show
+import com.dexciuq.yummy_express.utils.show
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
@@ -34,7 +36,6 @@ class MainActivity : AppCompatActivity() {
 //                R.id.addressFragment, R.id.deliveryFragment -> {
 //                    binding.bottomNavigationView.hide(binding.navHostFragmentContainer)
 //                }
-
                 else -> {
                     binding.bottomNavigationView.show(binding.navHostFragmentContainer)
                 }

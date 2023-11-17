@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/cartFragment"
-        android:name="com.dexciuq.yummy_express.presentation.screen.CartFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.cart.CartFragment"
         android:label="fragment_cart"
         tools:layout="@layout/fragment_cart" />
 </navigation>

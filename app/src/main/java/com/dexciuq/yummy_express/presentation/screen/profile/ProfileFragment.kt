@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.presentation.screen
+package com.dexciuq.yummy_express.presentation.screen.profile
 
 import android.os.Bundle
 import android.view.LayoutInflater
