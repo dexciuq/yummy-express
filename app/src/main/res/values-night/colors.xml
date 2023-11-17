@@ -6,8 +6,8 @@
     <color name="primary_dark">#6CC51D</color>
     <color name="primary_light">#EBFFD7</color>
     <color name="link">#1A0DAB</color>
-    <color name="background">#FFFFFF</color>
-    <color name="title">#000000</color>
+    <color name="background">#131313</color>
+    <color name="title">#FFFFFFFF</color>
     <color name="text">#868889</color>
-    <color name="stroke_color">#DDDDDD</color>
+    <color name="stroke_color">#5E5E5E</color>
 </resources>
