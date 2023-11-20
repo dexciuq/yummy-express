@@ -5,7 +5,7 @@ import com.dexciuq.yummy_express.common.Constants
 import com.dexciuq.yummy_express.data.data_source.DataSource
 import javax.inject.Inject
 
-class PreferenceDataSourceImpl @Inject constructor(
+class PreferenceDataSource @Inject constructor(
     private val sharedPreferences: SharedPreferences
 ) : DataSource.Preference {
 

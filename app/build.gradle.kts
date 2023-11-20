@@ -59,6 +59,12 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
 
+    // glide
+    implementation("com.github.bumptech.glide:glide:4.15.1")
+
+    // shimmer effect
+    implementation("com.facebook.shimmer:shimmer:0.5.0")
+
     // jetpack navigation
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")

@@ -6,8 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.dexciuq.yummy_express.R
-import com.dexciuq.yummy_express.databinding.ActivityMainBinding
 import com.dexciuq.yummy_express.common.show
+import com.dexciuq.yummy_express.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -9,5 +9,7 @@
     <color name="background">#FFFFFF</color>
     <color name="title">#000000</color>
     <color name="text">#868889</color>
-    <color name="stroke_color">#DDDDDD</color>
+    <color name="stroke">#DDDDDD</color>
+    <color name="search_view_background">#F4F5F9</color>
+    <color name="place_holder">#C2C2C2</color>
 </resources>
