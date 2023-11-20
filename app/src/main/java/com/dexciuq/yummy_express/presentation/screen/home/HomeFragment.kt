@@ -9,12 +9,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import com.dexciuq.yummy_express.common.Resource
+import com.dexciuq.yummy_express.common.setTextSize
 import com.dexciuq.yummy_express.databinding.FragmentHomeBinding
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
-import com.dexciuq.yummy_express.common.Resource
-import com.dexciuq.yummy_express.common.setTextSize
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -71,7 +71,9 @@ class HomeFragment : Fragment() {
                     }
                 }
             }
+        }
 
+        lifecycleScope.launch {
             viewModel.featuredProducts.collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {

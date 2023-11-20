@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Product
-import com.dexciuq.yummy_express.domain.use_case.banner.GetAllBannersUseCase
+import com.dexciuq.yummy_express.domain.use_case.ui.GetAllBannersUseCase
 import com.dexciuq.yummy_express.domain.use_case.product.GetFeaturedProductsUseCase
 import com.dexciuq.yummy_express.common.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel

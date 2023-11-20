@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".presentation.screen.on_boarding.OnBoardingFragment">
+
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/on_boarding_view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tab_layout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/background"
+        app:layout_constraintBottom_toTopOf="@+id/next_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tabBackground="@drawable/selector_tab_layout"
+        app:tabGravity="center"
+        app:tabPaddingEnd="8dp"
+        app:tabPaddingStart="8dp" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/next_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="60dp"
+        android:layout_marginBottom="60dp"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:text="@string/next"
+        android:textColor="@color/white"
+        android:textFontWeight="700"
+        android:textSize="16sp"
+        android:backgroundTint="@color/primary_dark"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:targetApi="p" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

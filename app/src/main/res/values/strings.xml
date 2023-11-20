@@ -7,4 +7,10 @@
     <string name="search_view_hint">Search keywords…</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="featured_products">Featured Products</string>
+    <string name="buy_grocery">Buy Grocery</string>
+    <string name="fast_delivery">Fast Delivery</string>
+    <string name="enjoy_quality_food">Enjoy Quality Food</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consetetur \nsadipscing elitr, sed diam nonumy</string>
+    <string name="next">Next</string>
+    <string name="get_started">Get Started</string>
 </resources>

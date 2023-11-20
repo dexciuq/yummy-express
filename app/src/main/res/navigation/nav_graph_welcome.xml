@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph_welcome"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/onBoardingFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.on_boarding.OnBoardingFragment"
+        android:label="fragment_on_boarding"
+        tools:layout="@layout/fragment_on_boarding" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.splash.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_onBoardingFragment"
+            app:destination="@id/onBoardingFragment"
+            app:popUpTo="@id/nav_graph_welcome"
+            app:popUpToInclusive="true" />
+    </fragment>
+</navigation>

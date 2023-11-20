@@ -8,4 +8,10 @@
     <string name="search_view_hint">Поиск по ключевым словам…</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="featured_products">Рекомендуемые Продукты</string>
+    <string name="buy_grocery">Покупайте продукты</string>
+    <string name="fast_delivery">Быстрая доставка</string>
+    <string name="enjoy_quality_food">Наслаждайтесь качественной едой</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consetetur \nsadipscing elitr, sed diam nonumy</string>
+    <string name="next">Далее</string>
+    <string name="get_started">Начать</string>
 </resources>
