@@ -1,7 +1,7 @@
 package com.dexciuq.yummy_express.domain.repository
 
 import com.dexciuq.yummy_express.domain.model.Product
-import com.dexciuq.yummy_express.utils.Resource
+import com.dexciuq.yummy_express.common.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface ProductRepository {

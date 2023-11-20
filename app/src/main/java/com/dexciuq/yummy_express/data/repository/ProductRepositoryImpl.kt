@@ -2,7 +2,7 @@ package com.dexciuq.yummy_express.data.repository
 
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.repository.ProductRepository
-import com.dexciuq.yummy_express.utils.Resource
+import com.dexciuq.yummy_express.common.Resource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

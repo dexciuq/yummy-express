@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.utils
+package com.dexciuq.yummy_express.common
 
 sealed class Resource<out T : Any> {
     data object Loading : Resource<Nothing>()

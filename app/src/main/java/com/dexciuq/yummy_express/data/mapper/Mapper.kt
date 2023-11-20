@@ -4,7 +4,7 @@ import com.dexciuq.yummy_express.data.model.remote.CategoryDto
 import com.dexciuq.yummy_express.data.model.remote.ProductDto
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Product
-import com.dexciuq.yummy_express.utils.orPlaceholder
+import com.dexciuq.yummy_express.common.orPlaceholder
 
 fun ProductDto.toProduct() = Product(
     id = id ?: 0,

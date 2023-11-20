@@ -1,6 +1,9 @@
-package com.dexciuq.yummy_express.utils
+package com.dexciuq.yummy_express.common
 
+import android.util.TypedValue
 import android.view.View
+import android.widget.EditText
+import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -33,3 +36,9 @@ fun View.show() {
 }
 
 fun String?.orPlaceholder(): String = this ?: ""
+
+fun SearchView.setTextSize(size: Float) {
+    val searchText = this.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
+    searchText.setTextSize(TypedValue.COMPLEX_UNIT_SP, size)
+}
+
