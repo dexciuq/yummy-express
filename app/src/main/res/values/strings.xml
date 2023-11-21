@@ -14,4 +14,6 @@
     <string name="next">Next</string>
     <string name="get_started">Get Started</string>
     <string name="see_all">See All</string>
+    <string name="your_cart_is_empty">Your cart is empty !</string>
+    <string name="empty_cart_description">It looks like you haven\'t added a single product to the list</string>
 </resources>

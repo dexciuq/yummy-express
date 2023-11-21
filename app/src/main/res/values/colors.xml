@@ -12,4 +12,5 @@
     <color name="stroke">#DDDDDD</color>
     <color name="search_view_background">#F4F5F9</color>
     <color name="place_holder">#C2C2C2</color>
+    <color name="category_background">#FFFFFF</color>
 </resources>

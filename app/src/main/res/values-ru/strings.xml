@@ -14,4 +14,7 @@
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consetetur \nsadipscing elitr, sed diam nonumy</string>
     <string name="next">Далее</string>
     <string name="get_started">Начать</string>
+    <string name="see_all">Все</string>
+    <string name="your_cart_is_empty">Ваша корзина пуста!</string>
+    <string name="empty_cart_description">Похоже, вы не добавили в список ни одного продукта</string>
 </resources>

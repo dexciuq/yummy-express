@@ -86,7 +86,8 @@
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/categories_loading"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -94,13 +95,13 @@
                     android:layout_marginVertical="10dp"
                     android:orientation="horizontal">
 
-                    <include layout="@layout/placeholder_categories" />
+                    <include layout="@layout/placeholder_category" />
 
-                    <include layout="@layout/placeholder_categories" />
+                    <include layout="@layout/placeholder_category" />
 
-                    <include layout="@layout/placeholder_categories" />
+                    <include layout="@layout/placeholder_category" />
 
-                    <include layout="@layout/placeholder_categories" />
+                    <include layout="@layout/placeholder_category" />
 
                 </LinearLayout>
 
@@ -108,11 +109,13 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/categories_rv"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:visibility="gone"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_category"
+                tools:itemCount="5"/>
 
         </LinearLayout>
 
@@ -127,22 +130,11 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories_container" />
 
-        <TextView
-            android:id="@+id/featured_products_all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/see_all"
-            android:textColor="@color/primary"
-            android:textFontWeight="600"
-            android:textSize="14sp"
-            app:layout_constraintBottom_toBottomOf="@+id/featured_products_title"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/featured_products_title" />
-
         <LinearLayout
             android:id="@+id/featured_products_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/featured_products_title">
@@ -150,7 +142,8 @@
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/featured_products_loading"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:visibility="gone">
 
                 <LinearLayout
                     android:layout_width="match_parent"
