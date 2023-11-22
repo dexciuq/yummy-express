@@ -38,7 +38,7 @@ class ProductListFragment : Fragment() {
         setupAppBarSection()
         setupProductListSection()
         collectData()
-        viewModel.getProductListByCategory(args.categoryId)
+        viewModel.getProductListByCategory(args.category.id)
         return binding.root
     }
 
@@ -46,7 +46,7 @@ class ProductListFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        binding.toolbar.title = "${getString(R.string.categories)} ${args.categoryId}"
+        binding.toolbar.title = args.category.name
     }
 
     private fun setupProductListSection() {

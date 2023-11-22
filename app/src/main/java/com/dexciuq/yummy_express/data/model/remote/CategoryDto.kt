@@ -4,11 +4,11 @@ import com.google.gson.annotations.SerializedName
 
 data class CategoryDto(
     @SerializedName("id")
-    val id: Long? = null,
+    val id: Long?,
     @SerializedName("name")
-    val name: String? = null,
+    val name: String?,
     @SerializedName("image")
-    val image: String? = null,
+    val image: String?,
     @SerializedName("description")
-    val description: String? = null,
+    val description: String?,
 )

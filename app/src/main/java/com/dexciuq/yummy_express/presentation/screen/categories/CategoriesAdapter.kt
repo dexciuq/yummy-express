@@ -12,7 +12,7 @@ import javax.inject.Inject
 
 class CategoriesAdapter(
     private val imageLoader: ImageLoader,
-    private val onItemClick: (Long) -> Unit = {}
+    private val onItemClick: (Category) -> Unit = {}
 ) : ListAdapter<Category, CategoriesAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Category>() {
         override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
@@ -38,7 +38,7 @@ class CategoriesAdapter(
         fun bind(category: Category) {
             binding.name.text = category.name
             imageLoader.load(category.imageURL, binding.image)
-            binding.root.setOnClickListener { onItemClick(category.id) }
+            binding.root.setOnClickListener { onItemClick(category) }
         }
     }
 }

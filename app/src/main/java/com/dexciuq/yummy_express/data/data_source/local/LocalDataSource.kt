@@ -2,12 +2,19 @@ package com.dexciuq.yummy_express.data.data_source.local
 
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.data.data_source.DataSource
+import com.dexciuq.yummy_express.data.data_source.local.db.ProductDao
+import com.dexciuq.yummy_express.data.mapper.fromDtoToProduct
+import com.dexciuq.yummy_express.data.mapper.fromEntityToProduct
+import com.dexciuq.yummy_express.data.mapper.toProductEntity
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.OnBoarding
+import com.dexciuq.yummy_express.domain.model.Product
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LocalDataSource @Inject constructor(
-    // todo
+    private val productDao: ProductDao,
 ) : DataSource.Local {
     override suspend fun getBanners(): List<Banner> = listOf(
         Banner(id = 1, image = R.drawable.ic_banner_1),
@@ -33,4 +40,22 @@ class LocalDataSource @Inject constructor(
             description = R.string.lorem_ipsum,
         ),
     )
+
+    override fun getAllProductsFromCart(): Flow<List<Product>> =
+        productDao.getAll().map { it.fromEntityToProduct() }
+
+    override suspend fun getCartProductById(id: Long): Product? =
+        productDao.getProductById(id)?.fromEntityToProduct()
+
+    override suspend fun addProductToCart(product: Product) =
+        productDao.insert(product.toProductEntity())
+
+    override suspend fun removeProductFromCart(id: Long) =
+        productDao.deleteById(id)
+
+    override suspend fun removeAllProductFromCart() =
+        productDao.deleteAllProducts()
+
+    override suspend fun updateProductAmount(id: Long, amount: Double) =
+        productDao.updateByIdAndAmount(id, amount)
 }

@@ -14,4 +14,5 @@ data class Product(
     val imageURL: String,
     val country: String,
     val brand: String,
+    var amount: Double?,
 )

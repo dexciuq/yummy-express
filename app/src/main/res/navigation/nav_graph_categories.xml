@@ -20,7 +20,7 @@
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" >
         <argument
-            android:name="categoryId"
-            app:argType="long" />
+            android:name="category"
+            app:argType="com.dexciuq.yummy_express.domain.model.Category" />
     </fragment>
 </navigation>

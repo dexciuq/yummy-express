@@ -23,5 +23,11 @@ interface DataSource {
     interface Local {
         suspend fun getBanners(): List<Banner>
         suspend fun getOnBoardingItems(): List<OnBoarding>
+        fun getAllProductsFromCart(): Flow<List<Product>>
+        suspend fun getCartProductById(id: Long): Product?
+        suspend fun removeProductFromCart(id: Long)
+        suspend fun removeAllProductFromCart()
+        suspend fun addProductToCart(product: Product)
+        suspend fun updateProductAmount(id: Long, amount: Double)
     }
 }
