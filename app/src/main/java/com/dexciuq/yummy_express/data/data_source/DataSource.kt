@@ -18,6 +18,7 @@ interface DataSource {
         suspend fun getFeaturedProductList(): List<Product>
         suspend fun getHomeCategoryList(): List<Category>
         suspend fun getProductsByCategory(category: Long): List<Product>
+        suspend fun getProductById(id: Long): Product
     }
 
     interface Local {

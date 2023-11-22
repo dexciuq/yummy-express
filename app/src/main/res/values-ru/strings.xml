@@ -20,4 +20,7 @@
     <string name="add_to_cart">Добавить</string>
     <string name="category_is_empty">Категория пуста</string>
     <string name="empty_category_list">Похоже, в этой категории нет ни одного товара</string>
+    <string name="detail_category">Категория: %s</string>
+    <string name="detail_brand">Бренд: %s</string>
+    <string name="detail_country">Страна: %s</string>
 </resources>

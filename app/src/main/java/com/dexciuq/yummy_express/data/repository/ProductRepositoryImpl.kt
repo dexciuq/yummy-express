@@ -34,6 +34,16 @@ class ProductRepositoryImpl @Inject constructor(
             }
         }
 
+    override suspend fun getProductById(id: Long): Flow<Resource<Product>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = remote.getProductById(id)
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
     override fun getAllProductsFromCart(): Flow<List<Product>> =
         local.getAllProductsFromCart()
 

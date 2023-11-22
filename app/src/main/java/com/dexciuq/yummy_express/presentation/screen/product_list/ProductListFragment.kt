@@ -50,7 +50,10 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setupProductListSection() {
-        productListAdapter = ProductListAdapter(imageLoader) { toast(it.toString()) }
+        productListAdapter = ProductListAdapter(imageLoader) {
+            val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(it)
+            findNavController().navigate(action)
+        }
         binding.productListRv.adapter = productListAdapter
     }
 

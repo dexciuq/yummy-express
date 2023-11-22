@@ -19,4 +19,7 @@
     <string name="add_to_cart">Add to cart</string>
     <string name="category_is_empty">Category is empty</string>
     <string name="empty_category_list">It looks like this category doesn\'t have a single product</string>
+    <string name="detail_category">Category: %s</string>
+    <string name="detail_brand">Brand: %s</string>
+    <string name="detail_country">Country: %s</string>
 </resources>

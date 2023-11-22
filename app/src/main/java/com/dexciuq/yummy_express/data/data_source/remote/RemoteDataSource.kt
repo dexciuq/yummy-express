@@ -19,6 +19,9 @@ class RemoteDataSource @Inject constructor(
     override suspend fun getProductsByCategory(category: Long): List<Product> =
         yummyExpressApiService.getAllProducts(category).products?.fromDtoToProduct() ?: listOf()
 
+    override suspend fun getProductById(id: Long): Product =
+        yummyExpressApiService.getProductById(id).product.fromDtoToProduct()
+
     override suspend fun getFeaturedProductList(): List<Product> =
         yummyExpressApiService.getAllProducts().products?.fromDtoToProduct()?.take(10) ?: listOf()
 }

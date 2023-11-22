@@ -83,7 +83,8 @@ class HomeFragment : Fragment() {
 
     private fun setupFeaturedProductsSection() {
         featuredProductsAdapter = ProductListAdapter(imageLoader) {
-            toast(it.toString())
+            val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(it)
+            findNavController().navigate(action)
         }
         binding.featuredProductsRv.adapter = featuredProductsAdapter
     }
