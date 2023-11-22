@@ -5,4 +5,8 @@ object Constants {
         const val SHARED_PREF_NAME = "yummy_express_shared_pref"
         const val ON_BOARDING_COMPLETE = "onBoardingComplete"
     }
+
+    object API {
+        const val BASE_URL = "http://10.0.2.2:8080/"
+    }
 }

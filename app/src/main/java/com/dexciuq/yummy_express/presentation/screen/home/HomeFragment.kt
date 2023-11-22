@@ -19,7 +19,6 @@ import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
-import com.dexciuq.yummy_express.presentation.screen.categories.CategoriesAdapter
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -35,7 +34,8 @@ class HomeFragment : Fragment() {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
-    @Inject lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -122,11 +122,12 @@ class HomeFragment : Fragment() {
                     is Resource.Loading -> {
                         binding.featuredProductsLoading.show()
                         binding.featuredProductsLoading.startShimmer()
+                        delay(1000)
                     }
 
                     is Resource.Success -> {
-//                        binding.featuredProductsLoading.hide()
-//                        binding.featuredProductsLoading.stopShimmer()
+                        binding.featuredProductsLoading.hide()
+                        binding.featuredProductsLoading.stopShimmer()
                         val data: List<Product> = resource.data
                     }
 

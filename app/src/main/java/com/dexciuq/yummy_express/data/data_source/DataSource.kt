@@ -14,6 +14,7 @@ interface DataSource {
     interface Remote {
         suspend fun getCategoryList(): List<Category>
         suspend fun getFeaturedProductList(): List<Product>
+        suspend fun getHomeCategoryList(): List<Category>
     }
 
     interface Local {

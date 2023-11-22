@@ -54,6 +54,12 @@
 
                 <include layout="@layout/placeholder_categories_list" />
 
+                <include layout="@layout/placeholder_categories_list" />
+
+                <include layout="@layout/placeholder_categories_list" />
+
+                <include layout="@layout/placeholder_categories_list" />
+
             </LinearLayout>
 
         </com.facebook.shimmer.ShimmerFrameLayout>
@@ -66,6 +72,8 @@
             android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:spanCount="3"
+            android:paddingBottom="72dp"
+            android:clipToPadding="true"
             tools:listitem="@layout/item_category" />
 
     </LinearLayout>

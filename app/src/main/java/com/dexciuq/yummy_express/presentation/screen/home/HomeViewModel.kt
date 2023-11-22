@@ -9,6 +9,7 @@ import com.dexciuq.yummy_express.domain.use_case.product.GetFeaturedProductsUseC
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.use_case.category.GetCategoriesUseCase
+import com.dexciuq.yummy_express.domain.use_case.category.GetHomeCategoriesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -20,7 +21,7 @@ import javax.inject.Inject
 class HomeViewModel @Inject constructor(
     private val getFeaturedProductsUseCase: GetFeaturedProductsUseCase,
     private val getAllBannersUseCase: GetAllBannersUseCase,
-    private val getCategoriesUseCase: GetCategoriesUseCase,
+    private val getHomeCategoriesUseCase: GetHomeCategoriesUseCase
 ) : ViewModel() {
 
     private val _featuredProducts = MutableStateFlow<Resource<List<Product>>>(Resource.Loading)
@@ -39,7 +40,7 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getCategories() = viewModelScope.launch {
-        getCategoriesUseCase().collectLatest {
+        getHomeCategoriesUseCase().collectLatest {
             _categories.emit(it)
         }
     }

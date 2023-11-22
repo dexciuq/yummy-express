@@ -1,5 +1,7 @@
 package com.dexciuq.yummy_express.common
 
+import android.os.Handler
+import android.os.Looper
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
@@ -7,6 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
+import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 fun BottomNavigationView.show(navHostFragmentContainer: View) {
@@ -46,5 +49,16 @@ fun SearchView.setTextSize(size: Float) {
 
 fun Fragment.toast(message: String?) {
     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun ShimmerFrameLayout.stop(
+    onHide: () -> Unit,
+) {
+    this.invisible()
+    Handler(Looper.getMainLooper()).postDelayed({
+        onHide()
+        this.hide()
+        this.stopShimmer()
+    }, 100)
 }
 

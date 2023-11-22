@@ -20,4 +20,14 @@ class CategoryRepositoryImpl @Inject constructor(
             emit(Resource.Error(t))
         }
     }
+
+    override suspend fun getHomeCategoryList(): Flow<Resource<List<Category>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = remote.getHomeCategoryList()
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
 }

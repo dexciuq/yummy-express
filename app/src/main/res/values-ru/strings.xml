@@ -17,4 +17,5 @@
     <string name="see_all">Все</string>
     <string name="your_cart_is_empty">Ваша корзина пуста!</string>
     <string name="empty_cart_description">Похоже, вы не добавили в список ни одного продукта</string>
+    <string name="add_to_cart">Добавить в корзину</string>
 </resources>

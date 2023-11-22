@@ -25,6 +25,8 @@ fun ProductDto.toProduct() = Product(
 fun CategoryDto.toCategory() = Category(
     id = id ?: 0,
     name = name.orEmpty(),
-    imageURL = imageURL.orPlaceholder(),
+    imageURL = image.orPlaceholder(),
     description = description.orEmpty(),
 )
+
+fun List<CategoryDto>.toCategory() = map(CategoryDto::toCategory)

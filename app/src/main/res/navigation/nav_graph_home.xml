@@ -9,5 +9,18 @@
         android:id="@+id/homeFragment"
         android:name="com.dexciuq.yummy_express.presentation.screen.home.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_productListFragment2"
+            app:destination="@id/productListFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/productListFragment2"
+        android:name="com.dexciuq.yummy_express.presentation.screen.product_list.ProductListFragment"
+        android:label="fragment_product_list"
+        tools:layout="@layout/fragment_product_list" >
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+    </fragment>
 </navigation>

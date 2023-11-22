@@ -16,4 +16,5 @@
     <string name="see_all">See All</string>
     <string name="your_cart_is_empty">Your cart is empty !</string>
     <string name="empty_cart_description">It looks like you haven\'t added a single product to the list</string>
+    <string name="add_to_cart">Add to cart</string>
 </resources>
