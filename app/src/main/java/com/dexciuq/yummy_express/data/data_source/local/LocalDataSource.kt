@@ -12,7 +12,8 @@ class LocalDataSource @Inject constructor(
     override suspend fun getBanners(): List<Banner> = listOf(
         Banner(id = 1, image = R.drawable.ic_banner_1),
         Banner(id = 2, image = R.drawable.ic_banner_2),
-        Banner(id = 3, image = R.drawable.ic_banner_3)
+        Banner(id = 3, image = R.drawable.ic_banner_3),
+        Banner(id = 4, image = R.drawable.ic_banner_4)
     )
 
     override suspend fun getOnBoardingItems(): List<OnBoarding> = listOf(

@@ -10,7 +10,7 @@ import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import javax.inject.Inject
 
-class CategoriesAdapter @Inject constructor(
+class CategoriesAdapter(
     private val imageLoader: ImageLoader,
     private val onItemClick: (Long) -> Unit = {}
 ) : ListAdapter<Category, CategoriesAdapter.ViewHolder>(

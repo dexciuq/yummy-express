@@ -34,8 +34,8 @@ class HomeFragment : Fragment() {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
-    @Inject
-    lateinit var imageLoader: ImageLoader
+    private lateinit var featuredProductsAdapter: HomeFeaturedProductsAdapter
+    @Inject lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,6 +43,7 @@ class HomeFragment : Fragment() {
     ): View {
         setupSearchView()
         setupCategoriesSection()
+        setupFeaturedProductsSection()
         collectData()
         return binding.root
     }
@@ -74,6 +75,13 @@ class HomeFragment : Fragment() {
         binding.categoriesAll.setOnClickListener {
             bottomNavigation.selectedItemId = R.id.nav_graph_categories
         }
+    }
+
+    private fun setupFeaturedProductsSection() {
+        featuredProductsAdapter = HomeFeaturedProductsAdapter(imageLoader) {
+            toast(it.toString())
+        }
+        binding.featuredProductsRv.adapter = featuredProductsAdapter
     }
 
     private fun collectData() {
@@ -120,6 +128,7 @@ class HomeFragment : Fragment() {
             viewModel.featuredProducts.collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {
+                        binding.featuredProductsRv.hide()
                         binding.featuredProductsLoading.show()
                         binding.featuredProductsLoading.startShimmer()
                         delay(1000)
@@ -127,8 +136,9 @@ class HomeFragment : Fragment() {
 
                     is Resource.Success -> {
                         binding.featuredProductsLoading.hide()
+                        binding.featuredProductsRv.show()
                         binding.featuredProductsLoading.stopShimmer()
-                        val data: List<Product> = resource.data
+                        featuredProductsAdapter.submitList(resource.data)
                     }
 
                     is Resource.Error -> {
@@ -143,7 +153,6 @@ class HomeFragment : Fragment() {
         val adapter = BannerViewPagerAdapter(requireActivity(), bannerList)
 
         binding.viewPager.adapter = adapter
-        binding.viewPager.currentItem = bannerList.size / 2
         binding.viewPager.offscreenPageLimit = 1
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()

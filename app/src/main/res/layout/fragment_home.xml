@@ -29,8 +29,9 @@
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewPager"
             android:layout_width="0dp"
-            android:layout_height="250dp"
+            android:layout_height="wrap_content"
             android:saveEnabled="false"
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_view" />
@@ -41,7 +42,7 @@
             android:layout_height="24dp"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="@+id/viewPager"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tabBackground="@drawable/selector_tab_layout"
@@ -54,7 +55,7 @@
             android:id="@+id/categories_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/categories"
             android:textColor="@color/title"
             android:textFontWeight="800"
@@ -79,6 +80,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="4dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categories_title">
@@ -114,8 +116,8 @@
                 android:orientation="horizontal"
                 android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_category"
-                tools:itemCount="5"/>
+                tools:itemCount="5"
+                tools:listitem="@layout/item_category" />
 
         </LinearLayout>
 
@@ -127,6 +129,7 @@
             android:textColor="@color/title"
             android:textFontWeight="800"
             android:textSize="18sp"
+            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories_container" />
 
@@ -135,6 +138,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:orientation="vertical"
+            android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/featured_products_title">
@@ -168,8 +172,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
+                android:paddingBottom="24dp"
+                android:clipToPadding="true"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                app:spanCount="2" />
+                app:spanCount="2"
+                tools:listitem="@layout/item_product" />
 
         </LinearLayout>
 

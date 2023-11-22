@@ -16,5 +16,20 @@ class RemoteDataSource @Inject constructor(
         yummyExpressApiService.getAllCategories().categories.toCategory().take(6)
 
     override suspend fun getFeaturedProductList(): List<Product> = listOf(
+        Product(
+            id = 1,
+            name = "Fresh Peach",
+            description = "",
+            category = Category(id = 55, name = "dfkj", imageURL = "", description = ""),
+            upc = "45464645",
+            price = 65000L,
+            discountPercentage = 5,
+            quantity = 822,
+            unit = "kg",
+            priceUnit = 0.4,
+            imageURL = "https://pngfre.com/wp-content/uploads/peach-png-image-from-pngfre-33-1024x815.png",
+            country = "kz",
+            brand = "asi_mart"
+        )
     )
 }
