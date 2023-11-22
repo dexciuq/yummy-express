@@ -21,4 +21,14 @@ class ProductRepositoryImpl @Inject constructor(
             emit(Resource.Error(t))
         }
     }
+
+    override suspend fun getProductsByCategory(category: Long): Flow<Resource<List<Product>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = remote.getProductsByCategory(category)
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
 }

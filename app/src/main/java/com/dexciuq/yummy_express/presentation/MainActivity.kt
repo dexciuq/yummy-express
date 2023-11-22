@@ -6,6 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.dexciuq.yummy_express.R
+import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -33,9 +34,9 @@ class MainActivity : AppCompatActivity() {
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-//                R.id.addressFragment, R.id.deliveryFragment -> {
-//                    binding.bottomNavigationView.hide(binding.navHostFragmentContainer)
-//                }
+                R.id.productListFragment -> {
+                    binding.bottomNavigationView.hide(binding.navHostFragmentContainer)
+                }
                 else -> {
                     binding.bottomNavigationView.show(binding.navHostFragmentContainer)
                 }

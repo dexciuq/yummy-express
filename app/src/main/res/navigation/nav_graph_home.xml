@@ -11,11 +11,11 @@
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" >
         <action
-            android:id="@+id/action_homeFragment_to_productListFragment2"
-            app:destination="@id/productListFragment2" />
+            android:id="@+id/action_homeFragment_to_productListFragment"
+            app:destination="@id/productListFragment" />
     </fragment>
     <fragment
-        android:id="@+id/productListFragment2"
+        android:id="@+id/productListFragment"
         android:name="com.dexciuq.yummy_express.presentation.screen.product_list.ProductListFragment"
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" >

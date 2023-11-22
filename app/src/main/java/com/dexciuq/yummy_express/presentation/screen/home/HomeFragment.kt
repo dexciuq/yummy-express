@@ -8,6 +8,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
@@ -19,7 +20,9 @@ import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
+import com.dexciuq.yummy_express.presentation.screen.categories.CategoriesFragmentDirections
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
+import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -34,7 +37,7 @@ class HomeFragment : Fragment() {
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
-    private lateinit var featuredProductsAdapter: HomeFeaturedProductsAdapter
+    private lateinit var featuredProductsAdapter: ProductListAdapter
     @Inject lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
@@ -65,7 +68,8 @@ class HomeFragment : Fragment() {
 
     private fun setupCategoriesSection() {
         categoriesAdapter = HomeCategoriesAdapter(imageLoader) {
-            toast(it.toString())
+            val action = HomeFragmentDirections.actionHomeFragmentToProductListFragment(it)
+            findNavController().navigate(action)
         }
         binding.categoriesRv.adapter = categoriesAdapter
 
@@ -78,7 +82,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupFeaturedProductsSection() {
-        featuredProductsAdapter = HomeFeaturedProductsAdapter(imageLoader) {
+        featuredProductsAdapter = ProductListAdapter(imageLoader) {
             toast(it.toString())
         }
         binding.featuredProductsRv.adapter = featuredProductsAdapter

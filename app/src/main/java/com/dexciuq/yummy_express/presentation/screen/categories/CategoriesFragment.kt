@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
@@ -31,7 +32,8 @@ class CategoriesFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         adapter = CategoriesAdapter(imageLoader) {
-            toast(it.toString())
+            val action = CategoriesFragmentDirections.actionCategoriesFragmentToProductListFragment(it)
+            findNavController().navigate(action)
         }
         binding.categoriesRv.adapter = adapter
 

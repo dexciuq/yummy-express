@@ -18,4 +18,6 @@
     <string name="your_cart_is_empty">Ваша корзина пуста!</string>
     <string name="empty_cart_description">Похоже, вы не добавили в список ни одного продукта</string>
     <string name="add_to_cart">Добавить</string>
+    <string name="category_is_empty">Категория пуста</string>
+    <string name="empty_category_list">Похоже, в этой категории нет ни одного товара</string>
 </resources>
