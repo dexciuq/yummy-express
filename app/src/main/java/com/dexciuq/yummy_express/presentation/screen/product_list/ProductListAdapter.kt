@@ -2,9 +2,12 @@ package com.dexciuq.yummy_express.presentation.screen.product_list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.fragment.FragmentNavigator
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.dexciuq.yummy_express.common.Constants
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.databinding.ItemProductBinding
@@ -13,7 +16,7 @@ import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 
 class ProductListAdapter(
     private val imageLoader: ImageLoader,
-    private val onItemClick: (Long) -> Unit = {}
+    private val onItemClick: (Product, FragmentNavigator.Extras) -> Unit
 ) : ListAdapter<Product, ProductListAdapter.ViewHolder>(
     object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -43,7 +46,7 @@ class ProductListAdapter(
                 name.text = product.name
                 price.text = "${product.price / 100f} ₸ / ${product.unit}"
                 imageLoader.load(product.imageURL, image)
-                productContainer.setOnClickListener { onItemClick(product.id) }
+
                 addToCardContainer.setOnClickListener {
                     addToCardContainer.hide()
                     quantityContainer.show()
@@ -65,6 +68,20 @@ class ProductListAdapter(
                         quantity.text =
                             (quantity.text.toString().toDouble() - product.priceUnit).toString()
                     }
+                }
+
+                name.transitionName = Constants.TransitionName.NAME + product.id.toString()
+                image.transitionName = Constants.TransitionName.IMAGE + product.id.toString()
+                price.transitionName = Constants.TransitionName.PRICE + product.id.toString()
+
+                val extras = FragmentNavigatorExtras(
+                    name to Constants.TransitionName.NAME,
+                    image to Constants.TransitionName.IMAGE,
+                    price to Constants.TransitionName.PRICE,
+                )
+
+                productContainer.setOnClickListener {
+                    onItemClick(product, extras)
                 }
             }
         }

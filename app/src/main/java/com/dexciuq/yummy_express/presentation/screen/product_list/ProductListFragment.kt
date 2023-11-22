@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
@@ -35,6 +37,7 @@ class ProductListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        postponeEnterTransition()
         setupAppBarSection()
         setupProductListSection()
         collectData()
@@ -50,9 +53,10 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setupProductListSection() {
-        productListAdapter = ProductListAdapter(imageLoader) {
-            val action = ProductListFragmentDirections.actionProductListFragmentToProductDetailFragment(it)
-            findNavController().navigate(action)
+        productListAdapter = ProductListAdapter(imageLoader) { product, extras ->
+            val action = ProductListFragmentDirections
+                .actionProductListFragmentToProductDetailFragment(product.id)
+            findNavController().navigate(action, extras)
         }
         binding.productListRv.adapter = productListAdapter
     }
@@ -66,7 +70,6 @@ class ProductListFragment : Fragment() {
                         binding.productListRv.hide()
                         binding.productListLoading.show()
                         binding.productListLoading.startShimmer()
-                        delay(1000)
                     }
 
                     is Resource.Success -> {
@@ -77,6 +80,9 @@ class ProductListFragment : Fragment() {
                         if (resource.data.isEmpty()) {
                             binding.productListRv.hide()
                             binding.emptyProductList.show()
+                        }
+                        binding.productListRv.doOnPreDraw {
+                            startPostponedEnterTransition()
                         }
                     }
 

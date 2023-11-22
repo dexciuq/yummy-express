@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.transition.TransitionInflater
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
@@ -20,6 +21,7 @@ import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,7 +47,6 @@ class ProductDetailFragment : Fragment() {
                 when (resource) {
                     is Resource.Loading -> {
                         binding.imageProgressBar.show()
-                        delay(1000)
                     }
 
                     is Resource.Success -> {
@@ -62,9 +63,14 @@ class ProductDetailFragment : Fragment() {
     }
 
     private fun setupProductSection(product: Product) {
+        sharedElementEnterTransition =
+            TransitionInflater.from(requireContext()).inflateTransition(android.R.transition.move)
+        postponeEnterTransition(200, TimeUnit.MILLISECONDS)
+
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+
         imageLoader.load(product.imageURL, binding.productImage)
         binding.name.text = product.name
         binding.price.text = "${product.price / 100} ₸ / ${product.unit}"

@@ -13,4 +13,10 @@ object Constants {
     object DB {
         const val DATABASE_NAME = "yummy-express"
     }
+
+    object TransitionName {
+        const val NAME = "name"
+        const val PRICE = "price"
+        const val IMAGE = "image"
+    }
 }

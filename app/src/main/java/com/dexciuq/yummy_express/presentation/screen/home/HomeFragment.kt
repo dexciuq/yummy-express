@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -82,9 +83,9 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupFeaturedProductsSection() {
-        featuredProductsAdapter = ProductListAdapter(imageLoader) {
-            val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(it)
-            findNavController().navigate(action)
+        featuredProductsAdapter = ProductListAdapter(imageLoader) { product, extras ->
+            val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(product.id)
+            findNavController().navigate(action, extras)
         }
         binding.featuredProductsRv.adapter = featuredProductsAdapter
     }
@@ -144,6 +145,10 @@ class HomeFragment : Fragment() {
                         binding.featuredProductsRv.show()
                         binding.featuredProductsLoading.stopShimmer()
                         featuredProductsAdapter.submitList(resource.data)
+                        postponeEnterTransition()
+                        binding.featuredProductsRv.doOnPreDraw {
+                            startPostponedEnterTransition()
+                        }
                     }
 
                     is Resource.Error -> {
