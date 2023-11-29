@@ -1,6 +1,5 @@
 package com.dexciuq.yummy_express.data.data_source
 
-import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.OnBoarding
@@ -26,9 +25,8 @@ interface DataSource {
         suspend fun getOnBoardingItems(): List<OnBoarding>
         fun getAllProductsFromCart(): Flow<List<Product>>
         suspend fun getCartProductById(id: Long): Product?
-        suspend fun removeProductFromCart(id: Long)
+        suspend fun removeProductFromCart(product: Product)
         suspend fun removeAllProductFromCart()
         suspend fun addProductToCart(product: Product)
-        suspend fun updateProductAmount(id: Long, amount: Double)
     }
 }

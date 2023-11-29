@@ -23,4 +23,8 @@
     <string name="detail_category">Категория: %s</string>
     <string name="detail_brand">Бренд: %s</string>
     <string name="detail_country">Страна: %s</string>
+    <string name="checkout">Проверить</string>
+    <string name="subtotal">Промежуточная сумма</string>
+    <string name="shipping_charges">Стоимость доставки</string>
+    <string name="total">Итог</string>
 </resources>

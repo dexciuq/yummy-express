@@ -27,6 +27,7 @@ class AppDatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideProductDao(database: AppDatabase): ProductDao {
         return database.productDao()
     }

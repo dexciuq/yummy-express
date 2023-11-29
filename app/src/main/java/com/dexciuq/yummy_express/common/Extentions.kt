@@ -1,7 +1,9 @@
 package com.dexciuq.yummy_express.common
 
-import android.os.Handler
-import android.os.Looper
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
@@ -9,23 +11,19 @@ import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
-import com.facebook.shimmer.ShimmerFrameLayout
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
-fun BottomNavigationView.show(navHostFragmentContainer: View) {
-    if (visibility == View.VISIBLE) return
-    visibility = View.VISIBLE
-    val params = navHostFragmentContainer.layoutParams as ConstraintLayout.LayoutParams
-    params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, params.bottomMargin)
-    navHostFragmentContainer.layoutParams = params
+fun BottomNavigationView.showWithAnimation(fragmentContainerView: View) {
+    if (this.visibility == View.VISIBLE) return
+    this.show()
+    this.animateTranslationY(0f, 70f, 500)
+    fragmentContainerView.animateMarginBottom(0f, 500)
 }
 
-fun BottomNavigationView.hide(navHostFragmentContainer: View) {
-    if (visibility == View.GONE) return
-    visibility = View.GONE
-    val params = navHostFragmentContainer.layoutParams as ConstraintLayout.LayoutParams
-    params.setMargins(params.leftMargin, params.topMargin, params.rightMargin, 0)
-    navHostFragmentContainer.layoutParams = params
+fun BottomNavigationView.hideWithAnimation(fragmentContainerView: View) {
+    if (this.visibility == View.GONE) return
+    this.animateTranslationY(70f, 0f, 500)
+    fragmentContainerView.animateMarginBottom(0f, 500)
 }
 
 fun View.hide() {
@@ -51,14 +49,55 @@ fun Fragment.toast(message: String?) {
     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
 }
 
-fun ShimmerFrameLayout.stop(
-    onHide: () -> Unit,
-) {
-    this.invisible()
-    Handler(Looper.getMainLooper()).postDelayed({
-        onHide()
-        this.hide()
-        this.stopShimmer()
-    }, 100)
+
+fun View.animateTranslationY(animateFrom: Float, animateTo: Float, duration: Long) {
+    val animator =
+        ObjectAnimator.ofFloat(
+            this, "translationY", TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                animateTo,
+                resources.displayMetrics
+            ), TypedValue.applyDimension(
+                TypedValue.COMPLEX_UNIT_DIP,
+                animateFrom,
+                resources.displayMetrics
+            )
+        )
+    animator.duration = duration
+    if (animateTo == 0f) {
+        animator.addListener(object : AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator) {
+                this@animateTranslationY.hide()
+            }
+        })
+    }
+    animator.start()
+
 }
+
+fun View.animateMarginBottom(size: Float, duration: Long) {
+    val dpToPx = TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        size,
+        resources.displayMetrics
+    )
+
+    val params =
+        this.layoutParams as ConstraintLayout.LayoutParams
+    val animator = ValueAnimator.ofInt(params.bottomMargin, dpToPx.toInt())
+    animator.addUpdateListener {
+        val value = it.animatedValue as Int
+        params.setMargins(
+            params.leftMargin,
+            params.topMargin,
+            params.rightMargin,
+            value
+        )
+        this.layoutParams = params
+    }
+    animator.duration = duration
+    animator.start()
+}
+
+fun Long.toMoney() = (this.toDouble() / 100).toString() + " ₸"
 

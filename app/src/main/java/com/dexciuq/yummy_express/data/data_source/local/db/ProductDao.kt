@@ -1,7 +1,7 @@
 package com.dexciuq.yummy_express.data.data_source.local.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -19,11 +19,8 @@ interface ProductDao {
     @Query("DELETE FROM products")
     suspend fun deleteAllProducts()
 
-    @Query("DELETE FROM products WHERE id = :id")
-    suspend fun deleteById(id: Long)
-
-    @Query("UPDATE products SET amount = :amount WHERE id = :id")
-    suspend fun updateByIdAndAmount(id: Long, amount: Double)
+    @Delete
+    suspend fun delete(productEntity: ProductEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(productEntity: ProductEntity)

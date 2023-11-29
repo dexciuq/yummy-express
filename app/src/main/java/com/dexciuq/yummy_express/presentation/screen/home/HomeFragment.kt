@@ -18,11 +18,10 @@ import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentHomeBinding
 import com.dexciuq.yummy_express.domain.model.Banner
-import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
-import com.dexciuq.yummy_express.presentation.screen.categories.CategoriesFragmentDirections
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
+import com.dexciuq.yummy_express.presentation.screen.home.category.HomeCategoriesAdapter
 import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
@@ -83,10 +82,17 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupFeaturedProductsSection() {
-        featuredProductsAdapter = ProductListAdapter(imageLoader) { product, extras ->
-            val action = HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(product.id)
-            findNavController().navigate(action, extras)
-        }
+        featuredProductsAdapter = ProductListAdapter(
+            imageLoader = imageLoader,
+            onItemClick = { product, extras ->
+                val action =
+                    HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(product.id)
+                findNavController().navigate(action, extras)
+            },
+            onAddToCart = {},
+            onDeleteFromCart = {},
+            onUpdateAmountClick = {},
+        )
         binding.featuredProductsRv.adapter = featuredProductsAdapter
     }
 
@@ -145,6 +151,7 @@ class HomeFragment : Fragment() {
                         binding.featuredProductsRv.show()
                         binding.featuredProductsLoading.stopShimmer()
                         featuredProductsAdapter.submitList(resource.data)
+
                         postponeEnterTransition()
                         binding.featuredProductsRv.doOnPreDraw {
                             startPostponedEnterTransition()

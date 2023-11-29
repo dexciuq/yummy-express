@@ -44,8 +44,15 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAllProductsFromCart(): Flow<List<Product>> =
-        local.getAllProductsFromCart()
+    override fun getAllProductsFromCart(): Flow<Resource<Flow<List<Product>>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = local.getAllProductsFromCart()
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
 
     override suspend fun getCartProductById(id: Long): Flow<Resource<Product>> = flow {
         emit(Resource.Loading)
@@ -60,12 +67,9 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun addProductToCart(product: Product) =
         local.addProductToCart(product)
 
-    override suspend fun removeProductFromCart(id: Long) =
-        local.removeProductFromCart(id)
+    override suspend fun removeProductFromCart(product: Product) =
+        local.removeProductFromCart(product)
 
     override suspend fun removeAllProductFromCart() =
         local.removeAllProductFromCart()
-
-    override suspend fun updateProductAmount(id: Long, amount: Int) =
-        local.removeProductFromCart(id)
 }

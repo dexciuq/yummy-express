@@ -50,12 +50,9 @@ class LocalDataSource @Inject constructor(
     override suspend fun addProductToCart(product: Product) =
         productDao.insert(product.toProductEntity())
 
-    override suspend fun removeProductFromCart(id: Long) =
-        productDao.deleteById(id)
+    override suspend fun removeProductFromCart(product: Product) =
+        productDao.delete(product.toProductEntity())
 
     override suspend fun removeAllProductFromCart() =
         productDao.deleteAllProducts()
-
-    override suspend fun updateProductAmount(id: Long, amount: Double) =
-        productDao.updateByIdAndAmount(id, amount)
 }

@@ -10,8 +10,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import androidx.transition.TransitionInflater
-import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
@@ -19,7 +17,6 @@ import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentProductListBinding
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -29,7 +26,6 @@ class ProductListFragment : Fragment() {
     private val binding by lazy { FragmentProductListBinding.inflate(layoutInflater) }
     private val viewModel: ProductListViewModel by viewModels()
     private val args: ProductListFragmentArgs by navArgs()
-
     private lateinit var productListAdapter: ProductListAdapter
     @Inject lateinit var imageLoader: ImageLoader
 
@@ -53,11 +49,17 @@ class ProductListFragment : Fragment() {
     }
 
     private fun setupProductListSection() {
-        productListAdapter = ProductListAdapter(imageLoader) { product, extras ->
-            val action = ProductListFragmentDirections
-                .actionProductListFragmentToProductDetailFragment(product.id)
-            findNavController().navigate(action, extras)
-        }
+        productListAdapter = ProductListAdapter(
+            imageLoader = imageLoader,
+            onItemClick = { product, extras ->
+                val action = ProductListFragmentDirections
+                    .actionProductListFragmentToProductDetailFragment(product.id)
+                findNavController().navigate(action, extras)
+            },
+            onAddToCart = viewModel::addProductToCart,
+            onDeleteFromCart = viewModel::removeProductFromCart,
+            onUpdateAmountClick = viewModel::updateAmount,
+        )
         binding.productListRv.adapter = productListAdapter
     }
 

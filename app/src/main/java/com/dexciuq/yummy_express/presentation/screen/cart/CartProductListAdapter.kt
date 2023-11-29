@@ -1,26 +1,19 @@
-package com.dexciuq.yummy_express.presentation.screen.product_list
+package com.dexciuq.yummy_express.presentation.screen.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.navigation.fragment.FragmentNavigator
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dexciuq.yummy_express.common.Constants
-import com.dexciuq.yummy_express.common.hide
-import com.dexciuq.yummy_express.common.show
-import com.dexciuq.yummy_express.databinding.ItemProductBinding
+import com.dexciuq.yummy_express.databinding.ItemCartProductBinding
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 
-class ProductListAdapter(
+class CartProductListAdapter(
     private val imageLoader: ImageLoader,
-    private val onItemClick: (Product, FragmentNavigator.Extras) -> Unit,
-    private val onAddToCart: (Product) -> Unit,
-    private val onDeleteFromCart: (Product) -> Unit,
+    private val onDeleteClick: (Product) -> Unit,
     private val onUpdateAmountClick: (Product) -> Unit,
-) : ListAdapter<Product, ProductListAdapter.ViewHolder>(
+) : ListAdapter<Product, CartProductListAdapter.ViewHolder>(
 
     object : DiffUtil.ItemCallback<Product>() {
         override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
@@ -34,7 +27,7 @@ class ProductListAdapter(
 
 ) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
-        ItemProductBinding.inflate(
+        ItemCartProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
     )
@@ -43,23 +36,15 @@ class ProductListAdapter(
         holder.bind(getItem(position))
 
     inner class ViewHolder(
-        private val binding: ItemProductBinding
+        private val binding: ItemCartProductBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(product: Product) {
             with(binding) {
                 name.text = product.name
                 price.text = "${product.price / 100f} ₸ / ${product.unit}"
+                quantity.text = product.amount.toString()
                 imageLoader.load(product.imageURL, image)
-
-                addToCardContainer.setOnClickListener {
-                    addToCardContainer.hide()
-                    quantityContainer.show()
-                    quantity.text = product.priceUnit.toString()
-
-                    product.amount = 1.0
-                    onAddToCart(product)
-                }
 
                 plus.setOnClickListener {
                     val next = quantity.text.toString().toDouble() + product.priceUnit
@@ -74,31 +59,13 @@ class ProductListAdapter(
                 minus.setOnClickListener {
                     val prev = quantity.text.toString().toDouble() - product.priceUnit
                     if (prev == 0.0) {
-                        addToCardContainer.show()
-                        quantityContainer.hide()
-                        quantity.text = 0.0.toString()
-
-                        onDeleteFromCart(product)
+                        onDeleteClick(product)
                     } else {
                         quantity.text = prev.toString()
 
                         product.amount = prev
                         onUpdateAmountClick(product)
                     }
-                }
-
-                name.transitionName = Constants.TransitionName.NAME + product.id.toString()
-                image.transitionName = Constants.TransitionName.IMAGE + product.id.toString()
-                price.transitionName = Constants.TransitionName.PRICE + product.id.toString()
-
-                val extras = FragmentNavigatorExtras(
-                    name to Constants.TransitionName.NAME,
-                    image to Constants.TransitionName.IMAGE,
-                    price to Constants.TransitionName.PRICE,
-                )
-
-                productContainer.setOnClickListener {
-                    onItemClick(product, extras)
                 }
             }
         }

@@ -76,17 +76,16 @@
 
     <LinearLayout
         android:id="@+id/empty_product_list"
-        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="64dp"
+        android:layout_marginTop="200dp"
         android:gravity="center"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.578">
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout">
 
         <ImageView
             android:layout_width="100dp"
@@ -108,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@string/empty_category_list"/>
+            android:text="@string/empty_category_list" />
 
     </LinearLayout>
 

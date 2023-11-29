@@ -1,15 +1,13 @@
-package com.dexciuq.yummy_express.presentation.screen.home
+package com.dexciuq.yummy_express.presentation.screen.home.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.dexciuq.yummy_express.databinding.ItemCategoryBinding
 import com.dexciuq.yummy_express.databinding.ItemHomeCategoryBinding
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
-import javax.inject.Inject
 
 class HomeCategoriesAdapter(
     private val imageLoader: ImageLoader,
