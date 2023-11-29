@@ -7,22 +7,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dexciuq.yummy_express.databinding.ItemCategoryBinding
 import com.dexciuq.yummy_express.domain.model.Category
+import com.dexciuq.yummy_express.presentation.diff_util.CategoryDiffUtil
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import javax.inject.Inject
 
 class CategoriesAdapter(
     private val imageLoader: ImageLoader,
     private val onItemClick: (Category) -> Unit = {}
-) : ListAdapter<Category, CategoriesAdapter.ViewHolder>(
-    object : DiffUtil.ItemCallback<Category>() {
-        override fun areItemsTheSame(oldItem: Category, newItem: Category): Boolean {
-            return oldItem.id == newItem.id
-        }
-        override fun areContentsTheSame(oldItem: Category, newItem: Category): Boolean {
-            return oldItem == newItem
-        }
-    }
-) {
+) : ListAdapter<Category, CategoriesAdapter.ViewHolder>(CategoryDiffUtil) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemCategoryBinding.inflate(
             LayoutInflater.from(parent.context), parent, false

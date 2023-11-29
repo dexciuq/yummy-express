@@ -25,18 +25,32 @@ class CategoriesFragment : Fragment() {
     private val binding by lazy { FragmentCategoriesBinding.inflate(layoutInflater) }
     private val viewModel: CategoriesViewModel by viewModels()
     private lateinit var adapter: CategoriesAdapter
-    @Inject lateinit var imageLoader: ImageLoader
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        adapter = CategoriesAdapter(imageLoader) {
-            val action = CategoriesFragmentDirections.actionCategoriesFragmentToProductListFragment(it)
-            findNavController().navigate(action)
-        }
-        binding.categoriesRv.adapter = adapter
+        setupCategoriesRecyclerView()
+        collectData()
+        return binding.root
+    }
 
+    private fun setupCategoriesRecyclerView() {
+        adapter = CategoriesAdapter(
+            imageLoader = imageLoader,
+            onItemClick = {
+                findNavController().navigate(
+                    CategoriesFragmentDirections.actionCategoriesFragmentToProductListFragment(it)
+                )
+            }
+        )
+        binding.categoriesRv.adapter = adapter
+    }
+
+    private fun collectData() {
         lifecycleScope.launch {
             viewModel.categories.collect { resource ->
                 when (resource) {
@@ -60,6 +74,5 @@ class CategoriesFragment : Fragment() {
                 }
             }
         }
-        return binding.root
     }
 }

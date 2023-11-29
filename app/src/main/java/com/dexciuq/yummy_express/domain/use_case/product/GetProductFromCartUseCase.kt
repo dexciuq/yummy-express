@@ -9,5 +9,6 @@ import javax.inject.Inject
 class GetProductFromCartUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    suspend operator fun invoke(id: Long): Flow<Resource<Product>> = repository.getCartProductById(id)
+    suspend operator fun invoke(id: Long): Flow<Resource<Product>> =
+        repository.getCartProductById(id)
 }

@@ -34,13 +34,21 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupCartProductListRecyclerView()
+        collectData()
+        return binding.root
+    }
+
+    private fun setupCartProductListRecyclerView() {
         adapter = CartProductListAdapter(
             imageLoader = imageLoader,
             onDeleteClick = viewModel::removeProductFromCart,
             onUpdateAmountClick = viewModel::updateAmount
         )
         binding.cartProductList.adapter = adapter
+    }
 
+    private fun collectData() {
         lifecycleScope.launch {
             viewModel.cartProductList.collect { resource ->
                 when (resource) {
@@ -80,8 +88,6 @@ class CartFragment : Fragment() {
                 }
             }
         }
-
-        return binding.root
     }
 
     private fun setupCheckoutContainer(productList: List<Product>) {

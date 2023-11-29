@@ -9,5 +9,6 @@ import javax.inject.Inject
 class GetAllProductsFromCartUseCase @Inject constructor(
     private val repository: ProductRepository
 ) {
-    operator fun invoke(): Flow<Resource<List<Product>>> = repository.getAllProductsFromCart()
+    operator fun invoke(): Flow<Resource<List<Product>>> =
+        repository.getAllProductsFromCart()
 }

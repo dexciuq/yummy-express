@@ -2,30 +2,20 @@ package com.dexciuq.yummy_express.presentation.screen.cart
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.dexciuq.yummy_express.common.toMoney
 import com.dexciuq.yummy_express.databinding.ItemCartProductBinding
 import com.dexciuq.yummy_express.domain.model.Product
+import com.dexciuq.yummy_express.presentation.diff_util.ProductDiffUtil
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 
 class CartProductListAdapter(
     private val imageLoader: ImageLoader,
     private val onDeleteClick: (Product) -> Unit,
     private val onUpdateAmountClick: (Product) -> Unit,
-) : ListAdapter<Product, CartProductListAdapter.ViewHolder>(
+) : ListAdapter<Product, CartProductListAdapter.ViewHolder>(ProductDiffUtil) {
 
-    object : DiffUtil.ItemCallback<Product>() {
-        override fun areItemsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem.id == newItem.id
-        }
-
-        override fun areContentsTheSame(oldItem: Product, newItem: Product): Boolean {
-            return oldItem == newItem
-        }
-    }
-
-) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = ViewHolder(
         ItemCartProductBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
@@ -42,7 +32,7 @@ class CartProductListAdapter(
         fun bind(product: Product) {
             with(binding) {
                 name.text = product.name
-                price.text = "${product.price / 100f} ₸ / ${product.unit}"
+                price.text = "${product.price.toMoney()} / ${product.unit}"
                 quantity.text = product.amount.toString()
                 imageLoader.load(product.imageURL, image)
 

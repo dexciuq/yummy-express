@@ -38,8 +38,6 @@ fun View.show() {
     visibility = View.VISIBLE
 }
 
-fun String?.orPlaceholder(): String = this ?: ""
-
 fun SearchView.setTextSize(size: Float) {
     val searchText = this.findViewById<EditText>(androidx.appcompat.R.id.search_src_text)
     searchText.setTextSize(TypedValue.COMPLEX_UNIT_SP, size)

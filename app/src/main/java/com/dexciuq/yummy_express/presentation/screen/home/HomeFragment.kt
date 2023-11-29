@@ -38,6 +38,7 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
     private lateinit var featuredProductsAdapter: ProductListAdapter
+
     @Inject
     lateinit var imageLoader: ImageLoader
 
@@ -86,9 +87,11 @@ class HomeFragment : Fragment() {
         featuredProductsAdapter = ProductListAdapter(
             imageLoader = imageLoader,
             onItemClick = { product, extras ->
-                val action =
-                    HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(product.id)
-                findNavController().navigate(action, extras)
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(
+                        product.id
+                    ), extras
+                )
             },
             onAddToCart = viewModel::addProductToCart,
             onDeleteFromCart = viewModel::removeProductFromCart,
@@ -120,7 +123,7 @@ class HomeFragment : Fragment() {
                         binding.categoriesRv.hide()
                         binding.categoriesLoading.show()
                         binding.categoriesLoading.startShimmer()
-                        delay(1000)
+                        delay(500)
                     }
 
                     is Resource.Success -> {
@@ -144,7 +147,7 @@ class HomeFragment : Fragment() {
                         binding.featuredProductsRv.hide()
                         binding.featuredProductsLoading.show()
                         binding.featuredProductsLoading.startShimmer()
-                        delay(1000)
+                        delay(500)
                     }
 
                     is Resource.Success -> {

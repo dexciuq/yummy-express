@@ -14,6 +14,7 @@ import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
+import com.dexciuq.yummy_express.common.toMoney
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentProductDetailBinding
 import com.dexciuq.yummy_express.domain.model.Product
@@ -72,8 +73,9 @@ class ProductDetailFragment : Fragment() {
         }
 
         imageLoader.load(product.imageURL, binding.productImage)
+
         binding.name.text = product.name
-        binding.price.text = "${product.price / 100} ₸ / ${product.unit}"
+        binding.price.text = "${product.price.toMoney()} / ${product.unit}"
         binding.description.text = product.description
         binding.category.text = getString(R.string.detail_category, product.category.name)
         binding.brand.text = getString(R.string.detail_brand, product.brand)
