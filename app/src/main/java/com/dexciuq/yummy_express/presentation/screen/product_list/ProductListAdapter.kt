@@ -52,12 +52,22 @@ class ProductListAdapter(
                 price.text = "${product.price / 100f} ₸ / ${product.unit}"
                 imageLoader.load(product.imageURL, image)
 
+                if (product.amount != null) {
+                    addToCardContainer.hide()
+                    quantityContainer.show()
+                    quantity.text = product.amount.toString()
+                } else {
+                    addToCardContainer.show()
+                    quantityContainer.hide()
+                    quantity.text = 0.0.toString()
+                }
+
                 addToCardContainer.setOnClickListener {
                     addToCardContainer.hide()
                     quantityContainer.show()
                     quantity.text = product.priceUnit.toString()
 
-                    product.amount = 1.0
+                    product.amount = product.priceUnit
                     onAddToCart(product)
                 }
 

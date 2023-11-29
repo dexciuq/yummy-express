@@ -92,7 +92,10 @@
 
                 <include layout="@layout/placeholder_cart_product" />
 
-                <include layout="@layout/placeholder_cart_product" />
+                <include layout="@layout/placeholder_cart_product" android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="32dp"
+                    android:layout_height="0dp" />
 
             </LinearLayout>
 
@@ -117,23 +120,24 @@
         android:layout_height="wrap_content"
         android:background="@drawable/shape_bottom_navigation"
         android:paddingHorizontal="16dp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/next_button"
+            android:id="@+id/checkout_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:backgroundTint="@color/primary_dark"
             android:gravity="center"
             android:paddingVertical="8dp"
             android:text="@string/checkout"
             android:textColor="@color/white"
-            android:textStyle="bold"
             android:textSize="16sp"
-            android:layout_marginTop="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -144,11 +148,11 @@
             android:id="@+id/total_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/total"
             android:layout_marginTop="16dp"
+            android:text="@string/total"
             android:textColor="@color/title"
-            android:textStyle="bold"
             android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/divider" />
 
@@ -156,8 +160,8 @@
             android:id="@+id/subtotal_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/subtotal"
             android:layout_marginTop="16dp"
+            android:text="@string/subtotal"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -176,10 +180,10 @@
             android:id="@+id/subtotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="5505.2 ₸"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/subtotal_label" />
+            app:layout_constraintTop_toTopOf="@id/subtotal_label"
+            tools:text="5505.2 ₸" />
 
         <TextView
             android:id="@+id/shipping_charges"
@@ -194,11 +198,11 @@
             android:id="@+id/total"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/title"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/total_label"
-            android:textColor="@color/title"
-            android:textStyle="bold"
-            android:textSize="18sp"
             tools:text="5805.2 ₸" />
 
         <View

@@ -70,7 +70,7 @@ fun Product.toProductEntity() = ProductEntity(
     imageURL = imageURL.orPlaceholder(),
     country = country,
     brand = brand,
-    amount = amount ?: 1.0
+    amount = amount ?: priceUnit
 )
 
 fun CategoryDto.toCategory() = Category(

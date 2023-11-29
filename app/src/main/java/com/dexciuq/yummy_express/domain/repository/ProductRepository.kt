@@ -8,7 +8,8 @@ interface ProductRepository {
     suspend fun getFeaturedProducts(): Flow<Resource<List<Product>>>
     suspend fun getProductsByCategory(category: Long): Flow<Resource<List<Product>>>
     suspend fun getProductById(id: Long): Flow<Resource<Product>>
-    fun getAllProductsFromCart(): Flow<Resource<Flow<List<Product>>>>
+
+    fun getAllProductsFromCart(): Flow<Resource<List<Product>>>
     suspend fun getCartProductById(id: Long): Flow<Resource<Product>>
     suspend fun addProductToCart(product: Product)
     suspend fun removeProductFromCart(product: Product)

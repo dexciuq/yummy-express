@@ -3,7 +3,6 @@ package com.dexciuq.yummy_express.data.data_source.local
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.data.data_source.DataSource
 import com.dexciuq.yummy_express.data.data_source.local.db.ProductDao
-import com.dexciuq.yummy_express.data.mapper.fromDtoToProduct
 import com.dexciuq.yummy_express.data.mapper.fromEntityToProduct
 import com.dexciuq.yummy_express.data.mapper.toProductEntity
 import com.dexciuq.yummy_express.domain.model.Banner

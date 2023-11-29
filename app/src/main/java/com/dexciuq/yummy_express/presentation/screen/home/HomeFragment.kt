@@ -38,7 +38,8 @@ class HomeFragment : Fragment() {
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
     private lateinit var featuredProductsAdapter: ProductListAdapter
-    @Inject lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -89,9 +90,9 @@ class HomeFragment : Fragment() {
                     HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(product.id)
                 findNavController().navigate(action, extras)
             },
-            onAddToCart = {},
-            onDeleteFromCart = {},
-            onUpdateAmountClick = {},
+            onAddToCart = viewModel::addProductToCart,
+            onDeleteFromCart = viewModel::removeProductFromCart,
+            onUpdateAmountClick = viewModel::updateAmount,
         )
         binding.featuredProductsRv.adapter = featuredProductsAdapter
     }

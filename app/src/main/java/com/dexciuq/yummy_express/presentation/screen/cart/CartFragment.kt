@@ -26,7 +26,9 @@ class CartFragment : Fragment() {
     private val binding by lazy { FragmentCartBinding.inflate(layoutInflater) }
     private val viewModel: CartViewModel by viewModels()
     private lateinit var adapter: CartProductListAdapter
-    @Inject lateinit var imageLoader: ImageLoader
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +47,7 @@ class CartFragment : Fragment() {
                     is Resource.Loading -> {
                         binding.emptyCart.hide()
                         binding.cartProductList.hide()
-                        binding.checkoutContainer.show()
+                        binding.checkoutContainer.hide()
                         binding.cartProductListLoading.show()
                         binding.cartProductListLoading.startShimmer()
                         delay(500)
@@ -54,24 +56,22 @@ class CartFragment : Fragment() {
                     is Resource.Success -> {
                         binding.cartProductListLoading.hide()
                         binding.cartProductListLoading.stopShimmer()
-
-                        resource.data.collect { productList ->
-                            when (productList.size) {
-                                0 -> {
-                                    binding.emptyCart.show()
-                                    binding.cartProductList.hide()
-                                    binding.checkoutContainer.hide()
-                                }
-
-                                else -> {
-                                    binding.checkoutContainer.show()
-                                    binding.emptyCart.hide()
-                                    binding.cartProductList.show()
-                                }
+                        val productList = resource.data
+                        when (productList.size) {
+                            0 -> {
+                                binding.emptyCart.show()
+                                binding.cartProductList.hide()
+                                binding.checkoutContainer.hide()
                             }
-                            adapter.submitList(productList)
-                            setupCheckoutContainer(productList)
+
+                            else -> {
+                                binding.emptyCart.hide()
+                                binding.cartProductList.show()
+                                binding.checkoutContainer.show()
+                            }
                         }
+                        adapter.submitList(productList)
+                        setupCheckoutContainer(productList)
                     }
 
                     is Resource.Error -> {
@@ -85,10 +85,12 @@ class CartFragment : Fragment() {
     }
 
     private fun setupCheckoutContainer(productList: List<Product>) {
-        val shippingCharges = 30000L
+        val discountTotal = 600000L
         val subtotal = productList.sumOf {
             it.amount?.times(it.price)?.toLong() ?: 0L
         }
+
+        val shippingCharges = if (subtotal > discountTotal) 0L else 30000L
         val total = shippingCharges + subtotal
 
         binding.subtotal.text = subtotal.toMoney()

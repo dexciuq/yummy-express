@@ -16,8 +16,17 @@ class ProductRepositoryImpl @Inject constructor(
     override suspend fun getFeaturedProducts(): Flow<Resource<List<Product>>> = flow {
         emit(Resource.Loading)
         try {
-            val response = remote.getFeaturedProductList()
-            emit(Resource.Success(response))
+            val remoteProducts = remote.getFeaturedProductList()
+            val cartProductsFlow = local.getAllProductsFromCart()
+
+            cartProductsFlow.collect { cartProducts ->
+                val mergedProducts = remoteProducts.map { remoteProduct ->
+                    val cartProduct = cartProducts.find { it.id == remoteProduct.id }
+                    remoteProduct.amount = cartProduct?.amount
+                    remoteProduct
+                }
+                emit(Resource.Success(mergedProducts))
+            }
         } catch (t: Throwable) {
             emit(Resource.Error(t))
         }
@@ -27,8 +36,17 @@ class ProductRepositoryImpl @Inject constructor(
         flow {
             emit(Resource.Loading)
             try {
-                val response = remote.getProductsByCategory(category)
-                emit(Resource.Success(response))
+                val remoteProducts = remote.getProductsByCategory(category)
+                val cartProductsFlow = local.getAllProductsFromCart()
+
+                cartProductsFlow.collect { cartProducts ->
+                    val mergedProducts = remoteProducts.map { remoteProduct ->
+                        val cartProduct = cartProducts.find { it.id == remoteProduct.id }
+                        remoteProduct.amount = cartProduct?.amount
+                        remoteProduct
+                    }
+                    emit(Resource.Success(mergedProducts))
+                }
             } catch (t: Throwable) {
                 emit(Resource.Error(t))
             }
@@ -44,11 +62,13 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override fun getAllProductsFromCart(): Flow<Resource<Flow<List<Product>>>> = flow {
+    override fun getAllProductsFromCart(): Flow<Resource<List<Product>>> = flow {
         emit(Resource.Loading)
         try {
             val response = local.getAllProductsFromCart()
-            emit(Resource.Success(response))
+            response.collect {
+                emit(Resource.Success(it))
+            }
         } catch (t: Throwable) {
             emit(Resource.Error(t))
         }
