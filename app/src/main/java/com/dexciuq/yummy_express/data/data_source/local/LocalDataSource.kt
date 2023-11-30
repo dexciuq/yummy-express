@@ -40,6 +40,9 @@ class LocalDataSource @Inject constructor(
         ),
     )
 
+    override fun getCartItemCount(): Flow<Int> =
+        productDao.getCartItemCount()
+
     override fun getAllProductsFromCart(): Flow<List<Product>> =
         productDao.getAll().map { it.fromEntityToProduct() }
 

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
@@ -34,9 +35,18 @@ class CartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        setupCheckoutButtonListener()
         setupCartProductListRecyclerView()
         collectData()
         return binding.root
+    }
+
+    private fun setupCheckoutButtonListener() {
+        binding.checkoutButton.setOnClickListener {
+            findNavController().navigate(
+                CartFragmentDirections.actionCartFragmentToAddressFragment()
+            )
+        }
     }
 
     private fun setupCartProductListRecyclerView() {

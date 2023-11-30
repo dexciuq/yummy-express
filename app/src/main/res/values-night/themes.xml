@@ -13,13 +13,4 @@
         <item name="android:windowLightNavigationBar">false</item>
     </style>
 
-    <style name="BottomNavigationView.Inactive" parent="@style/TextAppearance.AppCompat.Caption">
-        <item name="android:textSize">13sp</item>
-    </style>
-
-    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
-        <item name="android:textSize">13sp</item>
-        <item name="android:textFontWeight">600</item>
-    </style>
-
 </resources>

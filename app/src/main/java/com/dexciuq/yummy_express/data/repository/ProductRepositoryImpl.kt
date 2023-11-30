@@ -62,6 +62,18 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
+    override fun getCartItemCount(): Flow<Resource<Int>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = local.getCartItemCount()
+            response.collect {
+                emit(Resource.Success(it))
+            }
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
     override fun getAllProductsFromCart(): Flow<Resource<List<Product>>> = flow {
         emit(Resource.Loading)
         try {

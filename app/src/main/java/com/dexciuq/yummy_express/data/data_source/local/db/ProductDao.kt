@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ProductDao {
+    @Query("SELECT COUNT(*) FROM products")
+    fun getCartItemCount(): Flow<Int>
+
     @Query("SELECT * FROM products")
     fun getAll(): Flow<List<ProductEntity>>
 

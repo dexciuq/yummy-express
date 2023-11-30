@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.presentation
+package com.dexciuq.yummy_express.presentation.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

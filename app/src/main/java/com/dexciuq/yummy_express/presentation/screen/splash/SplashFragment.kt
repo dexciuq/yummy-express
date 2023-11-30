@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.databinding.FragmentSplashBinding
-import com.dexciuq.yummy_express.presentation.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

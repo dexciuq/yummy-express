@@ -4,6 +4,7 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.app.Activity
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
@@ -45,6 +46,10 @@ fun SearchView.setTextSize(size: Float) {
 
 fun Fragment.toast(message: String?) {
     Toast.makeText(requireActivity(), message, Toast.LENGTH_SHORT).show()
+}
+
+fun Activity.toast(message: String?) {
+    Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
 }
 
 

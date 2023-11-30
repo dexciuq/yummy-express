@@ -18,7 +18,7 @@ import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentHomeBinding
 import com.dexciuq.yummy_express.domain.model.Banner
-import com.dexciuq.yummy_express.presentation.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
 import com.dexciuq.yummy_express.presentation.screen.home.category.HomeCategoriesAdapter

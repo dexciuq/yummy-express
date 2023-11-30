@@ -13,4 +13,5 @@
     <color name="search_view_background">#474747</color>
     <color name="place_holder">#C2C2C2</color>
     <color name="category_background">#323232</color>
+    <color name="badge">#FF584D</color>
 </resources>
