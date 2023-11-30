@@ -8,11 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toMoney
 import com.dexciuq.yummy_express.common.toast
+import com.dexciuq.yummy_express.common.view.SwipeToDeleteCallback
 import com.dexciuq.yummy_express.databinding.FragmentCartBinding
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
@@ -56,6 +59,17 @@ class CartFragment : Fragment() {
             onUpdateAmountClick = viewModel::updateAmount
         )
         binding.cartProductList.adapter = adapter
+
+        // Swipe to delete
+        val swipeHandler = object : SwipeToDeleteCallback(requireContext()) {
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                viewModel.removeProductFromCart(
+                    adapter.currentList[viewHolder.adapterPosition]
+                )
+            }
+        }
+        val itemTouchHelper = ItemTouchHelper(swipeHandler)
+        itemTouchHelper.attachToRecyclerView(binding.cartProductList)
     }
 
     private fun collectData() {
