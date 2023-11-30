@@ -44,7 +44,8 @@ class MainActivity : AppCompatActivity() {
             when (destination.id) {
                 R.id.productListFragment,
                 R.id.productDetailFragment,
-                R.id.addressFragment -> {
+                R.id.addressFragment,
+                R.id.checkoutFragment -> {
                     binding.bottomNavigationView.hideWithAnimation(binding.navHostFragmentContainer)
                 }
 

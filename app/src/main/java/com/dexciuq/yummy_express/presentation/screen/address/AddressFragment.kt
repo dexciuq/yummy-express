@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,8 +16,11 @@ import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentAddressBinding
 import com.yandex.mapkit.Animation
 import com.yandex.mapkit.MapKitFactory
+import com.yandex.mapkit.ScreenPoint
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.runtime.image.ImageProvider
+
 
 class AddressFragment : Fragment() {
 
@@ -115,7 +119,9 @@ class AddressFragment : Fragment() {
                 toast(getString(R.string.all_fields_should_be_filled))
             },
             onReadyButtonClick = {
-                toast(it)
+                findNavController().navigate(
+                    AddressFragmentDirections.actionAddressFragmentToCheckoutFragment(it)
+                )
             }
         )
         addressBottomSheetFragment.show(parentFragmentManager, addressBottomSheetFragment.tag)
