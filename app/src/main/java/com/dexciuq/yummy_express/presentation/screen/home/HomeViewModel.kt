@@ -4,16 +4,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Product
-import com.dexciuq.yummy_express.domain.use_case.ui.GetAllBannersUseCase
+import com.dexciuq.yummy_express.domain.use_case.ui.banner.GetAllBannersUseCase
 import com.dexciuq.yummy_express.domain.use_case.product.GetFeaturedProductsUseCase
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.domain.model.Category
-import com.dexciuq.yummy_express.domain.use_case.category.GetCategoriesUseCase
 import com.dexciuq.yummy_express.domain.use_case.category.GetHomeCategoriesUseCase
 import com.dexciuq.yummy_express.domain.use_case.product.AddProductToCartUseCase
 import com.dexciuq.yummy_express.domain.use_case.product.RemoveProductFromCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collectLatest

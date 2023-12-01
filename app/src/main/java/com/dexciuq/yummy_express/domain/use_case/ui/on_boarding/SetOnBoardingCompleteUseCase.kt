@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.domain.use_case.ui
+package com.dexciuq.yummy_express.domain.use_case.ui.on_boarding
 
 import com.dexciuq.yummy_express.domain.repository.UIRepository
 import kotlinx.coroutines.Dispatchers

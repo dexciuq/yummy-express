@@ -47,4 +47,53 @@ class UIRepositoryImpl @Inject constructor(
     override suspend fun setOnBoardingComplete(isCompleted: Boolean) {
         preference.setOnBoardingComplete(isCompleted)
     }
+
+    override suspend fun setDarkMode(isDarkMode: Boolean) =
+        preference.setDarkMode(isDarkMode)
+
+    override suspend fun getDarkMode(): Flow<Resource<Boolean>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = preference.getDarkMode()
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun getCurrentLanguage(): Flow<Resource<String>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = preference.getCurrentLanguage()
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun setCurrentLanguage(language: String) =
+        preference.setCurrentLanguage(language)
+
+    override suspend fun getCurrentLanguageCode(): Flow<Resource<String>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = preference.getCurrentLanguageCode()
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun setCurrentLanguageCode(languageCode: String) =
+        preference.setCurrentLanguageCode(languageCode)
+
+    override fun getLanguages(): Flow<Resource<List<String>>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = listOf("en", "ru")
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
 }

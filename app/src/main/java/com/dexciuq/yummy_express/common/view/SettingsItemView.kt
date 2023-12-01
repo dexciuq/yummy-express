@@ -15,23 +15,23 @@ class SettingsItemView @JvmOverloads constructor(
     context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
-    private val binding = ViewSettingsItemBinding.inflate(LayoutInflater.from(context), this)
+    val itemBinding = ViewSettingsItemBinding.inflate(LayoutInflater.from(context), this)
     private var onArrowRightClickListener: () -> Unit = {}
     private var onSwitchCheckedChangeListener: (isChecked: Boolean) -> Unit = {}
     private var onTextClickListener: () -> Unit = {}
 
     init {
         setAttrs(attrs, R.styleable.SettingsItemView) {
-            binding.text.text = it.getString(R.styleable.SettingsItemView_text)
+            itemBinding.text.text = it.getString(R.styleable.SettingsItemView_text)
 
             val image = it.getDrawable(R.styleable.SettingsItemView_icon)
-            binding.image.setImageDrawable(image)
+            itemBinding.image.setImageDrawable(image)
 
             val colorFilter = it.getColor(
                 R.styleable.SettingsItemView_iconTint,
                 ContextCompat.getColor(context, R.color.primary_dark)
             )
-            binding.image.setColorFilter(colorFilter)
+            itemBinding.image.setColorFilter(colorFilter)
 
             val actionType = it.getInt(
                 R.styleable.SettingsItemView_actionType,
@@ -44,21 +44,21 @@ class SettingsItemView @JvmOverloads constructor(
     private fun setActionType(actionType: ActionType) {
         when (actionType) {
             ActionType.NOTHING -> {
-                binding.actionContainer.hide()
+                itemBinding.actionContainer.hide()
             }
 
             ActionType.ARROW_RIGHT -> {
-                binding.actionContainer.show()
-                binding.actionArrowRight.show()
-                binding.actionArrowRight.setOnClickListener {
+                itemBinding.actionContainer.show()
+                itemBinding.actionArrowRight.show()
+                itemBinding.actionArrowRight.setOnClickListener {
                     onArrowRightClickListener()
                 }
             }
 
             ActionType.SWITCH -> {
-                binding.actionContainer.show()
-                binding.actionSwitch.show()
-                binding.actionSwitch.setOnCheckedChangeListener { _, isChecked ->
+                itemBinding.actionContainer.show()
+                itemBinding.actionSwitch.show()
+                itemBinding.actionSwitch.setOnCheckedChangeListener { _, isChecked ->
                     onSwitchCheckedChangeListener(isChecked)
                 }
             }

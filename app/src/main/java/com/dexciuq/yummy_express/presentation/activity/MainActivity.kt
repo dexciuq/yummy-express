@@ -1,8 +1,10 @@
 package com.dexciuq.yummy_express.presentation.activity
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
@@ -15,7 +17,9 @@ import com.dexciuq.yummy_express.common.showWithAnimation
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.Locale
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -78,7 +82,8 @@ class MainActivity : AppCompatActivity() {
 
                                 binding.bottomNavigationView
                                     .getOrCreateBadge(R.id.nav_graph_cart)
-                                    .backgroundColor = ContextCompat.getColor(this@MainActivity, R.color.badge)
+                                    .backgroundColor =
+                                    ContextCompat.getColor(this@MainActivity, R.color.badge)
                             }
                         }
                     }

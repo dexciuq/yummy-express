@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.domain.model.OnBoarding
-import com.dexciuq.yummy_express.domain.use_case.ui.GetOnBoardingItemsUseCase
-import com.dexciuq.yummy_express.domain.use_case.ui.SetOnBoardingCompleteUseCase
+import com.dexciuq.yummy_express.domain.use_case.ui.on_boarding.GetOnBoardingItemsUseCase
+import com.dexciuq.yummy_express.domain.use_case.ui.on_boarding.SetOnBoardingCompleteUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

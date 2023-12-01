@@ -10,6 +10,12 @@ interface DataSource {
     interface Preference {
         suspend fun setOnBoardingComplete(isCompleted: Boolean)
         suspend fun getOnBoardingComplete(): Boolean
+        suspend fun setDarkMode(isDarkMode: Boolean)
+        suspend fun getDarkMode(): Boolean
+        suspend fun setCurrentLanguage(language: String)
+        suspend fun getCurrentLanguage(): String
+        suspend fun setCurrentLanguageCode(language: String)
+        suspend fun getCurrentLanguageCode(): String
     }
 
     interface Remote {

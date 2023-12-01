@@ -7,7 +7,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val getCartItemCountUseCase: GetCartItemCountUseCase
+    private val getCartItemCountUseCase: GetCartItemCountUseCase,
 ) : ViewModel() {
 
     val cartItemCount get() = getCartItemCountUseCase()
