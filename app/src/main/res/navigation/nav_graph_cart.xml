@@ -30,6 +30,11 @@
         tools:layout="@layout/fragment_checkout" >
         <argument
             android:name="address"
-            app:argType="string" />
+            app:argType="com.dexciuq.yummy_express.domain.model.Address" />
+        <action
+            android:id="@+id/action_checkoutFragment_to_cartFragment"
+            app:destination="@id/cartFragment"
+            app:popUpTo="@id/nav_graph_cart"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>

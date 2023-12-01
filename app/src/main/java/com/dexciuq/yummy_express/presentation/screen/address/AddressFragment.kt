@@ -20,8 +20,10 @@ import com.yandex.mapkit.ScreenPoint
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.map.CameraPosition
 import com.yandex.runtime.image.ImageProvider
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class AddressFragment : Fragment() {
 
     private val binding by lazy { FragmentAddressBinding.inflate(layoutInflater) }

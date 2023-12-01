@@ -5,11 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dexciuq.yummy_express.databinding.FragmentAddressBottomSheetBinding
+import com.dexciuq.yummy_express.domain.model.Address
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddressBottomSheetFragment(
     private val onFieldIsBlankClick: () -> Unit = {},
-    private val onReadyButtonClick: (String) -> Unit = {}
+    private val onReadyButtonClick: (Address) -> Unit = {}
 ) : BottomSheetDialogFragment() {
 
     private val binding by lazy { FragmentAddressBottomSheetBinding.inflate(layoutInflater) }
@@ -29,8 +30,12 @@ class AddressBottomSheetFragment(
                 return@setOnClickListener
             }
 
-            val result =
-                "Address: $address, Apartment: $apartment, Entrance: $entrance, Floor: $floor"
+            val result = Address(
+                street = address,
+                apartment = apartment.toInt(),
+                entrance = entrance.toInt(),
+                floor = floor.toInt()
+            )
             onReadyButtonClick(result)
             dismiss()
         }

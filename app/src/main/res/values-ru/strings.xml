@@ -37,4 +37,17 @@
     <string name="all_fields_should_be_filled">Все поля должны быть заполнены</string>
     <string name="for_this_feature_we_need_to_access_your_location">Для использования этой функции нам необходимо получить доступ к вашему местоположению</string>
     <string name="failed_to_load_item_count">Не удалось загрузить количество элементов</string>
+    <string name="about_me">Обо мне</string>
+    <string name="my_orders">Мои заказы</string>
+    <string name="language">Язык</string>
+    <string name="dark_theme">Тёмная тема</string>
+    <string name="sign_out">Выйти</string>
+    <string name="payment">Оплата</string>
+    <string name="street">Адрес: %s</string>
+    <string name="apartment_with_value">Квартира: %d</string>
+    <string name="entrance_with_value">Подьед: %d</string>
+    <string name="floor_with_value">Этаж: %d</string>
+    <string name="products">Продукты</string>
+    <string name="order">Заказать</string>
+    <string name="your_order_was_successfully_placed">Ваш заказ был успешно размещен</string>
 </resources>

@@ -35,6 +35,7 @@ import javax.inject.Inject
 class HomeFragment : Fragment() {
 
     private val binding by lazy { FragmentHomeBinding.inflate(layoutInflater) }
+    private val onNavigationItemChanger by lazy { requireActivity() as MainActivity }
     private val viewModel: HomeViewModel by viewModels()
     private lateinit var categoriesAdapter: HomeCategoriesAdapter
     private lateinit var featuredProductsAdapter: ProductListAdapter
@@ -74,12 +75,8 @@ class HomeFragment : Fragment() {
             findNavController().navigate(action)
         }
         binding.categoriesRv.adapter = categoriesAdapter
-
-        val bottomNavigation = (requireActivity() as MainActivity)
-            .findViewById<BottomNavigationView>(R.id.bottom_navigation_view)
-
         binding.categoriesAll.setOnClickListener {
-            bottomNavigation.selectedItemId = R.id.nav_graph_categories
+            onNavigationItemChanger.navigate(R.id.nav_graph_categories)
         }
     }
 

@@ -1,7 +1,10 @@
 package com.dexciuq.yummy_express.presentation.activity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.annotation.IdRes
+import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -18,7 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), OnNavigationItemChanger {
 
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
     private val viewModel: MainActivityViewModel by viewModels()
@@ -86,4 +89,9 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
+    override fun navigate(@IdRes menu: Int) {
+        binding.bottomNavigationView.selectedItemId = menu
+    }
 }
+

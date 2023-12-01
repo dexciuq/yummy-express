@@ -43,7 +43,7 @@
             app:actionType="ARROW_RIGHT"
             app:icon="@drawable/ic_profile"
             app:iconTint="@color/primary_dark"
-            app:text="About me" />
+            app:text="@string/about_me" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/my_orders"
@@ -52,7 +52,7 @@
             app:actionType="ARROW_RIGHT"
             app:icon="@drawable/ic_my_orders"
             app:iconTint="@color/primary_dark"
-            app:text="My Orders" />
+            app:text="@string/my_orders" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/language"
@@ -61,7 +61,7 @@
             app:actionType="ARROW_RIGHT"
             app:icon="@drawable/ic_language"
             app:iconTint="@color/primary_dark"
-            app:text="Language" />
+            app:text="@string/language" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/dark_theme"
@@ -70,7 +70,7 @@
             app:actionType="SWITCH"
             app:icon="@drawable/ic_dark_theme"
             app:iconTint="@color/primary_dark"
-            app:text="Dark theme" />
+            app:text="@string/dark_theme" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/sign_out"
@@ -79,7 +79,7 @@
             app:actionType="NONE"
             app:icon="@drawable/ic_sign_out"
             app:iconTint="@color/primary_dark"
-            app:text="Sign Out" />
+            app:text="@string/sign_out" />
 
     </LinearLayout>
 
