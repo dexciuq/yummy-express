@@ -5,6 +5,8 @@ import android.animation.AnimatorListenerAdapter
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
+import android.content.res.TypedArray
+import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
 import android.widget.EditText
@@ -100,6 +102,21 @@ fun View.animateMarginBottom(size: Float, duration: Long) {
     }
     animator.duration = duration
     animator.start()
+}
+
+inline fun View.setAttrs(
+    attrs: AttributeSet?,
+    styleable: IntArray,
+    crossinline body: (TypedArray) -> Unit
+) {
+    context.theme.obtainStyledAttributes(attrs, styleable, 0, 0)
+        .apply {
+            try {
+                body(this)
+            } finally {
+                recycle()
+            }
+        }
 }
 
 fun Long.toMoney() = (this.toDouble() / 100).toString() + " ₸"

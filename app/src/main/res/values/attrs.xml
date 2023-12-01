@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingsItemView">
+        <attr name="icon" format="reference" />
+        <attr name="iconTint" format="color" />
+        <attr name="text" format="string" />
+        <attr name="actionType" format="enum">
+            <enum name="NONE" value="0" />
+            <enum name="ARROW_RIGHT" value="1" />
+            <enum name="SWITCH" value="2" />
+        </attr>
+    </declare-styleable>
+</resources>

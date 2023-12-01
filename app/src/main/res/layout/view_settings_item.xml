@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="12dp">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            app:tint="@color/primary_dark"
+            tools:src="@drawable/ic_profile" />
+
+        <TextView
+            android:id="@+id/text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:textColor="@color/title"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            tools:text="About me" />
+
+        <FrameLayout
+            android:id="@+id/action_container"
+            android:layout_gravity="center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="visible">
+
+            <com.google.android.material.materialswitch.MaterialSwitch
+                android:id="@+id/action_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                android:visibility="gone"
+
+                app:thumbIconTint="@color/primary_dark"
+                app:thumbTint="@color/primary_dark"
+                app:trackDecorationTint="@android:color/darker_gray"
+                app:trackTint="@color/background" />
+
+            <ImageView
+                android:id="@+id/action_arrow_right"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_arrow_right"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:tint="@android:color/darker_gray" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+
+</merge>

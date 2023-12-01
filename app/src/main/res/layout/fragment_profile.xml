@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.screen.profile.ProfileFragment">
@@ -21,9 +21,119 @@
             android:layout_height="wrap_content"
             app:title="@string/profile"
             app:titleCentered="true"
-            app:titleTextAppearance="@style/ToolbarTextAppearance"/>
+            app:titleTextAppearance="@style/ToolbarTextAppearance" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/email">
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/about_me"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="ARROW_RIGHT"
+            app:icon="@drawable/ic_profile"
+            app:iconTint="@color/primary_dark"
+            app:text="About me" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/my_orders"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="ARROW_RIGHT"
+            app:icon="@drawable/ic_my_orders"
+            app:iconTint="@color/primary_dark"
+            app:text="My Orders" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/language"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="ARROW_RIGHT"
+            app:icon="@drawable/ic_language"
+            app:iconTint="@color/primary_dark"
+            app:text="Language" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/dark_theme"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="SWITCH"
+            app:icon="@drawable/ic_dark_theme"
+            app:iconTint="@color/primary_dark"
+            app:text="Dark theme" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="NONE"
+            app:icon="@drawable/ic_sign_out"
+            app:iconTint="@color/primary_dark"
+            app:text="Sign Out" />
+
+    </LinearLayout>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/image_container"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:cardCornerRadius="50dp"
+        android:layout_marginTop="8dp"
+        app:cardBackgroundColor="@android:color/transparent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/app_bar_layout">
+
+        <ImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_megamind" />
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="dimokzhasulanov@gmail.com"
+        app:layout_constraintEnd_toEndOf="@+id/name"
+        app:layout_constraintStart_toStartOf="@+id/name"
+        app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Dinmukhammed Zhasulanov"
+        android:textColor="@color/title"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/image_container"
+        app:layout_constraintStart_toStartOf="@+id/image_container"
+        app:layout_constraintTop_toBottomOf="@+id/image_container" />
+
+    <ImageView
+        android:id="@+id/camera"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:elevation="12dp"
+        android:src="@drawable/ic_camera"
+        app:layout_constraintBottom_toBottomOf="@+id/image_container"
+        app:layout_constraintEnd_toEndOf="@+id/image_container" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
