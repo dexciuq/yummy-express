@@ -6,13 +6,16 @@ import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.app.Activity
 import android.content.res.TypedArray
+import android.graphics.drawable.InsetDrawable
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
+import android.widget.CompoundButton
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.widget.CompoundButtonCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -120,4 +123,10 @@ inline fun View.setAttrs(
 }
 
 fun Long.toMoney() = (this.toDouble() / 100).toString() + " ₸"
+
+fun CompoundButton.setIconPaddingLeft(left: Int) {
+    val compoundButtonDrawable = CompoundButtonCompat.getButtonDrawable(this)
+    val insetDrawable = InsetDrawable(compoundButtonDrawable, left, 0, 0, 0)
+    this.buttonDrawable = insetDrawable
+}
 

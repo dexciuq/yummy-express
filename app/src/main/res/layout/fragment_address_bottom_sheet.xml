@@ -7,6 +7,16 @@
     android:paddingHorizontal="16dp"
     android:paddingVertical="24dp">
 
+    <View
+        android:id="@+id/heading"
+        android:layout_width="50dp"
+        android:layout_height="5dp"
+        android:background="@drawable/shape_corner"
+        android:backgroundTint="@color/stroke"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/address"
         android:layout_width="0dp"
@@ -102,13 +112,14 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/please_ensure_that_everything_is_correct"
-        android:textColor="@color/title"
         android:gravity="center"
+        android:text="@string/please_ensure_that_everything_is_correct"
+        android:layout_marginTop="8dp"
+        android:textColor="@color/title"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/heading" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,4 +50,8 @@
     <string name="products">Продукты</string>
     <string name="order">Заказать</string>
     <string name="your_order_was_successfully_placed">Ваш заказ был успешно размещен</string>
+    <string name="russian">Русский</string>
+    <string name="english">Английский</string>
+    <string name="order_total">Итог: %s</string>
+    <string name="order_item_count">Товары: %d</string>
 </resources>

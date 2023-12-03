@@ -19,6 +19,7 @@ import com.dexciuq.yummy_express.databinding.FragmentCheckoutBinding
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.presentation.activity.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -64,7 +65,11 @@ class CheckoutFragment : Fragment() {
 
     private fun setupOrderButtonListener() {
         binding.orderButton.setOnClickListener {
-            toast(getString(R.string.your_order_was_successfully_placed))
+            Snackbar.make(
+                it,
+                getString(R.string.your_order_was_successfully_placed),
+                Snackbar.LENGTH_SHORT
+            ).show()
             viewModel.clearCart()
             findNavController().navigate(
                 CheckoutFragmentDirections.actionCheckoutFragmentToCartFragment()

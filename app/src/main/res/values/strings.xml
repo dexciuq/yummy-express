@@ -50,4 +50,8 @@
     <string name="products">Products</string>
     <string name="order">Order</string>
     <string name="your_order_was_successfully_placed">Your order was successfully placed</string>
+    <string name="russian">Russian</string>
+    <string name="english">English</string>
+    <string name="order_total">Total: %s</string>
+    <string name="order_item_count">Items: %d</string>
 </resources>
