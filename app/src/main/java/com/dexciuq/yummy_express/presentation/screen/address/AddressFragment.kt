@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,7 +65,8 @@ class AddressFragment : Fragment() {
 
     private fun moveToStartingPoint() {
         val astana = Point(51.08935, 71.416)
-        binding.mapView.mapWindow.map.move(
+        val map = binding.mapView.mapWindow.map
+        map.move(
             CameraPosition(astana, 13f, 0f, 0f),
             Animation(Animation.Type.SMOOTH, 2f),
             null
@@ -82,8 +82,6 @@ class AddressFragment : Fragment() {
             Configuration.UI_MODE_NIGHT_NO -> {
                 binding.mapView.mapWindow.map.isNightModeEnabled = false
             }
-
-            Configuration.UI_MODE_NIGHT_UNDEFINED -> {}
         }
     }
 
@@ -113,6 +111,22 @@ class AddressFragment : Fragment() {
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         )
+    }
+
+    private fun setupPlacemark() {
+        val mapWindow = binding.mapView.mapWindow
+        val centerX = mapWindow.width() / 2f
+        val centerY = mapWindow.height() / 2f
+        val centerPoint = ScreenPoint(centerX, centerY)
+
+        val worldPoint = mapWindow.screenToWorld(centerPoint) ?: error("unknown point")
+
+        val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.ic_pin)
+        val placemarkObject = mapWindow.map.mapObjects.addPlacemark {
+            it.geometry = worldPoint
+            it.setIcon(imageProvider)
+        }
+        placemarkObject.isVisible = true
     }
 
     private fun showAddressBottomSheetFragment() {
