@@ -69,4 +69,6 @@
     <string name="register">Зарегистрироваться</string>
     <string name="already_have_an_account">У вас уже есть учетная запись?</string>
     <string name="skip_for_now">Временно пропустить</string>
+    <string name="unauthentificated_user">Неаутентифицированный ползователь</string>
+    <string name="click_button_to_navigate_auth_screen">Нажмите кнопку, чтобы перейти к экрану авторизации</string>
 </resources>

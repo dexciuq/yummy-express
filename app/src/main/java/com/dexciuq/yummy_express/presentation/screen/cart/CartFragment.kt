@@ -1,15 +1,18 @@
 package com.dexciuq.yummy_express.presentation.screen.cart
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
@@ -45,6 +48,17 @@ class CartFragment : Fragment() {
     }
 
     private fun setupCheckoutButtonListener() {
+        viewModel.isButtonEnabled()
+        viewModel.enabledButton.observe(viewLifecycleOwner) {
+            if (it) {
+                binding.checkoutButton.setBackgroundColor(
+                    ContextCompat.getColor(requireContext(), R.color.primary_dark)
+                )
+            } else {
+                binding.checkoutButton.setBackgroundColor(Color.GRAY)
+            }
+            binding.checkoutButton.isEnabled = it
+        }
         binding.checkoutButton.setOnClickListener {
             findNavController().navigate(
                 CartFragmentDirections.actionCartFragmentToAddressFragment()

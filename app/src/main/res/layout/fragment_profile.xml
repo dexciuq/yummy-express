@@ -25,7 +25,6 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,12 +33,13 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email">
+        app:layout_constraintTop_toBottomOf="@+id/container">
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/about_me"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:actionType="ARROW_RIGHT"
             app:icon="@drawable/ic_profile"
             app:iconTint="@color/primary_dark"
@@ -49,6 +49,7 @@
             android:id="@+id/my_orders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             app:actionType="ARROW_RIGHT"
             app:icon="@drawable/ic_my_orders"
             app:iconTint="@color/primary_dark"
@@ -77,63 +78,118 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:actionType="NONE"
+            android:visibility="gone"
             app:icon="@drawable/ic_sign_out"
             app:iconTint="@color/primary_dark"
             app:text="@string/sign_out" />
 
     </LinearLayout>
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/image_container"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        app:cardCornerRadius="50dp"
-        android:layout_marginTop="8dp"
-        app:cardBackgroundColor="@android:color/transparent"
+    <LinearLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/app_bar_layout">
 
-        <ImageView
-            android:id="@+id/image"
+        <LinearLayout
+            android:id="@+id/user_container"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_megamind" />
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-    </androidx.cardview.widget.CardView>
+            <androidx.cardview.widget.CardView
+                android:id="@+id/image_container"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                app:cardBackgroundColor="@android:color/transparent"
+                app:cardCornerRadius="50dp">
 
-    <TextView
-        android:id="@+id/email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="4dp"
-        android:text="dimokzhasulanov@gmail.com"
-        app:layout_constraintEnd_toEndOf="@+id/name"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_megamind" />
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:text="Dinmukhammed Zhasulanov"
-        android:textColor="@color/title"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/image_container"
-        app:layout_constraintStart_toStartOf="@+id/image_container"
-        app:layout_constraintTop_toBottomOf="@+id/image_container" />
+            </androidx.cardview.widget.CardView>
 
-    <ImageView
-        android:id="@+id/camera"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:elevation="12dp"
-        android:src="@drawable/ic_camera"
-        app:layout_constraintBottom_toBottomOf="@+id/image_container"
-        app:layout_constraintEnd_toEndOf="@+id/image_container" />
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Dinmukhammed Zhasulanov"
+                android:textColor="@color/title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
+            <TextView
+                android:id="@+id/email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="dimokzhasulanov@gmail.com" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/empty_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/app_bar_layout">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/ic_profile"
+                app:tint="@android:color/darker_gray" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/unauthentificated_user"
+                android:textColor="@color/title"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/auth_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/click_button_to_navigate_auth_screen" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/auth_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="@color/primary_dark"
+                android:gravity="center"
+                android:paddingVertical="8dp"
+                android:text="@string/sign_in_to_your_account"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:targetApi="p" />
+
+        </LinearLayout>
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

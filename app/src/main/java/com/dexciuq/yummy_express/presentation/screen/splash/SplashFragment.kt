@@ -33,7 +33,7 @@ class SplashFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         if (resource.data) {
-                            navigateToAuthActivity()
+                            viewModel.getAuthSkip()
                         } else {
                             navigateToOnBoardingFragment()
                         }
@@ -49,11 +49,27 @@ class SplashFragment : Fragment() {
                 }
             }
         }
+
+        viewModel.authSkip.observe(viewLifecycleOwner) {
+            if (it) {
+                navigateToMainActivity()
+            } else {
+                navigateToAuthActivity()
+            }
+        }
+
         return binding.root
     }
 
     private fun navigateToAuthActivity() {
         val intent = Intent(requireActivity(), AuthActivity::class.java)
+        startActivity(intent)
+        requireActivity().finish()
+    }
+
+
+    private fun navigateToMainActivity() {
+        val intent = Intent(requireActivity(), MainActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

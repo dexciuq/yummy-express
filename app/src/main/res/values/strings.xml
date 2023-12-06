@@ -69,4 +69,6 @@
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account ?</string>
     <string name="skip_for_now">Skip for now</string>
+    <string name="unauthentificated_user">Unauthentificated user</string>
+    <string name="click_button_to_navigate_auth_screen">Click button to navigate auth screen</string>
 </resources>

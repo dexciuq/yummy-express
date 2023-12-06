@@ -1,6 +1,7 @@
 package com.dexciuq.yummy_express.di
 
 import com.dexciuq.yummy_express.common.Constants
+import com.dexciuq.yummy_express.data.data_source.remote.RefreshTokenInterceptor
 import com.dexciuq.yummy_express.data.data_source.remote.YummyExpressBackendApiService
 import dagger.Module
 import dagger.Provides
@@ -27,11 +28,13 @@ class NetworkModule {
     fun provideGsonConverterFactory(): GsonConverterFactory =
         GsonConverterFactory.create()
 
-
     @Singleton
     @Provides
-    fun provideHttpClient(): OkHttpClient {
+    fun provideHttpClient(
+        refreshTokenInterceptor: RefreshTokenInterceptor
+    ): OkHttpClient {
         return OkHttpClient.Builder()
+            .addInterceptor(refreshTokenInterceptor)
             .readTimeout(60, TimeUnit.SECONDS)
             .connectTimeout(60, TimeUnit.SECONDS)
             .build()
@@ -44,10 +47,10 @@ class NetworkModule {
         gsonConverterFactory: GsonConverterFactory,
         @Named("baseUrl") baseUrl: String
     ): Retrofit = Retrofit.Builder()
-            .addConverterFactory(gsonConverterFactory)
-            .client(okHttpClient)
-            .baseUrl(baseUrl)
-            .build()
+        .addConverterFactory(gsonConverterFactory)
+        .client(okHttpClient)
+        .baseUrl(baseUrl)
+        .build()
 
     @Provides
     @Singleton
