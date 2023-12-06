@@ -12,7 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.databinding.FragmentSplashBinding
-import com.dexciuq.yummy_express.presentation.activity.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
+import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -32,11 +33,12 @@ class SplashFragment : Fragment() {
                     is Resource.Loading -> {}
                     is Resource.Success -> {
                         if (resource.data) {
-                            navigateToMainActivity()
+                            navigateToAuthActivity()
                         } else {
                             navigateToOnBoardingFragment()
                         }
                     }
+
                     is Resource.Error -> {
                         Toast.makeText(
                             requireContext(),
@@ -50,8 +52,8 @@ class SplashFragment : Fragment() {
         return binding.root
     }
 
-    private fun navigateToMainActivity() {
-        val intent = Intent(requireActivity(), MainActivity::class.java)
+    private fun navigateToAuthActivity() {
+        val intent = Intent(requireActivity(), AuthActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
     }

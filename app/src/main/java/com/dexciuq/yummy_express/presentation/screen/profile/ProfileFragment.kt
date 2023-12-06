@@ -1,5 +1,6 @@
 package com.dexciuq.yummy_express.presentation.screen.profile
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentProfileBinding
+import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
 import com.dexciuq.yummy_express.presentation.screen.profile.language.LanguageBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,9 +27,9 @@ class ProfileFragment : Fragment() {
         }
 
         binding.myOrders.setOnArrowRightClickListener {
-           findNavController().navigate(
-               ProfileFragmentDirections.actionProfileFragmentToMyOrdersFragment()
-           )
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToMyOrdersFragment()
+            )
         }
 
         binding.camera.setOnClickListener {
@@ -36,6 +38,12 @@ class ProfileFragment : Fragment() {
 
         binding.language.setOnArrowRightClickListener {
             showLanguageBottomSheetFragment()
+        }
+
+        binding.signOut.setOnClickListener {
+            val intent = Intent(requireActivity(), AuthActivity::class.java)
+            startActivity(intent)
+            requireActivity().finish()
         }
 
         return binding.root

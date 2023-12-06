@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.presentation.activity
+package com.dexciuq.yummy_express.presentation.activity.main
 
 import androidx.lifecycle.ViewModel
 import com.dexciuq.yummy_express.domain.use_case.product.GetCartItemCountUseCase

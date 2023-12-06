@@ -14,7 +14,7 @@ import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentOnBoardingBinding
 import com.dexciuq.yummy_express.domain.model.OnBoarding
-import com.dexciuq.yummy_express.presentation.activity.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -74,7 +74,7 @@ class OnBoardingFragment : Fragment() {
                 binding.onBoardingViewPager.currentItem = nextItem
             } else {
                 viewModel.setOnBoardingComplete()
-                val intent = Intent(requireActivity(), MainActivity::class.java)
+                val intent = Intent(requireActivity(), AuthActivity::class.java)
                 startActivity(intent)
                 requireActivity().finish()
             }

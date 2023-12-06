@@ -54,4 +54,19 @@
     <string name="english">English</string>
     <string name="order_total">Total: %s</string>
     <string name="order_item_count">Items: %d</string>
+    <string name="don_t_have_an_account">Don’t have an account ?</string>
+    <string name="sign_up">Sign up</string>
+    <string name="sign_in_to_your_account">Sign in to your account</string>
+    <string name="welcome_back">Welcome back !</string>
+    <string name="login">Login</string>
+    <string name="email_address">Email Address</string>
+    <string name="password">Password</string>
+    <string name="create_account">Create account</string>
+    <string name="quickly_create_account">Quickly create account</string>
+    <string name="name">Name</string>
+    <string name="phone_number">Phone number</string>
+    <string name="surname">Surname</string>
+    <string name="register">Register</string>
+    <string name="already_have_an_account">Already have an account ?</string>
+    <string name="skip_for_now">Skip for now</string>
 </resources>

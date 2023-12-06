@@ -17,7 +17,7 @@ import com.dexciuq.yummy_express.common.toMoney
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentCheckoutBinding
 import com.dexciuq.yummy_express.domain.model.Product
-import com.dexciuq.yummy_express.presentation.activity.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint

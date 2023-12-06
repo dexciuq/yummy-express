@@ -1,10 +1,8 @@
-package com.dexciuq.yummy_express.presentation.activity
+package com.dexciuq.yummy_express.presentation.activity.main
 
-import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.annotation.IdRes
-import androidx.annotation.MenuRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope

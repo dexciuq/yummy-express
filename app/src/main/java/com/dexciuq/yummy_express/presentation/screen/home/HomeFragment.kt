@@ -18,12 +18,11 @@ import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentHomeBinding
 import com.dexciuq.yummy_express.domain.model.Banner
-import com.dexciuq.yummy_express.presentation.activity.MainActivity
+import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
 import com.dexciuq.yummy_express.presentation.screen.home.category.HomeCategoriesAdapter
 import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
