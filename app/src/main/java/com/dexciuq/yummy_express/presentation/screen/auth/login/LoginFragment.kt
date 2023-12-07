@@ -9,8 +9,10 @@ import androidx.core.widget.doOnTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.databinding.FragmentLoginBinding
 import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -35,7 +37,15 @@ class LoginFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.login.observe(viewLifecycleOwner) {
-            navigateToMainActivity()
+            if (it) {
+                navigateToMainActivity()
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    getString(R.string.invalid_credentials_please_try_again),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 

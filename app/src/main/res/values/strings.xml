@@ -71,4 +71,5 @@
     <string name="skip_for_now">Skip for now</string>
     <string name="unauthentificated_user">Unauthentificated user</string>
     <string name="click_button_to_navigate_auth_screen">Click button to navigate auth screen</string>
+    <string name="invalid_credentials_please_try_again">Invalid credentials, please try again</string>
 </resources>

@@ -71,4 +71,5 @@
     <string name="skip_for_now">Временно пропустить</string>
     <string name="unauthentificated_user">Неаутентифицированный ползователь</string>
     <string name="click_button_to_navigate_auth_screen">Нажмите кнопку, чтобы перейти к экрану авторизации</string>
+    <string name="invalid_credentials_please_try_again">Неверные учетные данные, пожалуйста, повторите попытку</string>
 </resources>

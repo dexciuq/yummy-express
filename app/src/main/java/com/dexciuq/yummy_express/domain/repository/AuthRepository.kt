@@ -11,7 +11,7 @@ interface AuthRepository {
     suspend fun setRefreshToken(refreshToken: String)
     suspend fun getAuthSkip(): Boolean
     suspend fun setAuthSkip(skip: Boolean)
-    suspend fun login(email: String, password: String): AuthTokens
+    suspend fun login(email: String, password: String): AuthTokens?
     suspend fun refresh(refreshToken: String): AccessToken
     suspend fun logout(accessToken: String)
     suspend fun getProfileInfo(accessToken: String): User

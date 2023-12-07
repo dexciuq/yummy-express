@@ -32,8 +32,12 @@ class RemoteDataSource @Inject constructor(
     override suspend fun getFeaturedProductList(): List<Product> =
         yummyExpressApiService.getAllProducts().products?.fromDtoToProduct()?.take(10) ?: listOf()
 
-    override suspend fun login(email: String, password: String): AuthTokens =
-        yummyExpressApiService.login(LoginRequest(email, password)).toAuthTokens()
+    override suspend fun login(email: String, password: String): AuthTokens? =
+        try {
+            yummyExpressApiService.login(LoginRequest(email, password))?.toAuthTokens()
+        } catch (e: Exception) {
+            null
+        }
 
     override suspend fun refresh(refreshToken: String): AccessToken =
         yummyExpressApiService.refresh(refreshToken).toAccessToken()

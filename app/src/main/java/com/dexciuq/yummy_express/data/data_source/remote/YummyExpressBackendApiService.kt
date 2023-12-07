@@ -41,7 +41,7 @@ interface YummyExpressBackendApiService {
     @POST("/v1/auth/authenticate")
     suspend fun login(
         @Body loginRequest: LoginRequest
-    ): LoginResponse
+    ): LoginResponse?
 
     @GET("/v1/auth/logout")
     suspend fun logout(

@@ -27,7 +27,7 @@ interface DataSource {
         suspend fun getHomeCategoryList(): List<Category>
         suspend fun getProductsByCategory(category: Long): List<Product>
         suspend fun getProductById(id: Long): Product
-        suspend fun login(email: String, password: String): AuthTokens
+        suspend fun login(email: String, password: String): AuthTokens?
         suspend fun refresh(refreshToken: String): AccessToken
         suspend fun logout(accessToken: String)
         suspend fun getProfileInfo(accessToken: String): User

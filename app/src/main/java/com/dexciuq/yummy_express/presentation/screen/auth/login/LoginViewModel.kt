@@ -25,6 +25,10 @@ class LoginViewModel @Inject constructor(
 
     fun login(email: String, password: String) = viewModelScope.launch {
         val authTokens = loginUseCase(email, password)
+        if (authTokens == null) {
+            _login.postValue(false)
+            return@launch
+        }
         setAuthSkipUseCase(true)
         setAccessTokenUseCase(authTokens.accessToken)
         setRefreshTokenUseCase(authTokens.refreshToken)

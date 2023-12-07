@@ -1,7 +1,7 @@
 package com.dexciuq.yummy_express.di
 
 import com.dexciuq.yummy_express.common.Constants
-import com.dexciuq.yummy_express.data.data_source.remote.RefreshTokenInterceptor
+import com.dexciuq.yummy_express.data.data_source.remote.token.RefreshTokenInterceptor
 import com.dexciuq.yummy_express.data.data_source.remote.YummyExpressBackendApiService
 import dagger.Module
 import dagger.Provides
