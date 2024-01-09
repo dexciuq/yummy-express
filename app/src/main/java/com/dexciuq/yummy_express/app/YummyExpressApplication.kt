@@ -1,6 +1,7 @@
-package com.dexciuq.yummy_express
+package com.dexciuq.yummy_express.app
 
 import android.app.Application
+import com.dexciuq.yummy_express.R
 import com.yandex.mapkit.MapKitFactory
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
