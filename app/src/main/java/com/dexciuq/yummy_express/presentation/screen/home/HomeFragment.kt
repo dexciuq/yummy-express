@@ -21,7 +21,6 @@ import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
-import com.dexciuq.yummy_express.presentation.screen.home.category.HomeCategoriesAdapter
 import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,14 +45,26 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupSearchView()
         setupCategoriesSection()
         setupFeaturedProductsSection()
         collectData()
-        return binding.root
     }
 
     private fun setupSearchView() {
+        binding.searchVoiceBtn.setOnClickListener {
+            val voiceSearchBottomSheetFragment = VoiceSearchBottomSheetFragment.newInstance()
+            voiceSearchBottomSheetFragment.show(
+                parentFragmentManager,
+                voiceSearchBottomSheetFragment.tag
+            )
+        }
+        
         binding.searchView.setTextSize(14f)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -76,6 +87,11 @@ class HomeFragment : Fragment() {
         binding.categoriesRv.adapter = categoriesAdapter
         binding.categoriesAll.setOnClickListener {
             onNavigationItemChanger.navigate(R.id.nav_graph_categories)
+//            val voiceSearchBottomSheetFragment = VoiceSearchBottomSheetFragment.newInstance()
+//            voiceSearchBottomSheetFragment.show(
+//                parentFragmentManager,
+//                voiceSearchBottomSheetFragment.tag
+//            )
         }
     }
 

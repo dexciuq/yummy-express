@@ -13,9 +13,11 @@ import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentMyOrdersBinding
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class MyOrdersFragment : Fragment() {
 
     private val binding by lazy { FragmentMyOrdersBinding.inflate(layoutInflater) }
@@ -26,10 +28,14 @@ class MyOrdersFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupToolbar()
         setupCategoriesRecyclerView()
         collectData()
-        return binding.root
     }
 
     private fun setupToolbar() {

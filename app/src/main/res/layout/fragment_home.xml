@@ -11,11 +11,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/search_voice_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/shape_search_view"
+            android:contentDescription="@null"
+            android:padding="12dp"
+            android:src="@drawable/ic_mic_filled"
+            app:layout_constraintBottom_toBottomOf="@+id/search_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/search_view"
+            app:layout_constraintTop_toTopOf="@+id/search_view"
+            app:tint="@color/text" />
+
         <androidx.appcompat.widget.SearchView
             android:id="@+id/search_view"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="64dp"
             android:background="@drawable/shape_search_view"
             app:defaultQueryHint="@string/search_view_hint"
             app:iconifiedByDefault="false"
@@ -30,8 +46,8 @@
             android:id="@+id/viewPager"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:saveEnabled="false"
             android:layout_marginTop="16dp"
+            android:saveEnabled="false"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_view" />
@@ -42,9 +58,9 @@
             android:layout_height="24dp"
             android:layout_alignParentBottom="true"
             android:backgroundTint="@android:color/transparent"
-            app:layout_constraintTop_toBottomOf="@+id/viewPager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"
             app:tabBackground="@drawable/selector_tab_layout"
             app:tabGravity="center"
             app:tabIndicator="@null"
@@ -79,8 +95,8 @@
             android:id="@+id/categories_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="4dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/categories_title">
@@ -125,11 +141,11 @@
             android:id="@+id/featured_products_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:text="@string/featured_products"
             android:textColor="@color/title"
             android:textFontWeight="800"
             android:textSize="18sp"
-            android:layout_marginTop="12dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/categories_container" />
 
@@ -137,8 +153,8 @@
             android:id="@+id/featured_products_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_marginTop="8dp"
+            android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/featured_products_title">
@@ -171,9 +187,9 @@
                 android:id="@+id/featured_products_rv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:visibility="gone"
-                android:paddingBottom="24dp"
                 android:clipToPadding="true"
+                android:paddingBottom="24dp"
+                android:visibility="gone"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 app:spanCount="2"
                 tools:listitem="@layout/item_product" />

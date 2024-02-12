@@ -1,15 +1,16 @@
 package com.dexciuq.yummy_express.data.mapper
 
 import com.dexciuq.yummy_express.data.model.local.ProductEntity
-import com.dexciuq.yummy_express.data.model.remote.CategoryDto
-import com.dexciuq.yummy_express.data.model.remote.LoginResponse
-import com.dexciuq.yummy_express.data.model.remote.ProductDto
-import com.dexciuq.yummy_express.data.model.remote.RefreshResponse
-import com.dexciuq.yummy_express.data.model.remote.UserDto
-import com.dexciuq.yummy_express.data.model.remote.UserResponse
+import com.dexciuq.yummy_express.data.model.remote.category.CategoryDto
+import com.dexciuq.yummy_express.data.model.remote.auth.LoginResponse
+import com.dexciuq.yummy_express.data.model.remote.order.OrderDto
+import com.dexciuq.yummy_express.data.model.remote.product.ProductDto
+import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.UserDto
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Category
+import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.model.User
 
@@ -51,7 +52,7 @@ fun ProductEntity.fromEntityToProduct() = Product(
     quantity = quantity,
     unit = unit,
     priceUnit = priceUnit,
-    imageURL = imageURL.orEmpty(),
+    imageURL = imageURL,
     country = country,
     brand = brand,
     amount = amount
@@ -73,7 +74,7 @@ fun Product.toProductEntity() = ProductEntity(
     quantity = quantity,
     unit = unit,
     priceUnit = priceUnit,
-    imageURL = imageURL.orEmpty(),
+    imageURL = imageURL,
     country = country,
     brand = brand,
     amount = amount ?: priceUnit
@@ -103,8 +104,20 @@ fun UserDto.toUser() = User(
     phoneNumber = phoneNumber
 )
 
+fun OrderDto.fromDtoToOrder() = Order(
+    id = id,
+    total = total ?: 0L,
+    address = address.orEmpty(),
+    status = status.orEmpty(),
+    createdAt = createdAt.orEmpty(),
+    deliveredAt = deliveredAt.orEmpty(),
+    productList = productList?.fromDtoToProduct().orEmpty(),
+)
+
 fun List<ProductEntity>.fromEntityToProduct() = map(ProductEntity::fromEntityToProduct)
 
 fun List<ProductDto>.fromDtoToProduct() = map(ProductDto::fromDtoToProduct)
 
 fun List<CategoryDto>.toCategory() = map(CategoryDto::toCategory)
+
+fun List<OrderDto>.toOrders() = map(OrderDto::fromDtoToOrder)

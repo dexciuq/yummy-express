@@ -56,6 +56,15 @@
             app:text="@string/my_orders" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/company"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="ARROW_RIGHT"
+            app:icon="@drawable/ic_categories"
+            app:iconTint="@color/primary_dark"
+            app:text="About company" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/language"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -161,7 +170,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="@string/unauthentificated_user"
+                android:text="@string/guest"
                 android:textColor="@color/title"
                 android:textSize="18sp"
                 android:textStyle="bold" />

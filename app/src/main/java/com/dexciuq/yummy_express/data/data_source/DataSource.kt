@@ -5,6 +5,7 @@ import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.OnBoarding
+import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.model.User
 import kotlinx.coroutines.flow.Flow
@@ -38,6 +39,10 @@ interface DataSource {
             phoneNumber: String,
             password: String
         )
+
+        suspend fun makeOrder(order: Order)
+        suspend fun getOrderById(id: Long): Order
+        suspend fun getOrderList(): List<Order>
     }
 
     interface Local {

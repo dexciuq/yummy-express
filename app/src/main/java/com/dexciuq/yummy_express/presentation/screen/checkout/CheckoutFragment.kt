@@ -32,10 +32,14 @@ class CheckoutFragment : Fragment() {
     private val onNavigationItemChanger by lazy { requireActivity() as MainActivity }
     private val viewModel: CheckoutViewModel by viewModels()
     private val args: CheckoutFragmentArgs by navArgs()
+
     private lateinit var adapter: CheckoutProductListAdapter
+    private lateinit var productList: List<Product>
+    private var total: Long = 0
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -70,7 +74,9 @@ class CheckoutFragment : Fragment() {
                 getString(R.string.your_order_was_successfully_placed),
                 Snackbar.LENGTH_SHORT
             ).show()
-            viewModel.clearCart()
+
+            viewModel.makeOrder(args.address, productList, total)
+
             findNavController().navigate(
                 CheckoutFragmentDirections.actionCheckoutFragmentToCartFragment()
             )
@@ -104,6 +110,7 @@ class CheckoutFragment : Fragment() {
                         binding.productList.show()
                         setupPaymentContainer(resource.data)
                         adapter.submitList(resource.data)
+                        productList = resource.data
                     }
                 }
             }
@@ -120,5 +127,6 @@ class CheckoutFragment : Fragment() {
         val total = shippingCharges + subtotal
 
         binding.payment.text = total.toMoney()
+        this.total = total
     }
 }

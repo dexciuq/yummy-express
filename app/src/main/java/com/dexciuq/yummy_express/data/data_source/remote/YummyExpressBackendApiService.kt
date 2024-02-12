@@ -1,13 +1,16 @@
 package com.dexciuq.yummy_express.data.data_source.remote
 
-import com.dexciuq.yummy_express.data.model.remote.CategoriesResponse
-import com.dexciuq.yummy_express.data.model.remote.LoginRequest
-import com.dexciuq.yummy_express.data.model.remote.LoginResponse
-import com.dexciuq.yummy_express.data.model.remote.ProductResponse
-import com.dexciuq.yummy_express.data.model.remote.ProductsResponse
-import com.dexciuq.yummy_express.data.model.remote.RefreshResponse
-import com.dexciuq.yummy_express.data.model.remote.RegisterRequest
-import com.dexciuq.yummy_express.data.model.remote.UserResponse
+import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.LoginResponse
+import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
+import com.dexciuq.yummy_express.data.model.remote.order.OrderResponse
+import com.dexciuq.yummy_express.data.model.remote.order.OrdersResponse
+import com.dexciuq.yummy_express.data.model.remote.product.ProductResponse
+import com.dexciuq.yummy_express.data.model.remote.product.ProductsResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -57,4 +60,20 @@ interface YummyExpressBackendApiService {
     suspend fun refresh(
         @Header("Authorization") refreshToken: String,
     ): RefreshResponse
+
+    @POST("/v1/orders")
+    suspend fun makeOrder(
+        @Header("Authorization") accessToken: String,
+        @Body orderRequest: OrderRequest,
+    )
+
+    @GET("/v1/products/{id}")
+    suspend fun getOrderById(
+        @Path("id") id: Long
+    ): OrderResponse
+
+    @GET("/v1/profile/orders")
+    suspend fun getOrders(
+        @Header("Authorization") accessToken: String,
+    ): OrdersResponse
 }

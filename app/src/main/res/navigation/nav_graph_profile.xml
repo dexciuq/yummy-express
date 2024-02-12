@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_profileFragment_to_myOrdersFragment"
             app:destination="@id/myOrdersFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutCompanyFragment"
+            app:destination="@id/aboutCompanyFragment" />
     </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
         android:name="com.dexciuq.yummy_express.presentation.screen.profile.my_orders.MyOrdersFragment"
         android:label="fragment_my_orders"
         tools:layout="@layout/fragment_my_orders" />
+    <fragment
+        android:id="@+id/aboutCompanyFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.profile.company.AboutCompanyFragment"
+        android:label="fragment_about_company"
+        tools:layout="@layout/fragment_about_company" />
 </navigation>

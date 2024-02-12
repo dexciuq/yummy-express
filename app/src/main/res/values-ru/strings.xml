@@ -68,8 +68,10 @@
     <string name="surname">Фамилия</string>
     <string name="register">Зарегистрироваться</string>
     <string name="already_have_an_account">У вас уже есть учетная запись?</string>
-    <string name="skip_for_now">Временно пропустить</string>
-    <string name="unauthentificated_user">Неаутентифицированный ползователь</string>
+    <string name="skip_for_now">Войти как гость</string>
+    <string name="guest">Гость</string>
     <string name="click_button_to_navigate_auth_screen">Нажмите кнопку, чтобы перейти к экрану авторизации</string>
     <string name="invalid_credentials_please_try_again">Неверные учетные данные, пожалуйста, повторите попытку</string>
+    <string name="voice_recognizer">Распознаватель голоса</string>
+    <string name="tap_to_start_recording">Нажмите, чтобы начать запись...</string>
 </resources>

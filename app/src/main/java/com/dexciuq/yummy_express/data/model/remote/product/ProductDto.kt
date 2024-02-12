@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.data.model.remote
+package com.dexciuq.yummy_express.data.model.remote.product
 
 
 import com.google.gson.annotations.SerializedName
@@ -16,6 +16,8 @@ data class ProductDto(
     val upc: String?,
     @SerializedName("quantity")
     val quantity: Long?,
+    @SerializedName("amount")
+    val amount: String?,
     @SerializedName("image")
     val image: String?,
     @SerializedName("step")

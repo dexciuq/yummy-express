@@ -2,10 +2,12 @@ package com.dexciuq.yummy_express.di
 
 import com.dexciuq.yummy_express.data.repository.AuthRepositoryImpl
 import com.dexciuq.yummy_express.data.repository.CategoryRepositoryImpl
+import com.dexciuq.yummy_express.data.repository.OrderRepositoryImpl
 import com.dexciuq.yummy_express.data.repository.ProductRepositoryImpl
 import com.dexciuq.yummy_express.data.repository.UIRepositoryImpl
 import com.dexciuq.yummy_express.domain.repository.AuthRepository
 import com.dexciuq.yummy_express.domain.repository.CategoryRepository
+import com.dexciuq.yummy_express.domain.repository.OrderRepository
 import com.dexciuq.yummy_express.domain.repository.ProductRepository
 import com.dexciuq.yummy_express.domain.repository.UIRepository
 import dagger.Binds
@@ -22,6 +24,9 @@ interface RepositoryModule {
 
     @Binds
     fun provideProductRepository(productRepositoryImpl: ProductRepositoryImpl): ProductRepository
+
+    @Binds
+    fun provideOrderRepository(orderRepositoryImpl: OrderRepositoryImpl): OrderRepository
 
     @Binds
     fun provideCategoryRepository(categoryRepositoryImpl: CategoryRepositoryImpl): CategoryRepository

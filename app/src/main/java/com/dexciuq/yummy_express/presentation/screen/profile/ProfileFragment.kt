@@ -73,6 +73,12 @@ class ProfileFragment : Fragment() {
             toast(binding.email.text.toString())
         }
 
+        binding.company.setOnArrowRightClickListener {
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToAboutCompanyFragment()
+            )
+        }
+
         binding.myOrders.setOnArrowRightClickListener {
             findNavController().navigate(
                 ProfileFragmentDirections.actionProfileFragmentToMyOrdersFragment()

@@ -68,8 +68,11 @@
     <string name="surname">Surname</string>
     <string name="register">Register</string>
     <string name="already_have_an_account">Already have an account ?</string>
-    <string name="skip_for_now">Skip for now</string>
-    <string name="unauthentificated_user">Unauthentificated user</string>
+    <string name="skip_for_now">Login as guest</string>
+    <string name="guest">Guest</string>
     <string name="click_button_to_navigate_auth_screen">Click button to navigate auth screen</string>
     <string name="invalid_credentials_please_try_again">Invalid credentials, please try again</string>
+    <string name="voice_recognizer">Voice recognizer</string>
+    <string name="tap_to_start_recording">Tap to start recording...</string>
+    <string name="about_company_text"><b>Yummy-Express</b> aims to provide a convenient and efficient solution for customers who prefer the ease of ordering groceries online and having them delivered directly to their doorstep. With time becoming increasingly valuable in the modern age, <b>Yummy-Express</b> is dedicated to bridging the gap between hectic lifestyles and the need for high-quality, fresh groceries.</string>
 </resources>
