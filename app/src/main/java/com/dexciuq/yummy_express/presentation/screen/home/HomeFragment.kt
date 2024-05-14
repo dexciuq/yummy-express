@@ -1,10 +1,14 @@
 package com.dexciuq.yummy_express.presentation.screen.home
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,7 +25,6 @@ import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
-import com.dexciuq.yummy_express.presentation.screen.home.category.HomeCategoriesAdapter
 import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,14 +49,30 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupSearchView()
         setupCategoriesSection()
         setupFeaturedProductsSection()
         collectData()
-        return binding.root
     }
 
     private fun setupSearchView() {
+        binding.searchVoiceBtn.setOnClickListener {
+            if (ContextCompat.checkSelfPermission(
+                    requireActivity(),
+                    Manifest.permission.RECORD_AUDIO
+                ) == PackageManager.PERMISSION_GRANTED
+            ) {
+                launchVoiceSearchBottomSheetFragment()
+            } else {
+                requestAudioPermission()
+            }
+        }
+        
         binding.searchView.setTextSize(14f)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -66,6 +85,28 @@ class HomeFragment : Fragment() {
                 return true
             }
         })
+    }
+
+    private fun requestAudioPermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.RECORD_AUDIO),
+            REQUEST_AUDIO_PERMISSION
+        )
+    }
+
+    @Deprecated("Deprecated in Java")
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_AUDIO_PERMISSION && grantResults.isNotEmpty()) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                launchVoiceSearchBottomSheetFragment()
+            }
+        }
     }
 
     private fun setupCategoriesSection() {
@@ -175,4 +216,19 @@ class HomeFragment : Fragment() {
         TabLayoutMediator(binding.tabLayout, binding.viewPager) { _, _ -> }.attach()
     }
 
+    private fun launchVoiceSearchBottomSheetFragment() {
+        val voiceSearchBottomSheetFragment = VoiceSearchBottomSheetFragment.newInstance(::setTextToSearchView)
+        voiceSearchBottomSheetFragment.show(
+            parentFragmentManager,
+            voiceSearchBottomSheetFragment.tag
+        )
+    }
+
+    private fun setTextToSearchView(input: String) {
+        binding.searchView.setQuery(input, true)
+    }
+
+    companion object {
+        private const val REQUEST_AUDIO_PERMISSION = 1002
+    }
 }

@@ -5,9 +5,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.dexciuq.yummy_express.R
-import com.dexciuq.yummy_express.databinding.ItemCategoryBinding
+import com.dexciuq.yummy_express.common.toMoney
 import com.dexciuq.yummy_express.databinding.ItemOrderBinding
-import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.presentation.diff_util.OrderDiffUtil
 
@@ -30,6 +29,11 @@ class MyOrdersAdapter(
 
         fun bind(order: Order) {
             binding.orderName.text = itemView.context.getString(R.string.order) + "# ${order.id}"
+            binding.orderPlacedDate.text = itemView.context.getString(
+                R.string.order_total,
+                order.total.toMoney()
+            )
+            binding.orderItemCount.text = "Delivery Address: ${order.address}"
             binding.root.setOnClickListener { onItemClick(order) }
         }
     }

@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.data.model.remote
+package com.dexciuq.yummy_express.data.model.remote.product
 
 
 import com.google.gson.annotations.SerializedName
