@@ -1,6 +1,5 @@
 package com.dexciuq.yummy_express.data.model.remote.order
 
-import com.dexciuq.yummy_express.data.model.remote.product.ProductDto
 import com.google.gson.annotations.SerializedName
 
 data class OrderDto(
@@ -16,6 +15,4 @@ data class OrderDto(
     val createdAt: String? = "",
     @SerializedName("deliveredAt")
     val deliveredAt: String? = "",
-    @SerializedName("products")
-    val productList: List<ProductDto>?,
 )

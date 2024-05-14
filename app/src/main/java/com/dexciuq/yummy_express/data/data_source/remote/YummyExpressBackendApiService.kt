@@ -67,7 +67,7 @@ interface YummyExpressBackendApiService {
         @Body orderRequest: OrderRequest,
     )
 
-    @GET("/v1/products/{id}")
+    @GET("/v1/orders/{id}")
     suspend fun getOrderById(
         @Path("id") id: Long
     ): OrderResponse

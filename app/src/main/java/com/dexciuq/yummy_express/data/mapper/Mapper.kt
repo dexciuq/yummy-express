@@ -7,10 +7,12 @@ import com.dexciuq.yummy_express.data.model.remote.order.OrderDto
 import com.dexciuq.yummy_express.data.model.remote.product.ProductDto
 import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.UserDto
+import com.dexciuq.yummy_express.data.model.remote.order.OrderItemDto
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Order
+import com.dexciuq.yummy_express.domain.model.OrderItem
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.model.User
 
@@ -104,15 +106,35 @@ fun UserDto.toUser() = User(
     phoneNumber = phoneNumber
 )
 
-fun OrderDto.fromDtoToOrder() = Order(
+fun OrderItemDto.fromDtoToDomain() = OrderItem(
+    id = id ?: 0L,
+    productId = productId ?: 0L,
+    name = name.orEmpty(),
+    description = description.orEmpty(),
+    category = category.orEmpty(),
+    upc = upc.orEmpty(),
+    price = price ?: 0L,
+    quantity = quantity ?: 0L,
+    unit = unit.orEmpty(),
+    image = image.orEmpty(),
+    country = country.orEmpty(),
+    brand = brand.orEmpty(),
+    amount = amount ?: 0.0,
+    step = step ?: 0.0,
+    subtotal = subtotal ?: 0L,
+)
+
+fun OrderDto.fromDtoToDomain(orderItems: List<OrderItemDto>) = Order(
     id = id,
     total = total ?: 0L,
     address = address.orEmpty(),
     status = status.orEmpty(),
     createdAt = createdAt.orEmpty(),
     deliveredAt = deliveredAt.orEmpty(),
-    productList = productList?.fromDtoToProduct().orEmpty(),
+    orderItemList = orderItems.fromDtoToDomain(),
 )
+
+fun List<OrderItemDto>.fromDtoToDomain() = map(OrderItemDto::fromDtoToDomain)
 
 fun List<ProductEntity>.fromEntityToProduct() = map(ProductEntity::fromEntityToProduct)
 
@@ -120,4 +142,6 @@ fun List<ProductDto>.fromDtoToProduct() = map(ProductDto::fromDtoToProduct)
 
 fun List<CategoryDto>.toCategory() = map(CategoryDto::toCategory)
 
-fun List<OrderDto>.toOrders() = map(OrderDto::fromDtoToOrder)
+fun List<OrderDto>.toDomain() = map {
+    it.fromDtoToDomain(listOf())
+}

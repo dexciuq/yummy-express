@@ -39,7 +39,7 @@
             android:id="@+id/order_placed_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="Placed on October 19 2021"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@+id/order_name"
@@ -47,21 +47,23 @@
 
         <TextView
             android:id="@+id/order_item_count"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:text="@string/order_item_count"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/order_placed_date"
             app:layout_constraintTop_toBottomOf="@+id/order_placed_date" />
 
-        <TextView
-            android:id="@+id/order_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:text="@string/order_total"
-            app:layout_constraintStart_toEndOf="@+id/order_item_count"
-            app:layout_constraintTop_toTopOf="@+id/order_item_count" />
+<!--        <TextView-->
+<!--            android:id="@+id/order_total"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginStart="32dp"-->
+<!--            android:text="@string/order_total"-->
+<!--            app:layout_constraintStart_toEndOf="@+id/order_item_count"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/order_item_count" />-->
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

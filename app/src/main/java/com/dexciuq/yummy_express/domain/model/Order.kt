@@ -7,5 +7,6 @@ data class Order(
     val status: String = "",
     val createdAt: String = "",
     val deliveredAt: String = "",
-    val productList: List<Product>,
+    val productList: List<Product> = listOf(),
+    val orderItemList: List<OrderItem> = listOf(),
 )

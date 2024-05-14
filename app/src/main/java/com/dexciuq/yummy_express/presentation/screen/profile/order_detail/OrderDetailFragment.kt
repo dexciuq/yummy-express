@@ -1,4 +1,4 @@
-package com.dexciuq.yummy_express.presentation.screen.profile.my_orders
+package com.dexciuq.yummy_express.presentation.screen.profile.order_detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,34 +8,41 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.navigateUp
+import androidx.navigation.fragment.navArgs
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
-import com.dexciuq.yummy_express.databinding.FragmentMyOrdersBinding
+import com.dexciuq.yummy_express.databinding.FragmentOrderDetailBinding
+import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyOrdersFragment : Fragment() {
+class OrderDetailFragment : Fragment() {
 
-    private val binding by lazy { FragmentMyOrdersBinding.inflate(layoutInflater) }
-    private val viewModel: MyOrdersViewModel by viewModels()
-    private lateinit var adapter: MyOrdersAdapter
+    private val binding by lazy { FragmentOrderDetailBinding.inflate(layoutInflater) }
+    private val viewModel: OrderDetailViewModel by viewModels()
+    private val args: OrderDetailFragmentArgs by navArgs()
+    private lateinit var adapter: OrderDetailAdapter
+
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewModel.getOrder(args.id)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupToolbar()
-        setupCategoriesRecyclerView()
+        setupRecyclerView()
         collectData()
     }
 
@@ -43,38 +50,34 @@ class MyOrdersFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
+        binding.toolbar.title = "Order #${args.id}"
     }
 
-    private fun setupCategoriesRecyclerView() {
-        adapter = MyOrdersAdapter(
-            onItemClick = {
-                findNavController().navigate(
-                    MyOrdersFragmentDirections.actionMyOrdersFragmentToOrderDetailFragment(it.id)
-                )
-            }
-        )
-        binding.myOrdersRv.adapter = adapter
+    private fun setupRecyclerView() {
+        adapter = OrderDetailAdapter(imageLoader)
+        binding.productList.adapter = adapter
     }
 
     private fun collectData() {
         lifecycleScope.launch {
-            viewModel.orders.collect { resource ->
+            viewModel.order.collect { resource ->
                 when (resource) {
                     is Resource.Loading -> {
-                        binding.myOrdersRv.hide()
-                        binding.myOrdersLoading.show()
-                        binding.myOrdersLoading.startShimmer()
+                        binding.productList.hide()
+                        binding.productListLoading.show()
+                        binding.productListLoading.startShimmer()
                     }
 
                     is Resource.Success -> {
-                        binding.myOrdersLoading.hide()
-                        binding.myOrdersRv.show()
-                        binding.myOrdersLoading.stopShimmer()
-                        adapter.submitList(resource.data)
+                        binding.productListLoading.hide()
+                        binding.productList.show()
+                        binding.productListLoading.stopShimmer()
+                        adapter.submitList(resource.data.orderItemList)
                     }
 
                     is Resource.Error -> {
                         toast(resource.throwable.message)
+                        Timber.i(resource.throwable)
                     }
                 }
             }

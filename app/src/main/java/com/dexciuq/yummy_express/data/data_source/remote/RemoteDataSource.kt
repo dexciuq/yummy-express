@@ -2,12 +2,12 @@ package com.dexciuq.yummy_express.data.data_source.remote
 
 import com.dexciuq.yummy_express.data.data_source.DataSource
 import com.dexciuq.yummy_express.data.data_source.remote.token.SessionManager
-import com.dexciuq.yummy_express.data.mapper.fromDtoToOrder
+import com.dexciuq.yummy_express.data.mapper.fromDtoToDomain
 import com.dexciuq.yummy_express.data.mapper.fromDtoToProduct
 import com.dexciuq.yummy_express.data.mapper.toAccessToken
 import com.dexciuq.yummy_express.data.mapper.toAuthTokens
 import com.dexciuq.yummy_express.data.mapper.toCategory
-import com.dexciuq.yummy_express.data.mapper.toOrders
+import com.dexciuq.yummy_express.data.mapper.toDomain
 import com.dexciuq.yummy_express.data.mapper.toUser
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
@@ -67,11 +67,14 @@ class RemoteDataSource @Inject constructor(
             )
         )
 
-    override suspend fun getOrderById(id: Long): Order =
-        yummyExpressApiService.getOrderById(id).orderDto.fromDtoToOrder()
+    override suspend fun getOrderById(id: Long): Order {
+        val response = yummyExpressApiService.getOrderById(id)
+        return response.orderDto.fromDtoToDomain(response.orderItems)
+    }
+
 
     override suspend fun getOrderList(): List<Order> =
-        yummyExpressApiService.getOrders(sessionManager.getAccessToken()!!).orders?.toOrders()
+        yummyExpressApiService.getOrders(sessionManager.getAccessToken()!!).orders?.toDomain()
             .orEmpty()
 
     override suspend fun logout(accessToken: String) =

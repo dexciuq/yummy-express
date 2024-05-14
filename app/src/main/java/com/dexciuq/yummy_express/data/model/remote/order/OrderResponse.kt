@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class OrderResponse(
     @SerializedName("order")
-    val orderDto: OrderDto
+    val orderDto: OrderDto,
+    @SerializedName("order_items")
+    val orderItems: List<OrderItemDto>,
 )
