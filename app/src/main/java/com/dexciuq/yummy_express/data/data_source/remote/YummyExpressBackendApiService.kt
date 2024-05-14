@@ -12,6 +12,8 @@ import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
 import retrofit2.http.Body
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -31,9 +33,15 @@ interface YummyExpressBackendApiService {
     @GET("/v1/products")
     suspend fun getAllProducts(): ProductsResponse
 
+//    @FormUrlEncoded
     @GET("/v1/products")
     suspend fun getAllProducts(
-        @Query("category") category: Long,
+        @Query("name") name: String?,
+        @Query("category") category: Long?,
+        @Query("brand") brand: String?,
+        @Query("page") page: Int?,
+        @Query("page_size") pageSize: Int?,
+        @Query("sort") sort: String?
     ): ProductsResponse
 
     @POST("/v1/auth/register")

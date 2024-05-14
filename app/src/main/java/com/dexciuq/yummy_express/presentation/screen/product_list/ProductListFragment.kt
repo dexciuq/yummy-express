@@ -37,7 +37,6 @@ class ProductListFragment : Fragment() {
         setupAppBarSection()
         setupProductListSection()
         collectData()
-        viewModel.getProductListByCategory(args.category.id)
         return binding.root
     }
 
@@ -45,7 +44,7 @@ class ProductListFragment : Fragment() {
         binding.toolbar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        binding.toolbar.title = args.category.name
+        binding.toolbar.title = args.filter.category?.name ?: "Search for: \"${args.filter.name?.lowercase()}\""
     }
 
     private fun setupProductListSection() {
@@ -64,6 +63,8 @@ class ProductListFragment : Fragment() {
     }
 
     private fun collectData() {
+        viewModel.getProductListByFilter(args.filter)
+
         lifecycleScope.launch {
             viewModel.products.collect { resource ->
                 when (resource) {

@@ -15,6 +15,7 @@ import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Category
+import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
 import javax.inject.Inject
@@ -29,8 +30,15 @@ class RemoteDataSource @Inject constructor(
     override suspend fun getHomeCategoryList(): List<Category> =
         yummyExpressApiService.getAllCategories().categories.toCategory().take(6)
 
-    override suspend fun getProductsByCategory(category: Long): List<Product> =
-        yummyExpressApiService.getAllProducts(category).products?.fromDtoToProduct().orEmpty()
+    override suspend fun getProductsByFilter(filter: Filter): List<Product> =
+        yummyExpressApiService.getAllProducts(
+            name = filter.name,
+            category = filter.category?.id,
+            brand = filter.brand?.joinToString(),
+            page = filter.page,
+            pageSize = filter.pageSize,
+            sort = filter.sort,
+        ).products?.fromDtoToProduct().orEmpty()
 
     override suspend fun getProductById(id: Long): Product =
         yummyExpressApiService.getProductById(id).product.fromDtoToProduct()

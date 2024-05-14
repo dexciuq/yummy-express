@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="center"
-            android:text="@string/empty_category_list" />
+            android:text="@string/empty_list_description" />
 
     </LinearLayout>
 

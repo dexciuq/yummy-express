@@ -2,6 +2,7 @@ package com.dexciuq.yummy_express.data.repository
 
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.data.data_source.DataSource
+import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
@@ -32,11 +33,11 @@ class ProductRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getProductsByCategory(category: Long): Flow<Resource<List<Product>>> =
+    override suspend fun getProductsByFilter(filter: Filter): Flow<Resource<List<Product>>> =
         flow {
             emit(Resource.Loading)
             try {
-                val remoteProducts = remote.getProductsByCategory(category)
+                val remoteProducts = remote.getProductsByFilter(filter)
                 val cartProductsFlow = local.getAllProductsFromCart()
 
                 cartProductsFlow.collect { cartProducts ->
