@@ -74,4 +74,6 @@
     <string name="invalid_credentials_please_try_again">Неверные учетные данные, пожалуйста, повторите попытку</string>
     <string name="voice_recognizer">Распознаватель голоса</string>
     <string name="tap_to_start_recording">Нажмите, чтобы начать запись...</string>
+    <string name="listening">Слушаем...</string>
+    <string name="scanning">Сканируем...</string>
 </resources>
