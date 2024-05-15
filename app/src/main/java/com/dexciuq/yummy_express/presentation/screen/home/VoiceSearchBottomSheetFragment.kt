@@ -70,7 +70,7 @@ class VoiceSearchBottomSheetFragment : BottomSheetDialogFragment() {
                 onRecorded(data?.first().orEmpty())
                 Handler(Looper.myLooper()!!).postDelayed({
                     dismiss()
-                }, 500)
+                }, 300)
             }
 
             override fun onPartialResults(partialResults: Bundle?) {}

@@ -130,11 +130,11 @@ class HomeFragment : Fragment() {
     private fun setupFeaturedProductsSection() {
         featuredProductsAdapter = ProductListAdapter(
             imageLoader = imageLoader,
-            onItemClick = { product, extras ->
+            onItemClick = { product ->
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(
                         product.id
-                    ), extras
+                    )
                 )
             },
             onAddToCart = viewModel::addProductToCart,
@@ -199,11 +199,6 @@ class HomeFragment : Fragment() {
                         binding.featuredProductsRv.show()
                         binding.featuredProductsLoading.stopShimmer()
                         featuredProductsAdapter.submitList(resource.data)
-
-                        postponeEnterTransition()
-                        binding.featuredProductsRv.doOnPreDraw {
-                            startPostponedEnterTransition()
-                        }
                     }
 
                     is Resource.Error -> {

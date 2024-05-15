@@ -10,5 +10,5 @@ data class Filter(
     val brand: List<Long>? = null,
     val page: Int? = null,
     val pageSize: Int? = null,
-    val sort: String? = null,
+    var sort: String? = null,
 ) : Parcelable
