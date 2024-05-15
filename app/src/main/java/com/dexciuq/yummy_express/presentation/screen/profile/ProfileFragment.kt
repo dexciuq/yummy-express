@@ -1,6 +1,7 @@
 package com.dexciuq.yummy_express.presentation.screen.profile
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,6 @@ import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentProfileBinding
 import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
-import com.dexciuq.yummy_express.presentation.screen.profile.language.LanguageBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -69,24 +69,25 @@ class ProfileFragment : Fragment() {
     }
 
     private fun setupListeners() {
-        binding.aboutMe.setOnArrowRightClickListener {
+        binding.aboutMe.setOnClickListener {
             toast(binding.email.text.toString())
         }
 
-        binding.company.setOnArrowRightClickListener {
+        binding.company.setOnClickListener {
             findNavController().navigate(
                 ProfileFragmentDirections.actionProfileFragmentToAboutCompanyFragment()
             )
         }
 
-        binding.myOrders.setOnArrowRightClickListener {
+        binding.myOrders.setOnClickListener {
             findNavController().navigate(
                 ProfileFragmentDirections.actionProfileFragmentToMyOrdersFragment()
             )
         }
 
-        binding.language.setOnArrowRightClickListener {
-            showLanguageBottomSheetFragment()
+        binding.contact.setOnClickListener {
+            val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:87474938382"))
+            startActivity(callIntent)
         }
 
         binding.authButton.setOnClickListener {
@@ -102,10 +103,5 @@ class ProfileFragment : Fragment() {
         val intent = Intent(requireActivity(), AuthActivity::class.java)
         startActivity(intent)
         requireActivity().finish()
-    }
-
-    private fun showLanguageBottomSheetFragment() {
-        val languageBottomSheetFragment = LanguageBottomSheetFragment()
-        languageBottomSheetFragment.show(parentFragmentManager, languageBottomSheetFragment.tag)
     }
 }
