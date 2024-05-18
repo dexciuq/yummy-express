@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity(), OnNavigationItemChanger {
                 R.id.productListFragment,
                 R.id.productDetailFragment,
                 R.id.addressFragment,
-                R.id.checkoutFragment -> {
+                R.id.checkoutFragment,
+                R.id.UPCScannerFragment-> {
                     binding.bottomNavigationView.hideWithAnimation(binding.navHostFragmentContainer)
                 }
 
