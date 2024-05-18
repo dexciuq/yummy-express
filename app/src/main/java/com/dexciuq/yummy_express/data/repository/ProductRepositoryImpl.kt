@@ -7,7 +7,6 @@ import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -69,6 +68,16 @@ class ProductRepositoryImpl @Inject constructor(
         emit(Resource.Loading)
         try {
             val response = remote.getProductById(id)
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun getProductByUPC(upc: String): Flow<Resource<Product>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = remote.getProductByUPC(upc)
             emit(Resource.Success(response))
         } catch (t: Throwable) {
             emit(Resource.Error(t))

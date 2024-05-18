@@ -29,10 +29,14 @@ interface YummyExpressBackendApiService {
         @Path("id") id: Long
     ): ProductResponse
 
+    @GET("/v1/upc/{upc}")
+    suspend fun getProductByUPC(
+        @Path("upc") upc: String
+    ): ProductResponse
+
     @GET("/v1/products")
     suspend fun getAllProducts(): ProductsResponse
 
-    //    @FormUrlEncoded
     @GET("/v1/products")
     suspend fun getAllProducts(
         @Query("name") name: String?,

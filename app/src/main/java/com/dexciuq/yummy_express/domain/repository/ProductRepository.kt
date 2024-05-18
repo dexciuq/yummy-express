@@ -9,6 +9,7 @@ interface ProductRepository {
     suspend fun getFeaturedProducts(): Flow<Resource<List<Product>>>
     suspend fun getProductsByFilter(filter: Filter): Flow<Resource<List<Product>>>
     suspend fun getProductById(id: Long): Flow<Resource<Product>>
+    suspend fun getProductByUPC(upc: String): Flow<Resource<Product>>
     fun getCartItemCount(): Flow<Resource<Int>>
     fun getAllProductsFromCart(): Flow<Resource<List<Product>>>
     suspend fun getCartProductById(id: Long): Flow<Resource<Product>>

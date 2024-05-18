@@ -34,7 +34,6 @@
         <action
             android:id="@+id/action_checkoutFragment_to_cartFragment"
             app:destination="@id/cartFragment"
-            app:popUpTo="@id/nav_graph_cart"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/cartFragment" />
     </fragment>
 </navigation>
