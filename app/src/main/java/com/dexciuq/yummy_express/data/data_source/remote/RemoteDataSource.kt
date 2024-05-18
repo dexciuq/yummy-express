@@ -13,11 +13,13 @@ import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
 import com.dexciuq.yummy_express.domain.model.AccessToken
-import com.dexciuq.yummy_express.domain.model.AuthTokens
+import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
+import retrofit2.HttpException
+import java.net.HttpURLConnection
 import javax.inject.Inject
 
 class RemoteDataSource @Inject constructor(
@@ -46,12 +48,26 @@ class RemoteDataSource @Inject constructor(
     override suspend fun getFeaturedProductList(): List<Product> =
         yummyExpressApiService.getAllProducts().products?.fromDtoToProduct()?.take(10).orEmpty()
 
-    override suspend fun login(email: String, password: String): AuthTokens? =
+    override suspend fun login(email: String, password: String): Authentication {
         try {
-            yummyExpressApiService.login(LoginRequest(email, password))?.toAuthTokens()
-        } catch (e: Exception) {
-            null
+            val response = yummyExpressApiService.login(LoginRequest(email, password))
+            if (response.isSuccessful) {
+                return Authentication(tokens = response.body()?.toAuthTokens())
+            }
+            val message = when (response.code()) {
+                HttpURLConnection.HTTP_UNAUTHORIZED -> {
+                    "Invalid authentication credentials"
+                }
+                HttpURLConnection.HTTP_FORBIDDEN -> {
+                    "Please, activate your account, we send message to your email"
+                }
+                else -> error("Unknown status: $response")
+            }
+            return Authentication(message = message)
+        } catch (e: HttpException) {
+            return Authentication(message = "Network error")
         }
+    }
 
     override suspend fun refresh(refreshToken: String): AccessToken =
         yummyExpressApiService.refresh(refreshToken).toAccessToken()

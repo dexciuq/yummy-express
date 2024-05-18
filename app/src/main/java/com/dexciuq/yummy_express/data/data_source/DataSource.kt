@@ -2,6 +2,7 @@ package com.dexciuq.yummy_express.data.data_source
 
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.AuthTokens
+import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Filter
@@ -29,7 +30,7 @@ interface DataSource {
         suspend fun getHomeCategoryList(): List<Category>
         suspend fun getProductsByFilter(filter: Filter): List<Product>
         suspend fun getProductById(id: Long): Product
-        suspend fun login(email: String, password: String): AuthTokens?
+        suspend fun login(email: String, password: String): Authentication
         suspend fun refresh(refreshToken: String): AccessToken
         suspend fun logout(accessToken: String)
         suspend fun getProfileInfo(accessToken: String): User

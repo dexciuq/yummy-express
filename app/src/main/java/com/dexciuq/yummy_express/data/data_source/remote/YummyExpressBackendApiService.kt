@@ -1,19 +1,18 @@
 package com.dexciuq.yummy_express.data.data_source.remote
 
-import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
+import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrdersResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductsResponse
-import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
-import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
-import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
+import retrofit2.Response
 import retrofit2.http.Body
-import retrofit2.http.FieldMap
-import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
@@ -33,7 +32,7 @@ interface YummyExpressBackendApiService {
     @GET("/v1/products")
     suspend fun getAllProducts(): ProductsResponse
 
-//    @FormUrlEncoded
+    //    @FormUrlEncoded
     @GET("/v1/products")
     suspend fun getAllProducts(
         @Query("name") name: String?,
@@ -52,7 +51,7 @@ interface YummyExpressBackendApiService {
     @POST("/v1/auth/authenticate")
     suspend fun login(
         @Body loginRequest: LoginRequest
-    ): LoginResponse?
+    ): Response<LoginResponse>
 
     @GET("/v1/auth/logout")
     suspend fun logout(

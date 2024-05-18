@@ -77,7 +77,7 @@ class VoiceSearchBottomSheetFragment : BottomSheetDialogFragment() {
             override fun onEvent(eventType: Int, params: Bundle?) {}
         })
 
-        binding.searchVoiceBtn.setOnTouchListener { v, event ->
+        binding.searchVoiceBtn.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     speechRecognizer.stopListening()

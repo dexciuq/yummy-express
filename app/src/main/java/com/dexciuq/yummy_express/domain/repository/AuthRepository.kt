@@ -2,6 +2,7 @@ package com.dexciuq.yummy_express.domain.repository
 
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.AuthTokens
+import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.User
 
 interface AuthRepository {
@@ -11,7 +12,7 @@ interface AuthRepository {
     suspend fun setRefreshToken(refreshToken: String)
     suspend fun getAuthSkip(): Boolean
     suspend fun setAuthSkip(skip: Boolean)
-    suspend fun login(email: String, password: String): AuthTokens?
+    suspend fun login(email: String, password: String): Authentication
     suspend fun refresh(refreshToken: String): AccessToken
     suspend fun logout(accessToken: String)
     suspend fun getProfileInfo(accessToken: String): User

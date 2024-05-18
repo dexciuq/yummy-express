@@ -37,14 +37,14 @@ class LoginFragment : Fragment() {
 
     private fun setupObservers() {
         viewModel.login.observe(viewLifecycleOwner) {
-            if (it) {
-                navigateToMainActivity()
-            } else {
+            if (it.tokens == null) {
                 Snackbar.make(
                     binding.root,
-                    getString(R.string.invalid_credentials_please_try_again),
+                    it.message.toString(),
                     Snackbar.LENGTH_SHORT
                 ).show()
+            } else {
+                navigateToMainActivity()
             }
         }
     }
