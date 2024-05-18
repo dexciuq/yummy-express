@@ -23,8 +23,8 @@
         android:label="fragment_product_list"
         tools:layout="@layout/fragment_product_list" >
         <argument
-            android:name="category"
-            app:argType="com.dexciuq.yummy_express.domain.model.Category" />
+            android:name="filter"
+            app:argType="com.dexciuq.yummy_express.domain.model.Filter" />
         <action
             android:id="@+id/action_productListFragment_to_productDetailFragment"
             app:destination="@id/productDetailFragment" />

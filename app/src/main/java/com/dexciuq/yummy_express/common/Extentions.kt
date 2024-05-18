@@ -122,7 +122,7 @@ inline fun View.setAttrs(
         }
 }
 
-fun Long.toMoney() = (this.toDouble() / 100).toString() + " ₸"
+fun Long.toMoney() = "${this / 100}.${this % 100}" + " ₸"
 
 fun CompoundButton.setIconPaddingLeft(left: Int) {
     val compoundButtonDrawable = CompoundButtonCompat.getButtonDrawable(this)

@@ -64,23 +64,33 @@
             app:iconTint="@color/primary_dark"
             app:text="About company" />
 
+
         <com.dexciuq.yummy_express.common.view.SettingsItemView
-            android:id="@+id/language"
+            android:id="@+id/contact"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:actionType="ARROW_RIGHT"
-            app:icon="@drawable/ic_language"
+            app:icon="@drawable/ic_contact"
             app:iconTint="@color/primary_dark"
-            app:text="@string/language" />
+            app:text="Contact us" />
 
-        <com.dexciuq.yummy_express.common.view.SettingsItemView
-            android:id="@+id/dark_theme"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:actionType="SWITCH"
-            app:icon="@drawable/ic_dark_theme"
-            app:iconTint="@color/primary_dark"
-            app:text="@string/dark_theme" />
+<!--        <com.dexciuq.yummy_express.common.view.SettingsItemView-->
+<!--            android:id="@+id/language"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:actionType="ARROW_RIGHT"-->
+<!--            app:icon="@drawable/ic_language"-->
+<!--            app:iconTint="@color/primary_dark"-->
+<!--            app:text="@string/language" />-->
+
+<!--        <com.dexciuq.yummy_express.common.view.SettingsItemView-->
+<!--            android:id="@+id/dark_theme"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            app:actionType="SWITCH"-->
+<!--            app:icon="@drawable/ic_dark_theme"-->
+<!--            app:iconTint="@color/primary_dark"-->
+<!--            app:text="@string/dark_theme" />-->
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/sign_out"

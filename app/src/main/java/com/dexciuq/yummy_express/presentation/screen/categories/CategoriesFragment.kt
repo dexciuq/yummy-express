@@ -13,6 +13,7 @@ import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentCategoriesBinding
+import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -43,7 +44,9 @@ class CategoriesFragment : Fragment() {
             imageLoader = imageLoader,
             onItemClick = {
                 findNavController().navigate(
-                    CategoriesFragmentDirections.actionCategoriesFragmentToProductListFragment(it)
+                    CategoriesFragmentDirections.actionCategoriesFragmentToProductListFragment(
+                        filter = Filter(category = it)
+                    )
                 )
             }
         )

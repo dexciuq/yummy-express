@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.use_case.auth.LoginUseCase
 import com.dexciuq.yummy_express.domain.use_case.auth.SetAccessTokenUseCase
 import com.dexciuq.yummy_express.domain.use_case.auth.SetAuthSkipUseCase
@@ -20,18 +21,17 @@ class LoginViewModel @Inject constructor(
     private val setAuthSkipUseCase: SetAuthSkipUseCase,
 ) : ViewModel() {
 
-    private val _login = MutableLiveData<Boolean>()
-    val login: LiveData<Boolean> = _login
+    private val _login = MutableLiveData<Authentication>()
+    val login: LiveData<Authentication> = _login
 
     fun login(email: String, password: String) = viewModelScope.launch {
-        val authTokens = loginUseCase(email, password)
-        if (authTokens == null) {
-            _login.postValue(false)
-            return@launch
+        val auth = loginUseCase(email, password)
+        _login.postValue(auth)
+
+        if (auth.tokens != null) {
+            setAuthSkipUseCase(true)
+            setAccessTokenUseCase(auth.tokens.accessToken)
+            setRefreshTokenUseCase(auth.tokens.refreshToken)
         }
-        setAuthSkipUseCase(true)
-        setAccessTokenUseCase(authTokens.accessToken)
-        setRefreshTokenUseCase(authTokens.refreshToken)
-        _login.postValue(true)
     }
 }

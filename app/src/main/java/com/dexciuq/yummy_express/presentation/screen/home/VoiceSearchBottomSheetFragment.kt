@@ -70,14 +70,14 @@ class VoiceSearchBottomSheetFragment : BottomSheetDialogFragment() {
                 onRecorded(data?.first().orEmpty())
                 Handler(Looper.myLooper()!!).postDelayed({
                     dismiss()
-                }, 500)
+                }, 300)
             }
 
             override fun onPartialResults(partialResults: Bundle?) {}
             override fun onEvent(eventType: Int, params: Bundle?) {}
         })
 
-        binding.searchVoiceBtn.setOnTouchListener { v, event ->
+        binding.searchVoiceBtn.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_UP -> {
                     speechRecognizer.stopListening()

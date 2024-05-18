@@ -28,7 +28,7 @@ class MyOrdersAdapter(
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(order: Order) {
-            binding.orderName.text = itemView.context.getString(R.string.order) + "# ${order.id}"
+            binding.orderName.text = itemView.context.getString(R.string.order) + " #${order.id}"
             binding.orderPlacedDate.text = itemView.context.getString(
                 R.string.order_total,
                 order.total.toMoney()

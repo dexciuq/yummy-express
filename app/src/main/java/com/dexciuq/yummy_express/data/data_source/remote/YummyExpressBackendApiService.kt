@@ -1,16 +1,17 @@
 package com.dexciuq.yummy_express.data.data_source.remote
 
-import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
+import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrdersResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductsResponse
-import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
-import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
-import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -31,9 +32,15 @@ interface YummyExpressBackendApiService {
     @GET("/v1/products")
     suspend fun getAllProducts(): ProductsResponse
 
+    //    @FormUrlEncoded
     @GET("/v1/products")
     suspend fun getAllProducts(
-        @Query("category") category: Long,
+        @Query("name") name: String?,
+        @Query("category") category: Long?,
+        @Query("brand") brand: String?,
+        @Query("page") page: Int?,
+        @Query("page_size") pageSize: Int?,
+        @Query("sort") sort: String?
     ): ProductsResponse
 
     @POST("/v1/auth/register")
@@ -44,7 +51,7 @@ interface YummyExpressBackendApiService {
     @POST("/v1/auth/authenticate")
     suspend fun login(
         @Body loginRequest: LoginRequest
-    ): LoginResponse?
+    ): Response<LoginResponse>
 
     @GET("/v1/auth/logout")
     suspend fun logout(

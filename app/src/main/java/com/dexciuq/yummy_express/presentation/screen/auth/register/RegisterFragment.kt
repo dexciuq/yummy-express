@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.databinding.FragmentRegisterBinding
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,6 +34,12 @@ class RegisterFragment : Fragment() {
 
     private fun setupListeners() {
         viewModel.registered.observe(viewLifecycleOwner) {
+            Snackbar.make(
+                binding.root,
+                "We send you message to your email, activate your account to authenticate",
+                Snackbar.LENGTH_LONG
+            ).show()
+
             if (it) {
                 findNavController().navigateUp()
             }

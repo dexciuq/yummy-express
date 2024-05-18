@@ -22,6 +22,7 @@ import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentHomeBinding
 import com.dexciuq.yummy_express.domain.model.Banner
+import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
@@ -76,7 +77,11 @@ class HomeFragment : Fragment() {
         binding.searchView.setTextSize(14f)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                // Handle search submission
+                findNavController().navigate(
+                    HomeFragmentDirections.actionHomeFragmentToProductListFragment(
+                        filter = Filter(name = query)
+                    )
+                )
                 return true
             }
 
@@ -111,7 +116,9 @@ class HomeFragment : Fragment() {
 
     private fun setupCategoriesSection() {
         categoriesAdapter = HomeCategoriesAdapter(imageLoader) {
-            val action = HomeFragmentDirections.actionHomeFragmentToProductListFragment(it)
+            val action = HomeFragmentDirections.actionHomeFragmentToProductListFragment(
+                filter = Filter(category = it)
+            )
             findNavController().navigate(action)
         }
         binding.categoriesRv.adapter = categoriesAdapter
@@ -123,11 +130,11 @@ class HomeFragment : Fragment() {
     private fun setupFeaturedProductsSection() {
         featuredProductsAdapter = ProductListAdapter(
             imageLoader = imageLoader,
-            onItemClick = { product, extras ->
+            onItemClick = { product ->
                 findNavController().navigate(
                     HomeFragmentDirections.actionHomeFragmentToProductDetailFragment(
                         product.id
-                    ), extras
+                    )
                 )
             },
             onAddToCart = viewModel::addProductToCart,
@@ -192,11 +199,6 @@ class HomeFragment : Fragment() {
                         binding.featuredProductsRv.show()
                         binding.featuredProductsLoading.stopShimmer()
                         featuredProductsAdapter.submitList(resource.data)
-
-                        postponeEnterTransition()
-                        binding.featuredProductsRv.doOnPreDraw {
-                            startPostponedEnterTransition()
-                        }
                     }
 
                     is Resource.Error -> {

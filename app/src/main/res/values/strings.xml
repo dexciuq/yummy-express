@@ -17,8 +17,8 @@
     <string name="your_cart_is_empty">Your cart is empty !</string>
     <string name="empty_cart_description">It looks like you haven\'t added a single product to the list</string>
     <string name="add_to_cart">Add to cart</string>
-    <string name="category_is_empty">Category is empty</string>
-    <string name="empty_category_list">It looks like this category doesn\'t have a single product</string>
+    <string name="category_is_empty">Response is empty</string>
+    <string name="empty_list_description">It looks like this query doesn\'t have a single product</string>
     <string name="detail_category">Category: %s</string>
     <string name="detail_brand">Brand: %s</string>
     <string name="detail_country">Country: %s</string>
@@ -77,4 +77,9 @@
     <string name="about_company_text"><b>Yummy-Express</b> aims to provide a convenient and efficient solution for customers who prefer the ease of ordering groceries online and having them delivered directly to their doorstep. With time becoming increasingly valuable in the modern age, <b>Yummy-Express</b> is dedicated to bridging the gap between hectic lifestyles and the need for high-quality, fresh groceries.</string>
     <string name="listening">Listening...</string>
     <string name="scanning">Scanning...</string>
+    <string name="by_default">By default</string>
+    <string name="price_in_descending_order">Price in descending order</string>
+    <string name="price_in_ascending_order">Price in ascending order</string>
+    <string name="sort_by">Sort by</string>
+    <string name="filter">Filter</string>
 </resources>
