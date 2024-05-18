@@ -91,7 +91,9 @@ class ProductListFragment : Fragment() {
     }
 
     private fun collectData() {
-        makeSearch(args.filter)
+        if (viewModel.products.value !is Resource.Success) {
+            makeSearch(args.filter)
+        }
 
         lifecycleScope.launch {
             viewModel.products.collect { resource ->
