@@ -50,7 +50,7 @@ interface YummyExpressBackendApiService {
     @POST("/v1/auth/register")
     suspend fun register(
         @Body registerRequest: RegisterRequest
-    )
+    ) : Response<UserResponse>
 
     @POST("/v1/auth/authenticate")
     suspend fun login(

@@ -96,7 +96,7 @@ class CartFragment : Fragment() {
                         binding.checkoutContainer.hide()
                         binding.cartProductListLoading.show()
                         binding.cartProductListLoading.startShimmer()
-                        delay(500)
+                        delay(300)
                     }
 
                     is Resource.Success -> {

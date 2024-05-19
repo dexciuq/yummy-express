@@ -112,7 +112,6 @@ class UPCScannerFragment : Fragment() {
         lifecycleScope.launch {
             viewModel.product.collect { resource ->
                 if (resource == null) {
-                    binding.upcText.hide()
                     return@collect
                 }
                 when (resource) {

@@ -1,7 +1,6 @@
 package com.dexciuq.yummy_express.domain.repository
 
 import com.dexciuq.yummy_express.domain.model.AccessToken
-import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.User
 
@@ -22,5 +21,5 @@ interface AuthRepository {
         email: String,
         phoneNumber: String,
         password: String
-    )
+    ): Boolean
 }

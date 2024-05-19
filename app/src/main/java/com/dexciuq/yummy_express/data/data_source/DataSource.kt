@@ -40,7 +40,7 @@ interface DataSource {
             email: String,
             phoneNumber: String,
             password: String
-        )
+        ): Boolean
 
         suspend fun makeOrder(order: Order)
         suspend fun getOrderById(id: Long): Order

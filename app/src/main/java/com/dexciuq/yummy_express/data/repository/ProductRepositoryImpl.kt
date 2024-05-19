@@ -40,18 +40,14 @@ class ProductRepositoryImpl @Inject constructor(
                 val remoteProducts = remote.getProductsByFilter(filter)
                 val cartProductsFlow = local.getAllProductsFromCart()
 
-                val total = linkedMapOf<Long, Product>()
-                remoteProducts.forEach {
-                    total[it.id] = it
-                }
-
                 cartProductsFlow.collect { cartProducts ->
-                    cartProducts.forEach {
-                        if (total.containsKey(it.id)) {
-                            total[it.id]?.amount = it.amount
-                        }
+                    val mergedProducts = remoteProducts.map { remoteProduct ->
+                        val cartProduct = cartProducts.find { it.id == remoteProduct.id }
+                        remoteProduct.amount = cartProduct?.amount
+                        remoteProduct
                     }
-                    var final = total.values.toList()
+
+                    var final = mergedProducts
                     final = when (filter.sort) {
                         "price" -> final.sortedBy { it.price }
                         "-price" -> final.sortedByDescending { it.price }
