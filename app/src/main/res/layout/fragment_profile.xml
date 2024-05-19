@@ -56,6 +56,15 @@
             app:text="@string/my_orders" />
 
         <com.dexciuq.yummy_express.common.view.SettingsItemView
+            android:id="@+id/upc_scanner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:actionType="ARROW_RIGHT"
+            app:icon="@drawable/ic_camera"
+            app:iconTint="@color/primary_dark"
+            app:text="UPC Scanner" />
+
+        <com.dexciuq.yummy_express.common.view.SettingsItemView
             android:id="@+id/company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

@@ -34,14 +34,19 @@ class RegisterFragment : Fragment() {
 
     private fun setupListeners() {
         viewModel.registered.observe(viewLifecycleOwner) {
-            Snackbar.make(
-                binding.root,
-                "We send you message to your email, activate your account to authenticate",
-                Snackbar.LENGTH_LONG
-            ).show()
-
             if (it) {
+                Snackbar.make(
+                    binding.root,
+                    "We send you message to your email, activate your account to authenticate",
+                    Snackbar.LENGTH_LONG
+                ).show()
                 findNavController().navigateUp()
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    "Account with this email is exists, please sign in",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
 

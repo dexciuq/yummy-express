@@ -45,8 +45,11 @@ class RemoteDataSource @Inject constructor(
     override suspend fun getProductById(id: Long): Product =
         yummyExpressApiService.getProductById(id).product.fromDtoToProduct()
 
+    override suspend fun getProductByUPC(upc: String): Product =
+        yummyExpressApiService.getProductByUPC(upc).product.fromDtoToProduct()
+
     override suspend fun getFeaturedProductList(): List<Product> =
-        yummyExpressApiService.getAllProducts().products?.fromDtoToProduct()?.take(10).orEmpty()
+        yummyExpressApiService.getAllProducts().products?.fromDtoToProduct()?.take(8).orEmpty()
 
     override suspend fun login(email: String, password: String): Authentication {
         try {
@@ -78,9 +81,12 @@ class RemoteDataSource @Inject constructor(
         email: String,
         phoneNumber: String,
         password: String
-    ) = yummyExpressApiService.register(
-        RegisterRequest(name, surname, email, phoneNumber, password)
-    )
+    ): Boolean {
+        val response = yummyExpressApiService.register(
+            RegisterRequest(name, surname, email, phoneNumber, password)
+        )
+        return response.isSuccessful
+    }
 
     override suspend fun makeOrder(order: Order) =
         yummyExpressApiService.makeOrder(

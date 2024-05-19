@@ -1,7 +1,6 @@
 package com.dexciuq.yummy_express.data.data_source
 
 import com.dexciuq.yummy_express.domain.model.AccessToken
-import com.dexciuq.yummy_express.domain.model.AuthTokens
 import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.Banner
 import com.dexciuq.yummy_express.domain.model.Category
@@ -30,6 +29,7 @@ interface DataSource {
         suspend fun getHomeCategoryList(): List<Category>
         suspend fun getProductsByFilter(filter: Filter): List<Product>
         suspend fun getProductById(id: Long): Product
+        suspend fun getProductByUPC(upc: String): Product
         suspend fun login(email: String, password: String): Authentication
         suspend fun refresh(refreshToken: String): AccessToken
         suspend fun logout(accessToken: String)
@@ -40,7 +40,7 @@ interface DataSource {
             email: String,
             phoneNumber: String,
             password: String
-        )
+        ): Boolean
 
         suspend fun makeOrder(order: Order)
         suspend fun getOrderById(id: Long): Order

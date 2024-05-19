@@ -6,10 +6,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.SearchView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.doOnPreDraw
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -27,6 +26,7 @@ import com.dexciuq.yummy_express.presentation.activity.main.MainActivity
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import com.dexciuq.yummy_express.presentation.screen.home.banner.BannerViewPagerAdapter
 import com.dexciuq.yummy_express.presentation.screen.product_list.ProductListAdapter
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -45,6 +45,20 @@ class HomeFragment : Fragment() {
 
     @Inject
     lateinit var imageLoader: ImageLoader
+
+    private val audioLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestPermission()
+    ) { isGranted ->
+        if (isGranted) {
+            launchVoiceSearchBottomSheetFragment()
+        } else {
+            Snackbar.make(
+                binding.root,
+                "To use this feature need to access your microphone",
+                Snackbar.LENGTH_SHORT
+            ).show()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -73,7 +87,7 @@ class HomeFragment : Fragment() {
                 requestAudioPermission()
             }
         }
-        
+
         binding.searchView.setTextSize(14f)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -93,25 +107,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun requestAudioPermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.RECORD_AUDIO),
-            REQUEST_AUDIO_PERMISSION
-        )
-    }
-
-    @Deprecated("Deprecated in Java")
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_AUDIO_PERMISSION && grantResults.isNotEmpty()) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                launchVoiceSearchBottomSheetFragment()
-            }
-        }
+        audioLauncher.launch(Manifest.permission.RECORD_AUDIO)
     }
 
     private fun setupCategoriesSection() {
@@ -121,6 +117,7 @@ class HomeFragment : Fragment() {
             )
             findNavController().navigate(action)
         }
+
         binding.categoriesRv.adapter = categoriesAdapter
         binding.categoriesAll.setOnClickListener {
             onNavigationItemChanger.navigate(R.id.nav_graph_categories)
@@ -219,7 +216,8 @@ class HomeFragment : Fragment() {
     }
 
     private fun launchVoiceSearchBottomSheetFragment() {
-        val voiceSearchBottomSheetFragment = VoiceSearchBottomSheetFragment.newInstance(::setTextToSearchView)
+        val voiceSearchBottomSheetFragment =
+            VoiceSearchBottomSheetFragment.newInstance(::setTextToSearchView)
         voiceSearchBottomSheetFragment.show(
             parentFragmentManager,
             voiceSearchBottomSheetFragment.tag
@@ -228,9 +226,5 @@ class HomeFragment : Fragment() {
 
     private fun setTextToSearchView(input: String) {
         binding.searchView.setQuery(input, true)
-    }
-
-    companion object {
-        private const val REQUEST_AUDIO_PERMISSION = 1002
     }
 }

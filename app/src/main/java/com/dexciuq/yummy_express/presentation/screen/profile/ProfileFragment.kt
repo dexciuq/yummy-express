@@ -85,6 +85,12 @@ class ProfileFragment : Fragment() {
             )
         }
 
+        binding.upcScanner.setOnClickListener {
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToUPCScannerFragment()
+            )
+        }
+
         binding.contact.setOnClickListener {
             val callIntent = Intent(Intent.ACTION_DIAL, Uri.parse("tel:87474938382"))
             startActivity(callIntent)

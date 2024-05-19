@@ -43,10 +43,8 @@ class MainActivity : AppCompatActivity(), OnNavigationItemChanger {
 
         navHostFragment.navController.addOnDestinationChangedListener { _, destination, _ ->
             when (destination.id) {
-                R.id.productListFragment,
-                R.id.productDetailFragment,
                 R.id.addressFragment,
-                R.id.checkoutFragment -> {
+                R.id.checkoutFragment, -> {
                     binding.bottomNavigationView.hideWithAnimation(binding.navHostFragmentContainer)
                 }
 

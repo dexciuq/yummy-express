@@ -7,7 +7,6 @@ import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.repository.ProductRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import timber.log.Timber
 import javax.inject.Inject
 
 class ProductRepositoryImpl @Inject constructor(
@@ -41,18 +40,14 @@ class ProductRepositoryImpl @Inject constructor(
                 val remoteProducts = remote.getProductsByFilter(filter)
                 val cartProductsFlow = local.getAllProductsFromCart()
 
-                val total = linkedMapOf<Long, Product>()
-                remoteProducts.forEach {
-                    total[it.id] = it
-                }
-
                 cartProductsFlow.collect { cartProducts ->
-                    cartProducts.forEach {
-                        if (total.containsKey(it.id)) {
-                            total[it.id]?.amount = it.amount
-                        }
+                    val mergedProducts = remoteProducts.map { remoteProduct ->
+                        val cartProduct = cartProducts.find { it.id == remoteProduct.id }
+                        remoteProduct.amount = cartProduct?.amount
+                        remoteProduct
                     }
-                    var final = total.values.toList()
+
+                    var final = mergedProducts
                     final = when (filter.sort) {
                         "price" -> final.sortedBy { it.price }
                         "-price" -> final.sortedByDescending { it.price }
@@ -69,6 +64,16 @@ class ProductRepositoryImpl @Inject constructor(
         emit(Resource.Loading)
         try {
             val response = remote.getProductById(id)
+            emit(Resource.Success(response))
+        } catch (t: Throwable) {
+            emit(Resource.Error(t))
+        }
+    }
+
+    override suspend fun getProductByUPC(upc: String): Flow<Resource<Product>> = flow {
+        emit(Resource.Loading)
+        try {
+            val response = remote.getProductByUPC(upc)
             emit(Resource.Success(response))
         } catch (t: Throwable) {
             emit(Resource.Error(t))
