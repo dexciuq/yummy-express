@@ -64,6 +64,9 @@ class RemoteDataSource @Inject constructor(
                 HttpURLConnection.HTTP_FORBIDDEN -> {
                     "Please, activate your account, we send message to your email"
                 }
+                422 -> {
+                    "Please, enter valid credentials"
+                }
                 else -> error("Unknown status: $response")
             }
             return Authentication(message = message)

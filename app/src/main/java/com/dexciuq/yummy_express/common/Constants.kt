@@ -9,9 +9,8 @@ object Constants {
         const val AUTH_SKIP = "auth_skip"
     }
 
-    object API {
-//        const val BASE_URL = "http://10.0.2.2:8080/"
-        const val BASE_URL = "http://192.168.0.13:8080/"
+    object API {    
+        const val BASE_URL = "http://46.101.154.239:8080/"
     }
 
     object DB {
