@@ -4,7 +4,7 @@
     <style name="Base.Theme.YummyExpress" parent="Theme.Material3.DayNight.NoActionBar">
         <item name="colorPrimary">@color/primary</item>
         <item name="colorSecondary">@color/primary_dark</item>
-
+        <item name="android:windowBackground">@color/background</item>
         <item name="android:textColor">@color/text</item>
         <item name="fontFamily">@font/manrope_font_family</item>
         <item name="android:statusBarColor">@color/background</item>

@@ -29,11 +29,11 @@ class MyOrdersAdapter(
 
         fun bind(order: Order) {
             binding.orderName.text = itemView.context.getString(R.string.order) + " #${order.id}"
-            binding.orderPlacedDate.text = itemView.context.getString(
+            binding.total.text = itemView.context.getString(
                 R.string.order_total,
                 order.total.toMoney()
             )
-            binding.orderItemCount.text = "Delivery Address: ${order.address}"
+            binding.address.text = order.address
             binding.root.setOnClickListener { onItemClick(order) }
         }
     }

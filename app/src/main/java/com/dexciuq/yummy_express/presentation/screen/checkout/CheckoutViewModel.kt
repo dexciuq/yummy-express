@@ -25,7 +25,7 @@ class CheckoutViewModel @Inject constructor(
         viewModelScope.launch {
             val order = Order(
                 total = total,
-                address = address.street,
+                address = address.toString(),
                 productList = productList,
             )
             makeOrderUseCase(order)

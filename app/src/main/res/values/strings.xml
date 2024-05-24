@@ -26,7 +26,6 @@
     <string name="subtotal">Subtotal</string>
     <string name="shipping_charges">Shipping charges</string>
     <string name="total">Total</string>
-    <string name="yandex_map_api_key" translatable="false">01b95746-5d83-4f29-8f51-b1425365f512</string>
     <string name="delivery_address">Delivery Address</string>
     <string name="street_house_number">Street, house number</string>
     <string name="apartment">Apartment</string>
@@ -82,4 +81,5 @@
     <string name="price_in_ascending_order">Price in ascending order</string>
     <string name="sort_by">Sort by</string>
     <string name="filter">Filter</string>
+    <string name="google_map_api_key">AIzaSyAAb0a4m7SIy9cK4Iw49e0NYo-aTZ2wkvc</string>
 </resources>

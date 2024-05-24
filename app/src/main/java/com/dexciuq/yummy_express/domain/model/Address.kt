@@ -9,4 +9,8 @@ data class Address(
     val apartment: Int,
     val entrance: Int,
     val floor: Int,
-) : Parcelable
+) : Parcelable {
+    override fun toString(): String {
+        return "Address: $street. Apartment: $apartment. Entrance: $entrance. Floor: $floor"
+    }
+}
