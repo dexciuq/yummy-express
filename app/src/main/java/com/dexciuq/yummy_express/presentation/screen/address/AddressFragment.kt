@@ -1,54 +1,95 @@
 package com.dexciuq.yummy_express.presentation.screen.address
 
 import android.Manifest
-import android.content.Context
+import android.content.pm.PackageManager
 import android.content.res.Configuration
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentAddressBinding
-import com.yandex.mapkit.Animation
-import com.yandex.mapkit.MapKitFactory
-import com.yandex.mapkit.ScreenPoint
-import com.yandex.mapkit.geometry.Point
-import com.yandex.mapkit.map.CameraPosition
-import com.yandex.runtime.image.ImageProvider
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MapStyleOptions
+import com.google.android.gms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.Locale
 
 
 @AndroidEntryPoint
-class AddressFragment : Fragment() {
+class AddressFragment : Fragment(), OnMapReadyCallback {
 
     private val binding by lazy { FragmentAddressBinding.inflate(layoutInflater) }
-    private val mapKit by lazy { MapKitFactory.getInstance() }
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        MapKitFactory.initialize(context)
-    }
+    private lateinit var map: GoogleMap
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
-    override fun onStart() {
-        super.onStart()
-        mapKit.onStart()
-        binding.mapView.onStart()
+    private val locationPermissionRequest = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        when {
+            permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false)
+                    && permissions.getOrDefault(
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                false
+            ) -> {
+                getCurrentLocation()
+            }
+
+            else -> {
+                toast(getString(R.string.for_this_feature_we_need_to_access_your_location))
+            }
+        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        requestLocationPermission()
-        setupToolbar()
-        setupFloatingActionButton()
-        setNightModeEnabled()
-        moveToStartingPoint()
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupMap()
+        setupToolbar()
+        setupFloatingActionButtons()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
+            Configuration.UI_MODE_NIGHT_YES -> {
+                googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                        requireContext(),
+                        R.raw.night_map_style
+                    )
+                )
+            }
+        }
+        map = googleMap
+        moveToStartingPoint()
+    }
+
+    private fun setupMap() {
+        val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
+        mapFragment.getMapAsync(this)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
     }
 
     private fun setupToolbar() {
@@ -57,54 +98,24 @@ class AddressFragment : Fragment() {
         }
     }
 
-    private fun setupFloatingActionButton() {
+    private fun setupFloatingActionButtons() {
+        binding.currLocation.setOnClickListener {
+            getCurrentLocation()
+        }
+
         binding.fab.setOnClickListener {
             showAddressBottomSheetFragment()
         }
     }
 
     private fun moveToStartingPoint() {
-        val astana = Point(51.08935, 71.416)
-        val map = binding.mapView.mapWindow.map
-        map.move(
-            CameraPosition(astana, 13f, 0f, 0f),
-            Animation(Animation.Type.SMOOTH, 2f),
-            null
-        )
+        val astana = LatLng(51.08935, 71.416)
+        val cameraUpdate = CameraUpdateFactory.newLatLngZoom(astana, 14f)
+        map.animateCamera(cameraUpdate)
     }
 
-    private fun setNightModeEnabled() {
-        when (context?.resources?.configuration?.uiMode?.and(Configuration.UI_MODE_NIGHT_MASK)) {
-            Configuration.UI_MODE_NIGHT_YES -> {
-                binding.mapView.mapWindow.map.isNightModeEnabled = true
-            }
-
-            Configuration.UI_MODE_NIGHT_NO -> {
-                binding.mapView.mapWindow.map.isNightModeEnabled = false
-            }
-        }
-    }
 
     private fun requestLocationPermission() {
-        val locationPermissionRequest = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            when {
-                permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                    // Precise location access granted.
-                }
-
-                permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                    // Only approximate location access granted.
-                }
-
-                else -> {
-                    // No location access granted.
-                    toast(getString(R.string.for_this_feature_we_need_to_access_your_location))
-                }
-            }
-        }
-
         locationPermissionRequest.launch(
             arrayOf(
                 Manifest.permission.ACCESS_FINE_LOCATION,
@@ -113,24 +124,57 @@ class AddressFragment : Fragment() {
         )
     }
 
-    private fun setupPlacemark() {
-        val mapWindow = binding.mapView.mapWindow
-        val centerX = mapWindow.width() / 2f
-        val centerY = mapWindow.height() / 2f
-        val centerPoint = ScreenPoint(centerX, centerY)
+    private fun getCurrentLocation() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED &&
+            ActivityCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_COARSE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            fusedLocationClient.lastLocation
+                .addOnSuccessListener { location: Location? ->
+                    if (location != null) {
+                        val currentLatLng = LatLng(location.latitude, location.longitude)
+                        map.addMarker(
+                            MarkerOptions()
+                                .position(currentLatLng)
+                                .title("Current Location")
+                        )
+                        map.animateCamera(
+                            CameraUpdateFactory.newLatLngZoom(currentLatLng, 15f),
+                            300, null
+                        )
 
-        val worldPoint = mapWindow.screenToWorld(centerPoint) ?: error("unknown point")
-
-        val imageProvider = ImageProvider.fromResource(requireContext(), R.drawable.ic_pin)
-        val placemarkObject = mapWindow.map.mapObjects.addPlacemark {
-            it.geometry = worldPoint
-            it.setIcon(imageProvider)
+                        val address = getAddressFromLocation(location.latitude, location.longitude)
+                        Handler(Looper.myLooper()!!).postDelayed(
+                            { showAddressBottomSheetFragment(address) }, 300
+                        )
+                    }
+                }
+        } else {
+            requestLocationPermission()
         }
-        placemarkObject.isVisible = true
     }
 
-    private fun showAddressBottomSheetFragment() {
-        val addressBottomSheetFragment = AddressBottomSheetFragment(
+    private fun getAddressFromLocation(lat: Double, lng: Double): String {
+        val geocoder = Geocoder(requireContext(), Locale.getDefault())
+        val addresses = geocoder.getFromLocation(lat, lng, 1)
+        return if (!addresses.isNullOrEmpty()) {
+            val address = addresses[0]
+            val streetName = address.thoroughfare ?: ""
+            val streetNumber = address.subThoroughfare ?: ""
+            return "$streetName, $streetNumber"
+        } else {
+            "Address not found"
+        }
+    }
+
+    private fun showAddressBottomSheetFragment(address: String = "") {
+        val addressBottomSheetFragment = AddressBottomSheetFragment.newInstance(
+            address = address,
             onFieldIsBlankClick = {
                 toast(getString(R.string.all_fields_should_be_filled))
             },
@@ -141,11 +185,5 @@ class AddressFragment : Fragment() {
             }
         )
         addressBottomSheetFragment.show(parentFragmentManager, addressBottomSheetFragment.tag)
-    }
-
-    override fun onStop() {
-        binding.mapView.onStop()
-        mapKit.onStop()
-        super.onStop()
     }
 }

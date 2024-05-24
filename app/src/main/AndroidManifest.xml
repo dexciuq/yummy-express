@@ -30,6 +30,11 @@
         android:theme="@style/Theme.YummyExpress"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_map_api_key" />
+
         <activity
             android:name=".presentation.activity.auth.AuthActivity"
             android:windowSoftInputMode="adjustPan"
