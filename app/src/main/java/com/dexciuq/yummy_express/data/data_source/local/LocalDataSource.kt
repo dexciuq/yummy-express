@@ -26,17 +26,17 @@ class LocalDataSource @Inject constructor(
         OnBoarding(
             image = R.drawable.ic_on_boarding_1,
             title = R.string.buy_grocery,
-            description = R.string.lorem_ipsum,
+            description = R.string.onboarding_description_1,
         ),
         OnBoarding(
             image = R.drawable.ic_on_boarding_2,
             title = R.string.fast_delivery,
-            description = R.string.lorem_ipsum,
+            description = R.string.onboarding_description_2,
         ),
         OnBoarding(
             image = R.drawable.ic_on_boarding_3,
             title = R.string.enjoy_quality_food,
-            description = R.string.lorem_ipsum,
+            description = R.string.onboarding_description_3,
         ),
     )
 

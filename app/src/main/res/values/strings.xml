@@ -82,4 +82,7 @@
     <string name="sort_by">Sort by</string>
     <string name="filter">Filter</string>
     <string name="google_map_api_key">AIzaSyAAb0a4m7SIy9cK4Iw49e0NYo-aTZ2wkvc</string>
+    <string name="onboarding_description_1">Order groceries and essentials directly from your phone.</string>
+    <string name="onboarding_description_2">Get your groceries delivered to your doorstep in minutes.</string>
+    <string name="onboarding_description_3">Enjoy fresh and high-quality food products.</string>
 </resources>
