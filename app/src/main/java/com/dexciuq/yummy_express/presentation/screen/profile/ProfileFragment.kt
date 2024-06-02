@@ -13,6 +13,7 @@ import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentProfileBinding
+import com.dexciuq.yummy_express.domain.model.User
 import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -70,7 +71,9 @@ class ProfileFragment : Fragment() {
 
     private fun setupListeners() {
         binding.aboutMe.setOnClickListener {
-            toast(binding.email.text.toString())
+            findNavController().navigate(
+                ProfileFragmentDirections.actionProfileFragmentToAboutMeFragment()
+            )
         }
 
         binding.company.setOnClickListener {
