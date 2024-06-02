@@ -85,4 +85,7 @@
     <string name="onboarding_description_1">Order groceries and essentials directly from your phone.</string>
     <string name="onboarding_description_2">Get your groceries delivered to your doorstep in minutes.</string>
     <string name="onboarding_description_3">Enjoy fresh and high-quality food products.</string>
+    <string name="here_you_can_see_or_update_your_information">Here you can see you information</string>
+    <string name="account_page">Account Page</string>
+    <string name="update">Update</string>
 </resources>

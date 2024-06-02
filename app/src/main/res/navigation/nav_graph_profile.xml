@@ -19,6 +19,9 @@
         <action
             android:id="@+id/action_profileFragment_to_UPCScannerFragment"
             app:destination="@id/UPCScannerFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutMeFragment"
+            app:destination="@id/aboutMeFragment" />
     </fragment>
     <fragment
         android:id="@+id/myOrdersFragment"
@@ -31,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/aboutCompanyFragment"
-        android:name="com.dexciuq.yummy_express.presentation.screen.profile.company.AboutCompanyFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.profile.about_company.AboutCompanyFragment"
         android:label="fragment_about_company"
         tools:layout="@layout/fragment_about_company" />
     <fragment
@@ -61,4 +64,9 @@
             android:name="id"
             app:argType="long" />
     </fragment>
+    <fragment
+        android:id="@+id/aboutMeFragment"
+        android:name="com.dexciuq.yummy_express.presentation.screen.profile.about_me.AboutMeFragment"
+        android:label="fragment_about_me"
+        tools:layout="@layout/fragment_about_me" />
 </navigation>
