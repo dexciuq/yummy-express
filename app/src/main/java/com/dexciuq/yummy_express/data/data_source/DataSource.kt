@@ -8,6 +8,7 @@ import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.OnBoarding
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
+import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
 import com.dexciuq.yummy_express.domain.model.User
 import kotlinx.coroutines.flow.Flow
 
@@ -41,7 +42,9 @@ interface DataSource {
             phoneNumber: String,
             password: String
         ): Boolean
-
+        suspend fun sendCode(email: String): Boolean
+        suspend fun verifyCode(code: String): Boolean
+        suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean
         suspend fun makeOrder(order: Order)
         suspend fun getOrderById(id: Long): Order
         suspend fun getOrderList(): List<Order>

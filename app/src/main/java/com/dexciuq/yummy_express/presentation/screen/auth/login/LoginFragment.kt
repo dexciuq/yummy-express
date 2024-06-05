@@ -56,6 +56,12 @@ class LoginFragment : Fragment() {
             )
         }
 
+        binding.forgotPassword.setOnClickListener {
+            findNavController().navigate(
+                LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment()
+            )
+        }
+
         binding.skip.setOnClickListener {
             val intent = Intent(requireActivity(), MainActivity::class.java)
             startActivity(intent)

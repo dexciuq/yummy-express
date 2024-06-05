@@ -2,15 +2,20 @@ package com.dexciuq.yummy_express.data.data_source.remote
 
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.MessageResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.RefreshResponse
 import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.ResetCodeRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.ResetPasswordRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.UserResponse
+import com.dexciuq.yummy_express.data.model.remote.auth.VerifyCodeRequest
 import com.dexciuq.yummy_express.data.model.remote.category.CategoriesResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderResponse
 import com.dexciuq.yummy_express.data.model.remote.order.OrdersResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductResponse
 import com.dexciuq.yummy_express.data.model.remote.product.ProductsResponse
+import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -87,4 +92,19 @@ interface YummyExpressBackendApiService {
     suspend fun getOrders(
         @Header("Authorization") accessToken: String,
     ): OrdersResponse
+
+    @POST("/v1/request-password-reset")
+    suspend fun sendResetCode(
+        @Body resetCodeRequest: ResetCodeRequest
+    ) : Response<MessageResponse>
+
+    @POST("/v1/verify-reset-code")
+    suspend fun verifyResetCode(
+        @Body verifyCodeRequest: VerifyCodeRequest
+    ) : Response<MessageResponse>
+
+    @POST("/v1/reset-password")
+    suspend fun resetPassword(
+        @Body resetPasswordRequest: ResetPasswordRequest
+    ) : Response<MessageResponse>
 }

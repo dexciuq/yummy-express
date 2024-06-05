@@ -88,4 +88,17 @@
     <string name="here_you_can_see_or_update_your_information">Here you can see you information</string>
     <string name="account_page">Account Page</string>
     <string name="update">Update</string>
+    <string name="forgot_you_password">Forgot your password?</string>
+    <string name="password_recovery">Password Recovery</string>
+    <string name="recover_your_password_via_email">Recover your password via email</string>
+    <string name="send">Send</string>
+    <string name="already_have_a_reset_code">Already have a reset code?</string>
+    <string name="reset_password">Reset password</string>
+    <string name="reset_password_uppercase">Reset Password</string>
+    <string name="fill_following_fields_and_set_your_new_password">Fill following fields and set your new password</string>
+    <string name="new_password">New Password</string>
+    <string name="new_password_again">Confirm New Password</string>
+    <string name="reset_code">Reset Code</string>
+    <string name="go_to_sign_in">Go to sign in</string>
+    <string name="successfully_reset_password">Successfully reset password?</string>
 </resources>

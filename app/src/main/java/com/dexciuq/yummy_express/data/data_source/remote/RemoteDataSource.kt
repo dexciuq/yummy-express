@@ -12,12 +12,16 @@ import com.dexciuq.yummy_express.data.mapper.toUser
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
 import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.ResetCodeRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.ResetPasswordRequest
+import com.dexciuq.yummy_express.data.model.remote.auth.VerifyCodeRequest
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.Category
 import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
+import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
 import retrofit2.HttpException
 import java.net.HttpURLConnection
 import javax.inject.Inject
@@ -88,6 +92,24 @@ class RemoteDataSource @Inject constructor(
         val response = yummyExpressApiService.register(
             RegisterRequest(name, surname, email, phoneNumber, password)
         )
+        return response.isSuccessful
+    }
+
+    override suspend fun sendCode(email: String): Boolean {
+        val response = yummyExpressApiService.sendResetCode(ResetCodeRequest(email))
+        return response.isSuccessful
+    }
+
+    override suspend fun verifyCode(code: String): Boolean {
+        val response = yummyExpressApiService.verifyResetCode(VerifyCodeRequest(code))
+        return response.isSuccessful
+    }
+
+    override suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean {
+        val response = yummyExpressApiService.resetPassword(ResetPasswordRequest(
+            code = resetPasswordConfig.code,
+            newPassword = resetPasswordConfig.password
+        ))
         return response.isSuccessful
     }
 

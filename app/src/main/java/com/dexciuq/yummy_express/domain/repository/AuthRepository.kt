@@ -2,6 +2,7 @@ package com.dexciuq.yummy_express.domain.repository
 
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.Authentication
+import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
 import com.dexciuq.yummy_express.domain.model.User
 
 interface AuthRepository {
@@ -22,4 +23,7 @@ interface AuthRepository {
         phoneNumber: String,
         password: String
     ): Boolean
+    suspend fun sendCode(email: String): Boolean
+    suspend fun verifyCode(code: String): Boolean
+    suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean
 }

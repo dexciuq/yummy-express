@@ -1,6 +1,7 @@
 package com.dexciuq.yummy_express.data.repository
 
 import com.dexciuq.yummy_express.data.data_source.DataSource
+import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
 import com.dexciuq.yummy_express.domain.model.User
 import com.dexciuq.yummy_express.domain.repository.AuthRepository
 import javax.inject.Inject
@@ -46,4 +47,13 @@ class AuthRepositoryImpl @Inject constructor(
         phoneNumber: String,
         password: String
     ) = remote.register(name, surname, email, phoneNumber, password)
+
+    override suspend fun sendCode(email: String): Boolean =
+        remote.sendCode(email)
+
+    override suspend fun verifyCode(code: String): Boolean =
+        remote.verifyCode(code)
+
+    override suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean =
+        remote.resetPassword(resetPasswordConfig)
 }
