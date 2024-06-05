@@ -35,10 +35,16 @@ class ResetPasswordFragment : Fragment() {
     }
 
     private fun setupObservers() {
-        viewModel.isSuccessful.observe(viewLifecycleOwner) {
-            binding.message.text = "New password has been successfully set"
-            binding.message.setTextColor(requireActivity().getColor(R.color.primary_dark))
-            binding.message.show()
+        viewModel.isSuccessful.observe(viewLifecycleOwner) { isSuccessful ->
+            if (isSuccessful) {
+                binding.message.text = "New password has been successfully set"
+                binding.message.setTextColor(requireActivity().getColor(R.color.primary_dark))
+                binding.message.show()
+            } else {
+                binding.message.text = "Please send valid credentials"
+                binding.message.setTextColor(Color.RED)
+                binding.message.show()
+            }
         }
     }
 
