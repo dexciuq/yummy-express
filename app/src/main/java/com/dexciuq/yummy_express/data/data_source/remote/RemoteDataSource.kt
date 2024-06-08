@@ -134,7 +134,9 @@ class RemoteDataSource @Inject constructor(
             sessionManager.getAccessToken()!!, orderRequest = OrderRequest(
                 order.total,
                 order.address,
-                order.productList
+                order.productList.map {
+                    it.copy(price = it.calculatePrice)
+                }
             )
         )
 
