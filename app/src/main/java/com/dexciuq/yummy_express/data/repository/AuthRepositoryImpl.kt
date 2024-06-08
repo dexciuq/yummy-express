@@ -40,6 +40,9 @@ class AuthRepositoryImpl @Inject constructor(
     override suspend fun getProfileInfo(accessToken: String): User =
         remote.getProfileInfo(accessToken)
 
+    override suspend fun updateUserProfile(user: User): User =
+        remote.updateUserProfile(user)
+
     override suspend fun register(
         name: String,
         surname: String,

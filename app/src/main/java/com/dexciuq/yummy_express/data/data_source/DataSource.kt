@@ -48,6 +48,7 @@ interface DataSource {
         suspend fun makeOrder(order: Order)
         suspend fun getOrderById(id: Long): Order
         suspend fun getOrderList(): List<Order>
+        suspend fun updateUserProfile(user: User): User
     }
 
     interface Local {

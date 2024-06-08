@@ -20,6 +20,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.PATCH
 import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -66,6 +67,12 @@ interface YummyExpressBackendApiService {
     suspend fun logout(
         @Header("Authorization") accessToken: String,
     )
+
+    @PATCH("/v1/users/{id}")
+    suspend fun updateUserById(
+        @Path("id") id: Long,
+        @Body registerRequest: RegisterRequest
+    ): UserResponse
 
     @GET("/v1/profile/me")
     suspend fun getProfileInfo(

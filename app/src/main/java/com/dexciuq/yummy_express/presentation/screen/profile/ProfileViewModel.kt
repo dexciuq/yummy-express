@@ -11,14 +11,17 @@ import com.dexciuq.yummy_express.domain.use_case.auth.LogoutUseCase
 import com.dexciuq.yummy_express.domain.use_case.auth.SetAccessTokenUseCase
 import com.dexciuq.yummy_express.domain.use_case.auth.SetAuthSkipUseCase
 import com.dexciuq.yummy_express.domain.use_case.auth.SetRefreshTokenUseCase
+import com.dexciuq.yummy_express.domain.use_case.auth.UpdateProfileInfoUseCase
 import com.dexciuq.yummy_express.domain.use_case.product.RemoveAllProductFromCartUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
     private val getProfileInfoUseCase: GetProfileInfoUseCase,
+    private val updateProfileInfoUseCase: UpdateProfileInfoUseCase,
     private val getAccessTokenUseCase: GetAccessTokenUseCase,
     private val logoutUseCase: LogoutUseCase,
     private val removeAllProductFromCartUseCase: RemoveAllProductFromCartUseCase,
@@ -45,6 +48,10 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    fun updateUser(userInfo: User) = viewModelScope.launch {
+        _user.value = updateProfileInfoUseCase(userInfo)
+    }
+
     fun logout() = viewModelScope.launch {
         val accessToken = getAccessTokenUseCase()
         logoutUseCase(accessToken)
@@ -52,7 +59,7 @@ class ProfileViewModel @Inject constructor(
         setAccessTokenUseCase("")
         setRefreshTokenUseCase("")
         setAuthSkipUseCase(false)
-        _user.postValue(null)
         _logoutCompleted.postValue(true)
+        _user.postValue(null)
     }
 }
