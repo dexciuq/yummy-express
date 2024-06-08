@@ -32,7 +32,7 @@ class CartProductListAdapter(
         fun bind(product: Product) {
             with(binding) {
                 name.text = product.name
-                price.text = "${product.price.toMoney()} / ${product.unit}"
+                price.text = "${product.calculatePrice.toMoney()} / ${product.unit}"
                 quantity.text = product.amount.toString()
                 imageLoader.load(product.imageURL, image)
 

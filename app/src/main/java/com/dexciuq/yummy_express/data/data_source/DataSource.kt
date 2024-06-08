@@ -29,6 +29,7 @@ interface DataSource {
         suspend fun getFeaturedProductList(): List<Product>
         suspend fun getHomeCategoryList(): List<Category>
         suspend fun getProductsByFilter(filter: Filter): List<Product>
+        suspend fun getProductsByFilterWithDiscount(filter: Filter): List<Product>
         suspend fun getProductById(id: Long): Product
         suspend fun getProductByUPC(upc: String): Product
         suspend fun login(email: String, password: String): Authentication
@@ -48,6 +49,7 @@ interface DataSource {
         suspend fun makeOrder(order: Order)
         suspend fun getOrderById(id: Long): Order
         suspend fun getOrderList(): List<Order>
+        suspend fun updateUserProfile(user: User): User
     }
 
     interface Local {

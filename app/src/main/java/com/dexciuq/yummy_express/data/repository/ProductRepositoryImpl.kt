@@ -37,7 +37,11 @@ class ProductRepositoryImpl @Inject constructor(
         flow {
             emit(Resource.Loading)
             try {
-                val remoteProducts = remote.getProductsByFilter(filter)
+                val remoteProducts = if (filter.category != null && filter.category.id == 1L) {
+                    remote.getProductsByFilterWithDiscount(filter)
+                } else {
+                    remote.getProductsByFilter(filter)
+                }
                 val cartProductsFlow = local.getAllProductsFromCart()
 
                 cartProductsFlow.collect { cartProducts ->
@@ -49,8 +53,8 @@ class ProductRepositoryImpl @Inject constructor(
 
                     var final = mergedProducts
                     final = when (filter.sort) {
-                        "price" -> final.sortedBy { it.price }
-                        "-price" -> final.sortedByDescending { it.price }
+                        "price" -> final.sortedBy { it.calculatePrice }
+                        "-price" -> final.sortedByDescending { it.calculatePrice }
                         else -> final.sortedBy { it.id }
                     }
                     emit(Resource.Success(final))

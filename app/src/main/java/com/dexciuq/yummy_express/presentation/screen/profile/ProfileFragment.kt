@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.dexciuq.yummy_express.common.hide
@@ -16,12 +17,13 @@ import com.dexciuq.yummy_express.databinding.FragmentProfileBinding
 import com.dexciuq.yummy_express.domain.model.User
 import com.dexciuq.yummy_express.presentation.activity.auth.AuthActivity
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
     private val binding by lazy { FragmentProfileBinding.inflate(layoutInflater) }
-    private val viewModel: ProfileViewModel by viewModels()
+    private val viewModel: ProfileViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,6 +51,7 @@ class ProfileFragment : Fragment() {
                 binding.signOut.hide()
 
             } else {
+                Timber.i(it.toString())
                 // containers
                 binding.emptyContainer.hide()
                 binding.userContainer.show()

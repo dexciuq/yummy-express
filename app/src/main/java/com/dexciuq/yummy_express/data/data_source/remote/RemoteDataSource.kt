@@ -10,11 +10,11 @@ import com.dexciuq.yummy_express.data.mapper.toCategory
 import com.dexciuq.yummy_express.data.mapper.toDomain
 import com.dexciuq.yummy_express.data.mapper.toUser
 import com.dexciuq.yummy_express.data.model.remote.auth.LoginRequest
-import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.RegisterRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.ResetCodeRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.ResetPasswordRequest
 import com.dexciuq.yummy_express.data.model.remote.auth.VerifyCodeRequest
+import com.dexciuq.yummy_express.data.model.remote.order.OrderRequest
 import com.dexciuq.yummy_express.domain.model.AccessToken
 import com.dexciuq.yummy_express.domain.model.Authentication
 import com.dexciuq.yummy_express.domain.model.Category
@@ -22,6 +22,7 @@ import com.dexciuq.yummy_express.domain.model.Filter
 import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.domain.model.Product
 import com.dexciuq.yummy_express.domain.model.ResetPasswordConfig
+import com.dexciuq.yummy_express.domain.model.User
 import retrofit2.HttpException
 import java.net.HttpURLConnection
 import javax.inject.Inject
@@ -40,6 +41,16 @@ class RemoteDataSource @Inject constructor(
         yummyExpressApiService.getAllProducts(
             name = filter.name,
             category = filter.category?.id,
+            brand = filter.brand?.joinToString(),
+            page = filter.page,
+            pageSize = filter.pageSize,
+            sort = filter.sort,
+        ).products?.fromDtoToProduct().orEmpty()
+
+    override suspend fun getProductsByFilterWithDiscount(filter: Filter): List<Product>  =
+        yummyExpressApiService.getAllProductsWithDiscount(
+            name = filter.name,
+            category = null,
             brand = filter.brand?.joinToString(),
             page = filter.page,
             pageSize = filter.pageSize,
@@ -65,12 +76,15 @@ class RemoteDataSource @Inject constructor(
                 HttpURLConnection.HTTP_UNAUTHORIZED -> {
                     "Invalid authentication credentials"
                 }
+
                 HttpURLConnection.HTTP_FORBIDDEN -> {
                     "Please, activate your account, we send message to your email"
                 }
+
                 422 -> {
                     "Please, enter valid credentials"
                 }
+
                 else -> error("Unknown status: $response")
             }
             return Authentication(message = message)
@@ -106,10 +120,12 @@ class RemoteDataSource @Inject constructor(
     }
 
     override suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean {
-        val response = yummyExpressApiService.resetPassword(ResetPasswordRequest(
-            code = resetPasswordConfig.code,
-            newPassword = resetPasswordConfig.password
-        ))
+        val response = yummyExpressApiService.resetPassword(
+            ResetPasswordRequest(
+                code = resetPasswordConfig.code,
+                newPassword = resetPasswordConfig.password
+            )
+        )
         return response.isSuccessful
     }
 
@@ -137,4 +153,14 @@ class RemoteDataSource @Inject constructor(
 
     override suspend fun getProfileInfo(accessToken: String) =
         yummyExpressApiService.getProfileInfo(accessToken).userDto.toUser()
+
+    override suspend fun updateUserProfile(user: User): User =
+        yummyExpressApiService.updateUserById(
+            user.id,
+            RegisterRequest(
+                firstname = user.name,
+                lastname = user.surname,
+                phoneNumber = user.phoneNumber,
+            )
+        ).userDto.toUser()
 }

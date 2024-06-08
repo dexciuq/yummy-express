@@ -15,4 +15,6 @@ data class Product(
     val country: String,
     val brand: String,
     var amount: Double?,
-)
+) {
+    val calculatePrice: Long = this.price / 100 * (100 - this.discountPercentage)
+}

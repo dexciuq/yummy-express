@@ -26,4 +26,5 @@ interface AuthRepository {
     suspend fun sendCode(email: String): Boolean
     suspend fun verifyCode(code: String): Boolean
     suspend fun resetPassword(resetPasswordConfig: ResetPasswordConfig): Boolean
+    suspend fun updateUserProfile(user: User): User
 }
