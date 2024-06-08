@@ -75,7 +75,7 @@ class ProductDetailFragment : Fragment() {
         imageLoader.load(product.imageURL, binding.productImage)
 
         binding.name.text = product.name
-        binding.price.text = "${product.price.toMoney()} / ${product.unit}"
+        binding.price.text = "${product.calculatePrice.toMoney()} / ${product.unit}"
         binding.description.text = product.description
         binding.category.text = getString(R.string.detail_category, product.category.name)
         binding.brand.text = getString(R.string.detail_brand, product.brand)

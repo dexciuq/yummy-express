@@ -49,8 +49,8 @@ class ProductRepositoryImpl @Inject constructor(
 
                     var final = mergedProducts
                     final = when (filter.sort) {
-                        "price" -> final.sortedBy { it.price }
-                        "-price" -> final.sortedByDescending { it.price }
+                        "price" -> final.sortedBy { it.calculatePrice }
+                        "-price" -> final.sortedByDescending { it.calculatePrice }
                         else -> final.sortedBy { it.id }
                     }
                     emit(Resource.Success(final))

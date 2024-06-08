@@ -120,7 +120,7 @@ class CheckoutFragment : Fragment() {
     private fun setupPaymentContainer(productList: List<Product>) {
         val discountTotal = 600000L
         val subtotal = productList.sumOf {
-            it.amount?.times(it.price)?.toLong() ?: 0L
+            it.amount?.times(it.calculatePrice)?.toLong() ?: 0L
         }
 
         val shippingCharges = if (subtotal > discountTotal) 0L else 30000L

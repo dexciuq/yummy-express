@@ -35,7 +35,13 @@ class ProductListAdapter(
         fun bind(product: Product) {
             with(binding) {
                 name.text = product.name
-                price.text = "${product.price.toMoney()} / ${product.unit}"
+                if (product.discountPercentage > 0) {
+                    percentContainer.show()
+                    percent.text = "- ${product.discountPercentage} %"
+                } else {
+                    percentContainer.hide()
+                }
+                price.text = "${product.calculatePrice.toMoney()} / ${product.unit}"
                 imageLoader.load(product.imageURL, image)
 
                 if (product.amount != null) {
