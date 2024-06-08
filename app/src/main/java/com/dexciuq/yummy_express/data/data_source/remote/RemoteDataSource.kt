@@ -47,6 +47,16 @@ class RemoteDataSource @Inject constructor(
             sort = filter.sort,
         ).products?.fromDtoToProduct().orEmpty()
 
+    override suspend fun getProductsByFilterWithDiscount(filter: Filter): List<Product>  =
+        yummyExpressApiService.getAllProductsWithDiscount(
+            name = filter.name,
+            category = null,
+            brand = filter.brand?.joinToString(),
+            page = filter.page,
+            pageSize = filter.pageSize,
+            sort = filter.sort,
+        ).products?.fromDtoToProduct().orEmpty()
+
     override suspend fun getProductById(id: Long): Product =
         yummyExpressApiService.getProductById(id).product.fromDtoToProduct()
 

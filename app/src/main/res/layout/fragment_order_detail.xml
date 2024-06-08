@@ -72,8 +72,8 @@
             android:id="@+id/product_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:clipToPadding="true"
-            android:paddingBottom="24dp"
+            android:clipToPadding="false"
+            android:paddingBottom="84dp"
             android:visibility="gone"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             tools:listitem="@layout/item_checkout_product" />

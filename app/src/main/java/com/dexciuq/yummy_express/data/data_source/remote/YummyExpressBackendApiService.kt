@@ -43,6 +43,16 @@ interface YummyExpressBackendApiService {
     @GET("/v1/products")
     suspend fun getAllProducts(): ProductsResponse
 
+    @GET("/v1/products-wit-discount")
+    suspend fun getAllProductsWithDiscount(
+        @Query("name") name: String?,
+        @Query("category") category: Long?,
+        @Query("brand") brand: String?,
+        @Query("page") page: Int?,
+        @Query("page_size") pageSize: Int?,
+        @Query("sort") sort: String?
+    ): ProductsResponse
+
     @GET("/v1/products")
     suspend fun getAllProducts(
         @Query("name") name: String?,

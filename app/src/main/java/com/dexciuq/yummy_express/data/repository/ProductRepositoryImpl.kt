@@ -37,7 +37,11 @@ class ProductRepositoryImpl @Inject constructor(
         flow {
             emit(Resource.Loading)
             try {
-                val remoteProducts = remote.getProductsByFilter(filter)
+                val remoteProducts = if (filter.category != null && filter.category.id == 1L) {
+                    remote.getProductsByFilterWithDiscount(filter)
+                } else {
+                    remote.getProductsByFilter(filter)
+                }
                 val cartProductsFlow = local.getAllProductsFromCart()
 
                 cartProductsFlow.collect { cartProducts ->
