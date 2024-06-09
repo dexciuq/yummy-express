@@ -27,7 +27,7 @@ class OrderRepositoryImpl @Inject constructor(
     override suspend fun getOrderList(): Flow<Resource<List<Order>>> = flow {
         emit(Resource.Loading)
         try {
-            val response = remote.getOrderList()
+            val response = remote.getOrderList().sortedByDescending { it.id }
             emit(Resource.Success(response))
         } catch (t: Throwable) {
             emit(Resource.Error(t))

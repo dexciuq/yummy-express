@@ -9,11 +9,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.dexciuq.yummy_express.R
 import com.dexciuq.yummy_express.common.Resource
 import com.dexciuq.yummy_express.common.hide
 import com.dexciuq.yummy_express.common.show
 import com.dexciuq.yummy_express.common.toast
 import com.dexciuq.yummy_express.databinding.FragmentOrderDetailBinding
+import com.dexciuq.yummy_express.domain.model.Order
 import com.dexciuq.yummy_express.presentation.image_loader.ImageLoader
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -53,6 +55,14 @@ class OrderDetailFragment : Fragment() {
         binding.toolbar.title = "Order #${args.id}"
     }
 
+    private fun setupInformation(order: Order) {
+        binding.address.text = order.address
+        binding.statusName.text = order.status
+        binding.statusDescription.text = order.statusDescription
+        setImage(order.status)
+    }
+
+
     private fun setupRecyclerView() {
         adapter = OrderDetailAdapter(imageLoader)
         binding.productList.adapter = adapter
@@ -72,6 +82,7 @@ class OrderDetailFragment : Fragment() {
                         binding.productListLoading.hide()
                         binding.productList.show()
                         binding.productListLoading.stopShimmer()
+                        setupInformation(resource.data)
                         adapter.submitList(resource.data.orderItemList)
                     }
 
@@ -83,4 +94,25 @@ class OrderDetailFragment : Fragment() {
             }
         }
     }
+
+    private fun setImage(status: String) {
+        when (status) {
+            "Ordered" -> {
+                binding.statusImage.setImageResource(R.drawable.ic_order)
+            }
+            "Processing" -> {
+                binding.statusImage.setImageResource(R.drawable.ic_delivered)
+            }
+            "Shipped" -> {
+                binding.statusImage.setImageResource(R.drawable.ic_shipped)
+            }
+            "Delivered" -> {
+                binding.statusImage.setImageResource(R.drawable.ic_processing)
+            }
+            "Cancelled" -> {
+                binding.statusImage.setImageResource(R.drawable.ic_order)
+            }
+        }
+    }
+
 }

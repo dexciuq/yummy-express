@@ -9,10 +9,14 @@ data class OrderDto(
     val total: Long?,
     @SerializedName("address")
     val address: String?,
+    @SerializedName("created_at")
+    val createdAt: String? = "",
+    @SerializedName("delivered_at")
+    val deliveredAt: String? = "",
     @SerializedName("status_id")
     val status: String? = "",
-    @SerializedName("createdAt")
-    val createdAt: String? = "",
-    @SerializedName("deliveredAt")
-    val deliveredAt: String? = "",
+    @SerializedName("status_name")
+    val statusName: String? = "",
+    @SerializedName("status_description")
+    val statusDescription: String? = "",
 )

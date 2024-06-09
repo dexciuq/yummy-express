@@ -5,6 +5,7 @@ data class Order(
     val total: Long,
     val address: String,
     val status: String = "",
+    val statusDescription: String = "",
     val createdAt: String = "",
     val deliveredAt: String = "",
     val productList: List<Product> = listOf(),

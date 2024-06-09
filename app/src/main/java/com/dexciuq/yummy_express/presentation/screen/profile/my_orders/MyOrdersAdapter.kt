@@ -33,7 +33,7 @@ class MyOrdersAdapter(
                 R.string.order_total,
                 order.total.toMoney()
             )
-            binding.address.text = order.address
+            binding.address.text = "Created At: ${order.createdAt.take(10)}"
             binding.root.setOnClickListener { onItemClick(order) }
         }
     }

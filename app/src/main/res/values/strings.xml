@@ -101,4 +101,6 @@
     <string name="reset_code">Reset Code</string>
     <string name="go_to_sign_in">Go to sign in</string>
     <string name="successfully_reset_password">Successfully reset password?</string>
+    <string name="status">Status</string>
+    <string name="address">Address</string>
 </resources>
